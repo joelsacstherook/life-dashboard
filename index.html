@@ -3,82 +3,666 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Life Dashboard · Hi Joel</title>
+<title>Life Dashboard · Joel</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style type="text/tailwindcss">
 @layer components {
-  .card{@apply rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-xl shadow-black/20;}
-  .pill{@apply inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold ring-1;}
-  .ph{@apply bg-rose-500/15 text-rose-300 ring-rose-500/40;}
-  .pm{@apply bg-amber-500/15 text-amber-300 ring-amber-500/40;}
-  .pl{@apply bg-emerald-500/15 text-emerald-300 ring-emerald-500/40;}
-  .lb{@apply rounded bg-slate-800 px-1.5 py-0.5 text-[10px] font-medium text-slate-300;}
-  .att{@apply bg-sky-500/20 text-sky-300;}
-  .it{@apply rounded-xl border border-slate-800 bg-slate-950/50 p-3 transition;}
-  .row{@apply flex cursor-pointer gap-3;}
-  .cb{@apply mt-1 h-4 w-4 shrink-0 accent-sky-500;}
-  .bd{@apply min-w-0 flex-1;}
-  .hd{@apply flex flex-wrap items-center gap-2;}
-  .sj{@apply text-sm font-semibold text-white;}
-  .dt{@apply ml-auto text-[11px] text-slate-400;}
-  .fm{@apply mt-0.5 block text-xs text-slate-400;}
-  .tx{@apply mt-1 block text-sm leading-snug text-slate-300;}
-  .tg{@apply mt-2 flex flex-wrap gap-1.5;}
-  .gh{@apply mb-2 mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400;}
-  .tile{@apply rounded-xl border border-slate-800 bg-slate-950/50 p-3;}
-  .tile dt{@apply text-[11px] font-medium uppercase tracking-wide text-slate-400;}
-  .tile dd{@apply mt-1 text-lg font-semibold text-slate-100;}
-  .sum{@apply rounded-2xl border border-slate-800 bg-slate-900/80 p-4;}
-  .sum h3{@apply text-xs font-semibold uppercase tracking-wide text-slate-400;}
-  .sum p.n{@apply mt-2 text-3xl font-extrabold text-white;}
-  .sum p.s{@apply mt-1 text-xs text-slate-400;}
-  .ev{@apply relative rounded-xl border border-slate-800 border-l-4 bg-slate-950/50 p-4;}
+  .card{@apply rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200}
+  .pill{@apply inline-flex shrink-0 items-center rounded-full px-2 py-0.5 text-[11px] font-bold ring-1}
+  .p-hi{@apply bg-rose-100 text-rose-800 ring-rose-300}
+  .p-md{@apply bg-amber-100 text-amber-900 ring-amber-300}
+  .p-lo{@apply bg-slate-100 text-slate-700 ring-slate-300}
+  .item{@apply flex gap-3 border-b border-slate-100 py-3 last:border-0}
+  .chk{@apply mt-1 h-5 w-5 shrink-0 cursor-pointer rounded border-slate-400 text-indigo-600 focus:ring-2 focus:ring-indigo-500}
+  .subj{@apply cursor-pointer text-sm font-semibold leading-snug text-slate-900}
+  .meta{@apply mt-0.5 text-xs text-slate-500}
+  .snip{@apply mt-1 text-xs leading-relaxed text-slate-700}
+  .l{@apply rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-slate-600}
+  .att{@apply rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-semibold text-amber-800 ring-1 ring-amber-200}
+  .att0{@apply text-[10px] text-slate-400}
+  .det{@apply mt-1.5 text-xs text-slate-600}
+  .det summary{@apply cursor-pointer font-medium text-indigo-700 hover:underline}
+  .det p{@apply mt-1 leading-relaxed}
+  .ids{@apply break-all font-mono text-[10px] text-slate-400}
+  .item.done .subj{@apply text-slate-400 line-through}
+  .item.done .snip{@apply text-slate-400}
+  .gh{@apply sticky top-0 z-10 bg-white/95 py-2 text-xs font-bold uppercase tracking-wide text-slate-500 backdrop-blur}
+  .badge{@apply inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-bold}
+  .b-joel{@apply bg-sky-100 text-sky-800}
+  .b-fam{@apply bg-emerald-100 text-emerald-800}
+  .b-all{@apply bg-violet-100 text-violet-800}
+  .wcell{@apply rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200}
+  .wcell dt{@apply text-[11px] font-semibold uppercase tracking-wide text-slate-500}
+  .wcell dd{@apply mt-1 text-xl font-bold text-slate-400}
+  .cblock{@apply rounded-xl bg-slate-50 p-4 ring-1 ring-slate-200}
+  .btn{@apply rounded-lg bg-white/15 px-3 py-1 text-xs font-semibold text-white ring-1 ring-white/30 hover:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white}
 }
 </style>
-<style>
-  .done{opacity:.55}
-  .done .sj{text-decoration:line-through}
-  :focus-visible{outline:2px solid #38bdf8;outline-offset:2px}
-</style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-950 to-indigo-950 text-slate-100 antialiased">
-<div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+<body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
 
-  <header class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+<header class="bg-gradient-to-r from-indigo-700 via-indigo-600 to-sky-600 text-white">
+  <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:flex-row sm:items-start sm:justify-between sm:px-6">
     <div>
-      <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Hi Joel</h1>
-      <p class="mt-1 text-sm text-slate-400">Daily dashboard · Google Calendar, Gmail, Chess, and Weather snapshot.</p>
+      <h1 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Hi Joel</h1>
+      <p class="mt-1 text-sm text-indigo-100 sm:text-base">Daily dashboard · Google Calendar, Gmail, Chess, and Weather snapshot.</p>
     </div>
-    <div class="rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 text-left sm:text-right">
-      <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Current date &amp; time</p>
-      <time id="now" class="mt-1 block text-sm font-semibold text-sky-300" datetime="">Loading…</time>
+    <div class="sm:text-right">
+      <time id="clock" class="block" datetime="">
+        <span id="date" class="block text-sm font-medium text-indigo-100">Loading date…</span>
+        <span id="time" class="block text-3xl font-bold tabular-nums">--:--:--</span>
+      </time>
+      <div class="mt-2 flex items-center gap-2 sm:justify-end" aria-label="Focus timer">
+        <span class="text-xs font-semibold uppercase tracking-wide text-indigo-100">Focus</span>
+        <output id="timer" role="timer" class="rounded-lg bg-black/20 px-3 py-1 text-lg font-bold tabular-nums">25:00</output>
+        <button id="tGo" type="button" class="btn">Start</button>
+        <button id="tReset" type="button" class="btn">Reset</button>
+      </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <section aria-labelledby="focus-h" class="mt-5 flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-900/70 px-5 py-3 sm:flex-row sm:items-center sm:justify-between">
-    <div class="flex items-center gap-4">
-      <h2 id="focus-h" class="text-sm font-semibold text-slate-200">Focus timer</h2>
-      <p id="timer" class="font-mono text-3xl font-bold tabular-nums text-white" role="timer" aria-live="off">25:00</p>
-      <span id="tstate" class="text-xs text-slate-400">Ready · 25-minute session</span>
+<main class="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6">
+
+  <!-- TOP ROW -->
+  <div class="grid gap-6 lg:grid-cols-2">
+
+    <!-- Schedule -->
+    <section class="card flex flex-col" aria-labelledby="sch-h">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <h2 id="sch-h" class="text-lg font-bold">Today's Schedule</h2>
+        <p class="text-xs text-slate-500">Google Calendar · Sun, Oct 4, 2026 · times shown in Eastern (EDT)</p>
+      </div>
+
+      <div class="mt-3 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900" role="note">
+        <strong>Coming up:</strong> Pursuit Clinic &amp; showcase starts at 11:00 AM (check-in from 10:15) — bring a lunch. Next: Algebra 2 with Thinkwell at 2:00 PM.
+      </div>
+
+      <ol class="mt-4 space-y-3">
+        <li class="flex gap-3">
+          <div class="w-20 shrink-0 pt-1 text-right text-xs font-semibold text-slate-600">11:00 AM<br>– 2:30 PM<br><span class="font-normal text-slate-400">3h 30m</span></div>
+          <article class="min-w-0 flex-1 rounded-xl border-l-4 border-sky-500 bg-sky-50 p-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="text-sm font-bold">Pursuit Clinic &amp; showcase - paid</h3>
+              <span class="badge b-joel">Joel</span>
+            </div>
+            <p class="mt-1 text-xs text-slate-700"><span class="font-semibold">Location:</span> 8325 Green meadows drive North Lewis, center OH</p>
+            <p class="mt-1 text-xs text-slate-700"><span class="font-semibold">Details:</span> BRING A LUNCH. Run of show from the description: 10:15–11 check in · 11–12:30 clinic · 12:30–1 lunch break · 1–2:30 lives.</p>
+            <p class="mt-1 text-[11px] text-slate-500">Confirmed · Organizer thejoelpenton@gmail.com · Default reminders · <a class="font-medium text-indigo-700 underline" href="https://www.google.com/calendar/event?eid=MzFmdmhjdnY1M2owdTRxbjAzaXR2cDZiOWUgdGhlam9lbHBlbnRvbkBt">Open event</a></p>
+          </article>
+        </li>
+
+        <li class="flex gap-3">
+          <div class="w-20 shrink-0 pt-1 text-right text-xs font-semibold text-slate-600">2:00 PM<br>– 3:00 PM<br><span class="font-normal text-slate-400">1h</span></div>
+          <article class="min-w-0 flex-1 rounded-xl border-l-4 border-emerald-500 bg-emerald-50 p-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="text-sm font-bold">JP meet w/JP3 Algebra 2 Thinkwell</h3>
+              <span class="badge b-fam">Family</span>
+            </div>
+            <p class="mt-1 text-xs text-slate-700"><span class="font-semibold">Location:</span> none listed · <a class="font-medium text-indigo-700 underline" href="https://meet.google.com/nfw-mfjy-jyr">Google Meet link</a></p>
+            <p class="mt-1 text-xs text-slate-700"><span class="font-semibold">Details:</span> Description links to the Thinkwell Homeschool account page and holds login info (hidden here).</p>
+            <p class="mt-1 text-xs text-slate-700"><span class="font-semibold">Attendees:</span> thejoelpenton@gmail.com (organizer, accepted) · Joel Penton, joel@lifewise.org (accepted)</p>
+            <p class="mt-1 text-[11px] text-slate-500">Confirmed · Default reminders · <a class="font-medium text-indigo-700 underline" href="https://www.google.com/calendar/event?eid=MHBsYnI5ZDNlbHY1YTRsY3JyZHVvZ3VhZG9fMjAyNjEwMDRUMTgwMDAwWiB0aGVqb2VscGVudG9uQG0">Open event</a></p>
+          </article>
+        </li>
+
+        <li class="flex gap-3">
+          <div class="w-20 shrink-0 pt-1 text-right text-xs font-semibold text-slate-600">3:30 PM<br>– 6:00 PM<br><span class="font-normal text-slate-400">2h 30m</span></div>
+          <article class="min-w-0 flex-1 rounded-xl border-l-4 border-violet-500 bg-violet-50 p-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="text-sm font-bold">Rock climbing</h3>
+              <span class="badge b-all">All</span>
+            </div>
+            <p class="mt-1 text-xs text-slate-700">No location or description provided.</p>
+            <p class="mt-1 text-[11px] text-slate-500">Confirmed · Organizer thejoelpenton@gmail.com · Default reminders · <a class="font-medium text-indigo-700 underline" href="https://www.google.com/calendar/event?eid=XzhsMjM2aDFpNjBzMzBiOWc2c3IzOGI5azhkMjM2YjlwNmwxNDZiOWs4NHM0NmNoazZzc2tjY3BsNmMgdGhlam9lbHBlbnRvbkBt">Open event</a></p>
+          </article>
+        </li>
+
+        <li class="flex gap-3">
+          <div class="w-20 shrink-0 pt-1 text-right text-xs font-semibold text-slate-600">5:30 PM<br>– 7:30 PM<br><span class="font-normal text-slate-400">2h</span></div>
+          <article class="min-w-0 flex-1 rounded-xl border-l-4 border-sky-500 bg-sky-50 p-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="text-sm font-bold">JJL Velocity</h3>
+              <span class="badge b-joel">Joel</span>
+            </div>
+            <p class="mt-1 text-xs text-slate-700">No location or description provided.</p>
+            <p class="mt-1 text-[11px] text-slate-500">Confirmed · Organizer thejoelpenton@gmail.com · Default reminders · <a class="font-medium text-indigo-700 underline" href="https://www.google.com/calendar/event?eid=NXJwNGxjMGlob2ZyNmllYW1maDU2MGRrb2dfMjAyNjEwMDRUMjEzMDAwWiB0aGVqb2VscGVudG9uQG0">Open event</a></p>
+          </article>
+        </li>
+      </ol>
+
+      <div class="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600 ring-1 ring-slate-200">
+        <p><strong>Overlaps:</strong> Pursuit Clinic and Algebra 2 overlap 2:00–2:30 PM. Rock climbing and JJL Velocity overlap 5:30–6:00 PM.</p>
+        <p class="mt-1 text-slate-500">Joel/Family/All badges are dashboard tags; the calendar feed has no owner field.</p>
+      </div>
+    </section>
+
+    <!-- Inbox -->
+    <section class="card flex min-h-0 flex-col" aria-labelledby="inb-h">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <h2 id="inb-h" class="text-lg font-bold">Action Items / Inbox</h2>
+        <p id="doneLbl" class="text-xs font-semibold text-slate-500" aria-live="polite">0 of 50 done</p>
+      </div>
+      <p class="mt-1 text-xs text-slate-500">50 unread Gmail messages in 46 threads. Priority is a triage heuristic (deadlines, security, business or schedule impact), not a Gmail field. Times are Eastern.</p>
+
+      <div class="mt-3 max-h-[46rem] flex-1 overflow-y-auto pr-1" tabindex="0" role="region" aria-label="Unread Gmail action items">
+
+        <h3 class="gh">High priority · 9</h3>
+        <ul>
+          <li class="item"><input class="chk" type="checkbox" id="m01"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-hi">High</span><label class="subj" for="m01">Q4 Kickoff - Thursday, Oct. 7th</label></div>
+            <p class="meta">Nick Fulop · nick@aleph-mgmt.com · Oct 2, 1:24 PM · to Eric Crawford, Dave King, Andy, Nick, Kimberly Wise, Shane Valentine, James Owens, joel@ftpaint.com</p>
+            <p class="snip">Q4 kickoff is Thursday, Oct. 8, 8am–1pm at the Delaware Area Chamber of Commerce building. Complete the prep file by end of day Wednesday, Oct. 7.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att">🖼 Media</span></div>
+            <details class="det"><summary>Details</summary><p>Subject says Oct. 7th but the body says Thursday, Oct. 8th, so confirm the date. Includes a Q4 Kickoff Prep File and Agenda. Praises Q3 results against sales plans.</p><p class="ids">Msg 1a0fda561d22c15c · Thread 1a0fda561d22c15c</p></details>
+          </div></li>
+
+          <li class="item"><input class="chk" type="checkbox" id="m02"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-hi">High</span><label class="subj" for="m02">New Appointment: Residential Painting Estimate (Elaine Hosteler) on Monday, October 5, 2026 10:00am EDT with Joel Penton</label></div>
+            <p class="meta">Elaine Hosteler via Acuity · no-reply@acuityscheduling.com · Sep 29, 6:41 PM · to joel@ftpaint.com</p>
+            <p class="snip">Client-scheduled 1-hour estimate Mon Oct 5 at 10:00 AM, 4374 Kendale Rd, Columbus 43220.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att">📎 Attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Scope: exterior one room and one interior piece of trim. No deadline. Contact by text: +1 614-746-0627, elainerezamail@gmail.com. Heard about Final Touch via doorknock; referral: Joel.</p><p class="ids">Msg 1a0ef547ddfae974 · Thread 1a0ef547ddfae974</p></details>
+          </div></li>
+
+          <li class="item"><input class="chk" type="checkbox" id="m03"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-hi">High</span><label class="subj" for="m03">Invitation: Midwest Doorknockign Camp @ Weekly from 4pm to 5pm on Monday (EDT)</label></div>
+            <p class="meta">Kimberly Wise · kimberly@ftpaint.com · Oct 2, 12:55 PM · to thejoelpenton@gmail.com, marketing@aleph-mgmt.com, nate@aleph-mgmt.com, ben@primpainting.com, alexaguinther@gmail.com</p>
+            <p class="snip">Weekly Monday 4–5pm ET with Google Meet, invited by nate@aleph-mgmt.com. Attendance optional. First session would be Mon Oct 5.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att">📎 Attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Meet: meet.google.com/idt-dkks-jzu · Phone (US) +1 402-704-6868. Organizer nate@aleph-mgmt.com. Guests: marketing@aleph-mgmt.com, ben@primpainting.com, Kimberly Wise, alexaguinther@gmail.com, thejoelpenton@gmail.com.</p><p class="ids">Msg 1a0fd8af6e6b35d5 · Thread 1a0fd8af6e6b35d5</p></details>
+          </div></li>
+
+          <li class="item"><input class="chk" type="checkbox" id="m04"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-hi">High</span><label class="subj" for="m04">New Wallogy Task Assigned - Enter Estimate - 148810</label></div>
+            <p class="meta">Wallogy · notifications@wallogy.com · Sep 28, 7:37 AM · to joel@ftpaint.com</p>
+            <p class="snip">Task assigned to you: Enter Estimate for Job 148810, Residential Exterior Painting, Collen Pfahl, 1100 Medhurst Rd, Columbus, OH 43220.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Contains a Wallogy job-view link for the job. Oldest open task in the inbox.</p><p class="ids">Msg 1a0e7ce7bc7646ba · Thread 1a0e7ce7bc7646ba</p></details>
+          </div></li>
+
+          <li class="item"><input class="chk" type="checkbox" id="m05"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-hi">High</span><label class="subj" for="m05">Your Google Account was recovered successfully</label></div>
+            <p class="meta">Google · no-reply@accounts.google.com · Oct 2, 1:04 AM · to joel@ftpaint.com</p>
+            <p class="snip">Account recovered for joel@ftpaint.com. If you suspect someone else caused the lockout, review and protect your account.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Security notice only; no other action described.</p><p class="ids">Msg 1a0fb00168f17474 · Thread 1a0fb00168f17474</p></details>
+          </div></li>
+
+          <li class="item"><input class="chk" type="checkbox" id="m06"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-hi">High</span><label class="subj" for="m06">Invitation: FTP Family outing @ Lehner farms. Dinner included:). Fun for kids too. @ Fri Oct 9, 2026 4:30pm - 7pm (EDT)</label></div>
+            <p class="meta">Eric Crawford · eric@trubluleader.com · Oct 3, 12:16 PM · to Joel Penton, Nick Fulop, James Owens, Dave King, Nick Keplar, Shane Valentine, Andy Brown</p>
+            <p class="snip">Fri Oct 9, 4:30–7pm ET at 2920 County Rd, Radnor, OH 43066. Dinner included; fun for kids. Attendance optional.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att">📎 Attachment</span></div>
+            <details class="det"><summary>Details</summary><p>This replaces the earlier "FTP outing at Lehner Farms" invitations, which were updated and then canceled (see Medium items). Organizer Eric Crawford; guests Eric, Joel, Nick Fulop, James Owens, Dave King, Nick Keplar, Shane Valentine, Andy Brown.</p><p class="ids">Msg 1a1028d85650e01f · Thread 1a1028d85650e01f</p></details>
+          </div></li>
+
+          <li class="item"><input class="chk" type="checkbox" id="m07"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-hi">High</span><label class="subj" for="m07">New sign-in detected on your Vercel account</label></div>
+            <p class="meta">Vercel · notifications@vercel.com · Oct 4, 12:21 AM · to joel@ftpaint.com</p>
+            <p class="snip">Account joel-5395 (joel@ftpaint.com) signed in from a new location, device or browser: Hilliard, Ohio, United States.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Mobile Safari 26.6.1 on iOS 18.7, Apple iPhone, IP 65.60.152.134, 4:21 AM UTC. If unrecognized, review activity and access tokens.</p><p class="ids">Msg 1a105254c1856169 · Thread 1a10444a30b33c28</p></details>
+          </div></li>
+
+          <li class="item"><input class="chk" type="checkbox" id="m08"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-hi">High</span><label class="subj" for="m08">New sign-in detected on your Vercel account</label></div>
+            <p class="meta">Vercel · notifications@vercel.com · Oct 3, 8:16 PM · to joel@ftpaint.com</p>
+            <p class="snip">Earlier sign-in alert for joel-5395 from Cincinnati, Ohio, United States.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Chrome 153.0.0.0 on macOS 10.15.7, Apple Mac, IP 174.196.114.23, 12:16 AM UTC. Same thread as the Hilliard alert.</p><p class="ids">Msg 1a10444a30b33c28 · Thread 1a10444a30b33c28</p></details>
+          </div></li>
+
+          <li class="item"><input class="chk" type="checkbox" id="m09"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-hi">High</span><label class="subj" for="m09">[GitHub] A personal access token (classic) has been added to your account</label></div>
+            <p class="meta">GitHub · noreply@github.com · Oct 3, 11:42 PM · to joelsacstherook &lt;joel@ftpaint.com&gt;</p>
+            <p class="snip">Classic token "Life Dashboard2.0" with repo scope was recently added to your account.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Review at github.com/settings/tokens and the security log at github.com/settings/security-log.</p><p class="ids">Msg 1a10501d6fadd55a · Thread 1a10501d6fadd55a</p></details>
+          </div></li>
+        </ul>
+
+        <h3 class="gh">Medium priority · 20</h3>
+        <ul>
+          <li class="item"><input class="chk" type="checkbox" id="m10"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m10">Updated invitation: FTP outing at Lehner Farms @ Fri Oct 9, 2026 4:30pm - 7pm (EDT)</label></div>
+            <p class="meta">Eric Crawford · eric@trubluleader.com · Oct 3, 12:14 PM · to Joel, Andy Brown, Dave King, James Owens, Nick Keplar, Shane Valentine</p>
+            <p class="snip">Time changed to 4:30–7pm at 2920 County Rd, Radnor, OH 43066.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att">📎 Attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Superseded by the cancellation and the new FTP Family outing invite.</p><p class="ids">Msg 1a1028bebde72ad7 · Thread 1a1028bebde72ad7</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m11"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m11">Canceled event: FTP outing at Lehner Farms @ Fri Oct 9, 2026 4:30pm - 7pm (EDT)</label></div>
+            <p class="meta">Eric Crawford · eric@trubluleader.com · Oct 3, 12:14 PM · to joel@ftpaint.com</p>
+            <p class="snip">This event has been canceled and removed from your calendar.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att">📎 Attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Location was 2920 County Rd, Radnor, OH 43066. Guests: Eric Crawford (organizer), Andy Brown, Dave King, James Owens, Joel Penton, Nick Keplar, Shane Valentine.</p><p class="ids">Msg 1a1028c0495719f2 · Thread 1a1028c0495719f2</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m12"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m12">Invitation: FTP outing at Lehner Farms @ Fri Oct 9, 2026 4:30pm - 8:15pm (EDT)</label></div>
+            <p class="meta">Eric Crawford · eric@trubluleader.com · Oct 3, 12:14 PM · to Joel, Andy Brown, Dave King, James Owens, Nick Keplar, Shane Valentine</p>
+            <p class="snip">Original invite for Fri Oct 9, 4:30–8:15pm at Lehner Farms, Radnor, OH.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att">📎 Attachment</span></div>
+            <details class="det"><summary>Details</summary><p>First in the sequence: 4:30–8:15pm, then 4:30–7pm, then canceled, then the Family outing invite.</p><p class="ids">Msg 1a1028baa080751a · Thread 1a1028baa080751a</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m13"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m13">Notes: “Doorknocker Mind Meld” Oct 2, 2026</label></div>
+            <p class="meta">Gemini · gemini-notes@google.com · Oct 2, 1:13 PM · to thejoelpenton@gmail.com</p>
+            <p class="snip">Auto-generated notes: appointments peaked at 112 the week of the 14th, then 80; top rep booked 20.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>October competition: weekly $100/$75/$50, monthly $1,000 for highest estimates. Weekly regional role-play camps (45–50 min) replace group meetings. Full-time marketing manager planned by year-end. Sales Rabbit showed 401 errors and sync failures. Next steps for Nate Streeter: update the camp schedule, meet Paris about Midwest leadership, resolve Sales Rabbit, adjust the calendar conflict with Johnny.</p><p class="ids">Msg 1a0fd9b9a268385d · Thread 1a0fd9b9a268385d</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m14"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m14">🗓 Doorknocker Mind Meld on October 2, 2026 @ 12:00 PM | Read Meeting Report</label></div>
+            <p class="meta">Jake Burns via Read AI · executiveassistant@e.read.ai · Oct 2, 12:57 PM · to thejoelpenton@gmail.com</p>
+            <p class="snip">Meeting focused on door-knocking performance, reporting, competition rules and the move to recurring role-playing camps.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Nate reviewed WalliG and SalesRabbit reports (production, pre-estimate, estimated, lost, canceled). 112 appointments the week of the 14th, then 80.</p><p class="ids">Msg 1a0fd8c557adb3e1 · Thread 1a0fd8c557adb3e1</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m15"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m15">Bid Viewed by Brad Williams - 149012</label></div>
+            <p class="meta">Wallogy · notifications@wallogy.com · Oct 1, 12:51 PM · to joel@ftpaint.com</p>
+            <p class="snip">Job 149012, Residential Exterior Painting, 1065 Woodmere Rd, Columbus, OH 43220. The customer viewed the bid.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Includes a Wallogy job-view link.</p><p class="ids">Msg 1a0f860606977ddf · Thread 1a0f860606977ddf</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m16"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m16">Bid Viewed by Ken Gallant - 148809</label></div>
+            <p class="meta">Wallogy · notifications@wallogy.com · Oct 1, 10:12 AM · to joel@ftpaint.com</p>
+            <p class="snip">Job 148809, Residential Exterior Painting, 1090 Medhurst Rd, Columbus, OH 43220. The customer viewed the bid.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Includes a Wallogy job-view link.</p><p class="ids">Msg 1a0f7cf031ec899b · Thread 1a0f7cf031ec899b</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m17"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m17">Oct 3, 2026 Digest: 1 new message from Hilliard City Schools today</label></div>
+            <p class="meta">Hilliard City Schools via StudentSquare · parentsquare.com · Oct 3, 6:24 PM · to joel.penton@hilliardschools.org</p>
+            <p class="snip">Career &amp; College News, Oct. 5–9, posted by Trevor Maggied.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>SchooLinks is the career and college platform for grades 6–12. Parents should update Home Access Information, including the sign-off waiver for out-of-building events. Add info@schoolinks.com to your safe-sender list.</p><p class="ids">Msg 1a103de0b998e5d5 · Thread 1a103de0b998e5d5</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m18"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m18">Oct 2, 2026 Digest: 1 new message from Hilliard Davidson High School today</label></div>
+            <p class="meta">Hilliard Davidson High School via StudentSquare · parentsquare.com · Oct 2, 6:47 PM · to joel.penton@hilliardschools.org</p>
+            <p class="snip">eNews, Friday Oct 2: Homecoming Week recap and the football game that night.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Highlights: spirit days, tailgate and PowderPuff game (seniors won), cookout, pep rally with Drum Line and cheerleaders. Thanks to Student Council.</p><p class="ids">Msg 1a0fecd90fa419b3 · Thread 1a0fecd90fa419b3</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m19"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m19">🎉 Hey Joel, you’ve been paid (10/02/2026)</label></div>
+            <p class="meta">Gusto · gustonoreply@gusto.com · Oct 2, 10:12 AM · to thejoelpenton@gmail.com</p>
+            <p class="snip">Aleph Final Touch LLC paid you $816.00 (flat payment) on 10/02/2026.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Pay details are available in the Gusto app. Do not reply to this address.</p><p class="ids">Msg 1a0fcf5a925455a7 · Thread 1a0fcf5a925455a7</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m20"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m20">Your Games Have Been Paused</label></div>
+            <p class="meta">Chess.com · alert@chess.com · Oct 3, 8:11 AM · to joel3sacstherook &lt;thejoelpenton@gmail.com&gt;</p>
+            <p class="snip">Your Daily Game has been paused and you are now on vacation.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>You may have had as little as 30 minutes left in one or more Daily games, so your Premium account was automatically set to "Vacation". Log in to continue your games.</p><p class="ids">Msg 1a101ad47be1c402 · Thread 1a101ad47be1c402</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m21"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m21">Hurry! You are About to Lose on Time (vs noservice)</label></div>
+            <p class="meta">Chess.com · alert@chess.com · Oct 3, 6:13 AM · to joel3sacstherook</p>
+            <p class="snip">Make a move against noservice before the clock runs out on Oct 3 at 2:05:59 PM.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Daily Game time warning. Deadline has passed relative to the supplied date.</p><p class="ids">Msg 1a1014133d7105ee · Thread 1a1002e2e8ef1692</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m22"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m22">Hurry! You are About to Lose on Time (vs yusefbarack)</label></div>
+            <p class="meta">Chess.com · alert@chess.com · Oct 3, 1:43 AM · to joel3sacstherook</p>
+            <p class="snip">Make a move against yusefbarack before the clock runs out on Oct 3 at 9:36:24 AM.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Daily Game time warning in the same thread as the other two.</p><p class="ids">Msg 1a10049db0c4e3e9 · Thread 1a1002e2e8ef1692</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m23"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m23">Hurry! You are About to Lose on Time (vs samuelluis1)</label></div>
+            <p class="meta">Chess.com · alert@chess.com · Oct 3, 1:13 AM · to joel3sacstherook</p>
+            <p class="snip">Make a move against samuelluis1 before the clock runs out on Oct 3 at 8:43:49 AM.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>First of three Daily Game time warnings.</p><p class="ids">Msg 1a1002e2e8ef1692 · Thread 1a1002e2e8ef1692</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m24"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m24">New sign-in to your OpenAI account</label></div>
+            <p class="meta">OpenAI · noreply@tm.openai.com · Oct 3, 9:07 AM · to joel.penton@hilliardschools.org</p>
+            <p class="snip">New sign-in via the ChatGPT iOS App, approx. location Cincinnati, US.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Mobile Safari on iOS, Oct 3, 9:07 AM EDT. No action needed if it was you; otherwise review account security.</p><p class="ids">Msg 1a101e0e524ad3c8 · Thread 1a101e0e524ad3c8</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m25"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m25">[GitHub] A fine-grained personal access token has been added to your account</label></div>
+            <p class="meta">GitHub · noreply@github.com · Oct 3, 11:31 PM · to joelsacstherook &lt;joel@ftpaint.com&gt;</p>
+            <p class="snip">Fine-grained token "lifedashboard" was recently added to your account.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Token details at github.com/settings/personal-access-tokens/20568780; security log at github.com/settings/security-log.</p><p class="ids">Msg 1a104f719557e200 · Thread 1a104f719557e200</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m26"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m26">[GitHub] A third-party OAuth application has been added to your account</label></div>
+            <p class="meta">GitHub · noreply@github.com · Oct 3, 10:56 PM · to joelsacstherook &lt;joel@ftpaint.com&gt;</p>
+            <p class="snip">OAuth application "Make" was authorized with read-only access to public information.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Manage under GitHub settings, Connections, Applications.</p><p class="ids">Msg 1a104d7a76b0dfc7 · Thread 1a104d7a76b0dfc7</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m27"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m27">🚀 Your GitHub launch code</label></div>
+            <p class="meta">GitHub · noreply@github.com · Oct 3, 10:55 PM · to joel@ftpaint.com</p>
+            <p class="snip">Code and link to continue signing up for a new GitHub account.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>The one-time code and verification link are omitted here. Ignore the email if you did not create a new account.</p><p class="ids">Msg 1a104d69ef29e4f6 · Thread 1a104d69ef29e4f6</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m28"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m28">Joel, you added a new card to use with Google Pay (Mastercard)</label></div>
+            <p class="meta">Google Pay · googlepay-noreply@google.com · Oct 3, 11:13 PM · to joel@ftpaint.com</p>
+            <p class="snip">Mastercard ending 4457 is now saved in Google Wallet.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Tips on virtual cards and faster checkout. Notification-only sender.</p><p class="ids">Msg 1a104e6e8d186f90 · Thread 1a104ca45df9b786</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m29"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-md">Medium</span><label class="subj" for="m29">Joel, you added a new card to use with Google Pay (Chase)</label></div>
+            <p class="meta">Google Pay · googlepay-noreply@google.com · Oct 3, 10:42 PM · to joel@ftpaint.com</p>
+            <p class="snip">Chase Retail Debit Core Blue ending 0786 is now saved in Google Wallet.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Card works with autofill and the Google Pay button; account-change notice.</p><p class="ids">Msg 1a104ca45df9b786 · Thread 1a104ca45df9b786</p></details>
+          </div></li>
+        </ul>
+
+        <h3 class="gh">Low priority · 21</h3>
+        <ul>
+          <li class="item"><input class="chk" type="checkbox" id="m30"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m30">Thanks for placing a mobile order!</label></div>
+            <p class="meta">McDonald's Account Services · DoNotReply_US@us.mcdonalds.com · Oct 3, 6:05 PM · to thejoelpenton@gmail.com</p>
+            <p class="snip">Mobile order receipt, Order MI56, total $48.11.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Lyman Drive Relo, 4280 Cemetery Road, Hilliard. Items: 10 pc McNuggets meal, Big Mac meal, 6 Double Cheeseburgers, Bacon Quarter Pounder meal. Paid by Mastercard ending 4457.</p><p class="ids">Msg 1a103cd38d5d5140 · Thread 1a103cd38d5d5140</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m31"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m31">USMC Sports Leadership Academy Columbus Wrestling Camp - 10-03-2026</label></div>
+            <p class="meta">scott.bridegam@bbim.com via SurveyMonkey · member@surveymonkeyuser.com · Oct 3, 4:45 PM · to thejoelpenton@gmail.com</p>
+            <p class="snip">Survey invite asking "Did you attend the event?" (Yes/No).</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Important</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>The survey link is unique to you; do not forward.</p><p class="ids">Msg 1a103839c0c8aa6b · Thread 1a103839c0c8aa6b</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m32"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m32">You shared some Google Account data with Vercel</label></div>
+            <p class="meta">Google · noreply-accounts@google.com · Oct 4, 12:21 AM · to thejoelpenton@gmail.com</p>
+            <p class="snip">Sign in with Google to Vercel on October 4 at 12:21 AM shared your name, profile picture and email.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Nothing you need to do. Shared profile: Joel Penton III, thejoelpenton@gmail.com.</p><p class="ids">Msg 1a10525311b77ff8 · Thread 1a10525311b77ff8</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m33"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m33">Your upgraded Core toolbox is ready 🧰</label></div>
+            <p class="meta">Make · info@make.com · Oct 3, 11:18 PM · to joel@ftpaint.com</p>
+            <p class="snip">Core plan confirmation: unlimited active scenarios, runs every minute, 300+ Make API endpoints.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Lists links to profile and subscription settings, the help center, release notes and the status page.</p><p class="ids">Msg 1a104eb7d56f4465 · Thread 1a104eb7d56f4465</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m34"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m34">Fix errors and keep your automations running ⚙️</label></div>
+            <p class="meta">Make · info@make.com · Oct 3, 11:14 PM · to joel@ftpaint.com</p>
+            <p class="snip">Tips to handle rate limits, connection issues and missing data.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Covers 429 rate-limit errors (reduce actions, limit parallel runs, add Sleep) and connection errors (enable incomplete executions).</p><p class="ids">Msg 1a104e80dc6a58f5 · Thread 1a104e80dc6a58f5</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m35"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m35">Ship your first Vercel deployment in minutes</label></div>
+            <p class="meta">Vercel · ship@info.vercel.com · Oct 3, 8:17 PM · to joel@ftpaint.com</p>
+            <p class="snip">Your Hobby account is live; deploy from a template or Git repo.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Mentions the Vercel plugin for coding agents (Claude Code, Cursor, Codex). Onboarding email.</p><p class="ids">Msg 1a1044606717de2e · Thread 1a1044606717de2e</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m36"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m36">👉 We picked these for you: Connect apps you're using today!</label></div>
+            <p class="meta">Make · info@make.com · Oct 3, 3:16 PM · to joel@ftpaint.com</p>
+            <p class="snip">Start from a template: WordPress posts from Google Sheets and ChatGPT, or Drive folder monitoring with image analysis.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Promotes the AI co-worker Maia for customizing templates.</p><p class="ids">Msg 1a103323df37ba20 · Thread 1a103323df37ba20</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m37"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m37">Meet the study assistant that makes learning click</label></div>
+            <p class="meta">Grammarly · hello@mail.grammarly.com · Oct 3, 10:20 AM · to thejoelpenton@gmail.com</p>
+            <p class="snip">Turn on Superhuman Go for tests, research and papers.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>You already have access; enable it in the browser extension settings.</p><p class="ids">Msg 1a10223381cb7d79 · Thread 1a10223381cb7d79</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m38"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m38">New Unread Post (Aragorn9021: Why you should read the Silmarillion)</label></div>
+            <p class="meta">Chess.com · alert@chess.com · Oct 3, 7:51 AM · to joel3sacstherook</p>
+            <p class="snip">Aragorn9021 posted "Why you should read the Silmarillion".</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Chess.com community post notification.</p><p class="ids">Msg 1a1019ab6a4b9732 · Thread 1a1019ab6a4b9732</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m39"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m39">New Unread Post (Aragorn9021: Why you should read lord of the rings)</label></div>
+            <p class="meta">Chess.com · alert@chess.com · Oct 2, 2:03 PM · to joel3sacstherook</p>
+            <p class="snip">Aragorn9021 posted "Why you should read lord of the rings".</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Chess.com community post notification.</p><p class="ids">Msg 1a0fdc9292c5ee65 · Thread 1a0fdc9292c5ee65</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m40"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m40">🚀 Pro has fresh new features. Get the scoop inside.</label></div>
+            <p class="meta">Grammarly · hello@mail.grammarly.com · Oct 2, 8:10 PM · to thejoelpenton@gmail.com</p>
+            <p class="snip">50% student discount on Grammarly Pro, including AI Grader.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Offer applies to the first seat only; renewal prices $30 monthly, $60 quarterly, $144 annually.</p><p class="ids">Msg 1a0ff196d7b2a819 · Thread 1a0ff196d7b2a819</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m41"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m41">Welcome! Describe what you want, we’ll build it ✅</label></div>
+            <p class="meta">Make · info@make.com · Oct 2, 3:16 PM · to joel@ftpaint.com</p>
+            <p class="snip">Welcome to Make; describe an automation and the AI co-worker Maia builds it.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Example prompts: Slack message on a new lead, daily email digest, meeting notes into action items.</p><p class="ids">Msg 1a0fe0bd2fc9f5e2 · Thread 1a0fe0bd2fc9f5e2</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m42"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m42">From small steps to big wins 🥳</label></div>
+            <p class="meta">Make · info@make.com · Oct 2, 2:11 PM · to joel@ftpaint.com</p>
+            <p class="snip">Congratulations on your first automation, plus template suggestions.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Templates include WordPress blog generation, Drive image analysis and calendar events from webhooks via ChatGPT.</p><p class="ids">Msg 1a0fdd066b43390e · Thread 1a0fdd066b43390e</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m43"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m43">Welcome to the Claude Platform</label></div>
+            <p class="meta">Claude Team · no-reply@email.claude.com · Oct 2, 1:31 PM · to joel@ftpaint.com</p>
+            <p class="snip">Get your API key, add credits and make your first request in a few minutes.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Updates</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Onboarding email for the Claude Platform.</p><p class="ids">Msg 1a0fdabb2bad9f61 · Thread 1a0fdabb2bad9f61</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m44"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m44">Joel, your monthly MyPanera recap is here!</label></div>
+            <p class="meta">MyPanera · panera@m1.panerabread.com · Oct 2, 11:53 AM · to thejoelpenton@gmail.com</p>
+            <p class="snip">Monthly recap: "See how you stacked up." Earn points with every bite.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Important</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Promotional rewards recap; no stats legible in the text body.</p><p class="ids">Msg 1a0fd51fb7120d9f · Thread 1a0fd51fb7120d9f</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m45"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m45">Your agent is one connection away from doing incredible things</label></div>
+            <p class="meta">Composio · hi@composio.com · Oct 2, 5:48 AM · to joel@ftpaint.com</p>
+            <p class="snip">Connect Composio to an app to get started.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Unread</span><span class="l">Personal</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Ideas: Slack catch-up, summarize unread Gmail, daily morning brief from calendar, inbox, Slack, Notion and GitHub.</p><p class="ids">Msg 1a0fc039b8abefeb · Thread 1a0fc039b8abefeb</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m46"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m46">NEW! Share Outlook templates 🤝</label></div>
+            <p class="meta">cloudHQ · marketing.emails@cloudhq.net · Sep 29, 11:57 PM · to joel@ftpaint.com</p>
+            <p class="snip">Outlook Email Templates can now be shared with your whole team.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Free Chrome/Edge extension; templates can be kept in a Private folder.</p><p class="ids">Msg 1a0f075ff9fc6473 · Thread 1a0f075ff9fc6473</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m47"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m47">New: Get answers about your business by asking Quo — Live event</label></div>
+            <p class="meta">Nico at Quo · nico.carmosino@quo.com · Sep 28, 2:05 PM · to joel@ftpaint.com</p>
+            <p class="snip">Live walkthrough of Quo Agent on October 5 at 12 PM PT.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Speakers: Rachel Boles (Quo) and John Miller (Bridgewest Holdings). Quo Agent is free on every plan during beta.</p><p class="ids">Msg 1a0e9379f476e27c · Thread 1a0e9379f476e27c</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m48"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m48">New: Quo Agent is here. Get answers and take action like never before.</label></div>
+            <p class="meta">Tina at Quo · tinamcauley@quo.com · Sep 24, 3:56 PM · to joel@ftpaint.com</p>
+            <p class="snip">Quo Agent answers questions, surfaces opportunities and drafts replies or tasks for your approval.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Also invites you to the Oct 5 live event.</p><p class="ids">Msg 1a0d4fd95bed954a · Thread 1a0d4fd95bed954a</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m49"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m49">Start a project to give each idea a home</label></div>
+            <p class="meta">Claude Team · no-reply@email.claude.com · Sep 23, 9:18 AM · to joel@ftpaint.com</p>
+            <p class="snip">Projects preserve your context in one place.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Product tip: projects are personal workspaces that stay loaded with your files.</p><p class="ids">Msg 1a0ce6a9f55f7d82 · Thread 1a0ce6a9f55f7d82</p></details>
+          </div></li>
+          <li class="item"><input class="chk" type="checkbox" id="m50"><div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5"><span class="pill p-lo">Low</span><label class="subj" for="m50">Get a lead for every Google Drive download</label></div>
+            <p class="meta">cloudHQ · marketing.emails@cloudhq.net · Sep 22, 8:33 PM · to joel@ftpaint.com</p>
+            <p class="snip">Secure Document Sharing gates a Drive file behind an email capture.</p>
+            <div class="mt-1 flex flex-wrap items-center gap-1"><span class="l">Promotions</span><span class="l">Unread</span><span class="l">Important</span><span class="l">Inbox</span><span class="att0">No attachment</span></div>
+            <details class="det"><summary>Details</summary><p>Features: email capture, password protection, expiration dates, access and download tracking.</p><p class="ids">Msg 1a0cbaed5fe6f5ec · Thread 1a0cbaed5fe6f5ec</p></details>
+          </div></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <!-- MIDDLE ROW -->
+  <div class="grid gap-6 lg:grid-cols-2">
+
+    <!-- Weather -->
+    <section class="card" aria-labelledby="wx-h">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <h2 id="wx-h" class="text-lg font-bold">Weather</h2>
+        <p class="text-xs font-semibold text-slate-500">Hilliard, OH</p>
+      </div>
+      <div class="mt-4 flex flex-wrap items-center gap-5 rounded-2xl bg-gradient-to-br from-sky-50 to-indigo-50 p-4 ring-1 ring-sky-100">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Reported temperature</p>
+          <p class="text-6xl font-extrabold text-sky-700">55°F</p>
+        </div>
+        <div class="text-sm text-slate-700">
+          <p><span class="font-semibold">Date:</span> not provided</p>
+          <p><span class="font-semibold">Description:</span> not provided</p>
+        </div>
+      </div>
+      <dl class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <div class="wcell"><dt>Day</dt><dd>—</dd></div>
+        <div class="wcell"><dt>High</dt><dd>—</dd></div>
+        <div class="wcell"><dt>Low</dt><dd>—</dd></div>
+        <div class="wcell"><dt>Morning</dt><dd>—</dd></div>
+        <div class="wcell"><dt>Evening</dt><dd>—</dd></div>
+        <div class="wcell"><dt>Humidity</dt><dd>—</dd></div>
+        <div class="wcell col-span-2 sm:col-span-3"><dt>Wind</dt><dd>—</dd></div>
+      </dl>
+      <p class="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 text-xs text-slate-600" role="status">
+        Only one forecast temperature was supplied, converted to Fahrenheit (°F = °C × 9/5 + 32, rounded) as 55°F. Date, description, high/low, morning/evening temperatures, humidity and wind were not provided, so they show —.
+      </p>
+    </section>
+
+    <!-- Chess -->
+    <section class="card" aria-labelledby="ch-h">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <h2 id="ch-h" class="text-lg font-bold">Chess Ratings</h2>
+        <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">@joel3sacstherook</span>
+      </div>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        <article class="cblock" aria-label="Rapid">
+          <h3 class="text-xs font-bold uppercase tracking-wide text-slate-500">Rapid</h3>
+          <p class="mt-1 text-4xl font-extrabold text-slate-400">—</p>
+          <p class="mt-1 text-sm font-medium text-slate-600">W — · L — · D —</p>
+        </article>
+        <article class="cblock" aria-label="Blitz">
+          <h3 class="text-xs font-bold uppercase tracking-wide text-slate-500">Blitz</h3>
+          <p class="mt-1 text-4xl font-extrabold text-slate-400">—</p>
+          <p class="mt-1 text-sm font-medium text-slate-600">W — · L — · D —</p>
+        </article>
+        <article class="cblock" aria-label="Bullet">
+          <h3 class="text-xs font-bold uppercase tracking-wide text-slate-500">Bullet</h3>
+          <p class="mt-1 text-4xl font-extrabold text-slate-400">—</p>
+          <p class="mt-1 text-sm font-medium text-slate-600">W — · L — · D —</p>
+        </article>
+        <article class="cblock" aria-label="Daily">
+          <h3 class="text-xs font-bold uppercase tracking-wide text-slate-500">Daily</h3>
+          <p class="mt-1 text-4xl font-extrabold text-slate-400">—</p>
+          <p class="mt-1 text-sm font-medium text-slate-600">W — · L — · D —</p>
+        </article>
+        <article class="cblock sm:col-span-2" aria-label="Tactics and Puzzles">
+          <h3 class="text-xs font-bold uppercase tracking-wide text-slate-500">Tactics / Puzzles</h3>
+          <p class="mt-1 text-4xl font-extrabold text-slate-400">—</p>
+          <p class="mt-1 text-sm font-medium text-slate-600">W — · L — · D —</p>
+        </article>
+      </div>
+      <p class="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 text-xs text-slate-600" role="status">
+        The Chess.com stats feed contained no rating or record data, so nothing is shown rather than guessing. Gmail alerts for this account show Daily games vs noservice, yusefbarack and samuelluis1 near time-out on Oct 3, and the account was auto-set to Vacation.
+      </p>
+    </section>
+  </div>
+
+  <!-- SUMMARY BAR -->
+  <section aria-label="Summary" class="grid grid-cols-2 gap-4 lg:grid-cols-5">
+    <div class="card text-center">
+      <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Total Events</p>
+      <p class="mt-1 text-4xl font-extrabold text-sky-700">4</p>
+      <p class="mt-1 text-[11px] text-slate-500">Google Calendar today</p>
     </div>
-    <div class="flex gap-2">
-      <button id="tstart" type="button" class="rounded-lg bg-sky-500 px-4 py-1.5 text-sm font-semibold text-slate-950 hover:bg-sky-400">Start</button>
-      <button id="treset" type="button" class="rounded-lg border border-slate-700 px-4 py-1.5 text-sm font-semibold text-slate-200 hover:bg-slate-800">Reset</button>
+    <div class="card text-center">
+      <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">New Email Threads</p>
+      <p class="mt-1 text-4xl font-extrabold text-indigo-700">46</p>
+      <p class="mt-1 text-[11px] text-slate-500">unread threads (50 messages)</p>
+    </div>
+    <div class="card text-center">
+      <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Open Inbox Threads</p>
+      <p class="mt-1 text-4xl font-extrabold text-violet-700">46</p>
+      <p class="mt-1 text-[11px] text-slate-500">threads labeled Inbox</p>
+    </div>
+    <div class="card text-center">
+      <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Action Items Open</p>
+      <p id="openN" class="mt-1 text-4xl font-extrabold text-amber-600">50</p>
+      <p class="mt-1 text-[11px] text-slate-500">unchecked inbox items</p>
+    </div>
+    <div class="card col-span-2 text-center lg:col-span-1">
+      <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Completion Percentage</p>
+      <p id="pctN" class="mt-1 text-4xl font-extrabold text-emerald-600">0%</p>
+      <div class="mx-auto mt-2 h-2 w-full overflow-hidden rounded-full bg-slate-200" aria-hidden="true"><div id="bar" class="h-2 rounded-full bg-emerald-500 transition-all" style="width:0%"></div></div>
     </div>
   </section>
 
-  <main class="mt-6 space-y-6">
+  <footer class="pb-4 text-center text-xs text-slate-500">Built from the supplied Calendar, Gmail, Chess and Weather data. Missing values appear as —.</footer>
+</main>
 
-    <!-- TOP ROW -->
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  function tick(){
+    var d=new Date();
+    $('date').textContent=d.toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    $('time').textContent=d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    $('clock').setAttribute('datetime',d.toISOString());
+  }
+  tick();setInterval(tick,1000);
 
-      <!-- SCHEDULE -->
-      <section class="card" aria-labelledby="sched-h">
-        <div class="flex items-center justify-between gap-2">
-          <h2 id="sched-h" class="text-lg font-bold text-white">Today's Schedule</h2>
-          <span class="text-xs text-slate-400">Sun, Oct 4, 2026 · times in Eastern (EDT)</span>
-        </div>
+  var boxes=Array.prototype.slice.call(document.querySelectorAll('.chk'));
+  function upd(){
+    var n=boxes.length,done=boxes.filter(function(b){return b.checked}).length,pct=n?Math.round(done/n*100):0;
+    $('openN').textContent=n-done;
+    $('pctN').textContent=pct+'%';
+    $('bar').style.width=pct+'%';
+    $('doneLbl').textContent=done+' of '+n+' done';
+  }
+  boxes.forEach(function(b){
+    b.addEventListener('change',function(){b.closest('li').classList.toggle('done',b.checked);upd();});
+  });
+  upd();
 
-        <div class="mt-3 rounded-xl border border-indigo-500/40 bg-indigo-500/10 p-3 text-sm text-indigo-100" role="note">
-          <strong class="font-bold text-indigo-200">Coming up:</strong>
-          JP meet w/JP3 Algebra 2 Th
+  var T=1500,left=T,iv=null;
+  function show(){var m=Math.floor(left/60),s=left%60;$('timer').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;}
+  function stop(){clearInterval(iv);iv=null;$('tGo').textContent='Start';}
+  $('tGo').addEventListener('click',function(){
+    if(iv){stop();return;}
+    if(left<=0)left=T;
+    $('tGo').textContent='Pause';
+    iv=setInterval(function(){
+      left--;show();
+      if(left<=0){stop();$('timer').textContent='00:00';}
+    },1000);
+  });
+  $('tReset').addEventListener('click',function(){stop();left=T;show();});
+  show();
+})();
+</script>
+</body>
+</html>
