@@ -1,5 +1,202 @@
-<!DOCTYPE html>
-<html>
-  <head><title>Life Dashboard</title></head>
-  <body><h1>Dashboard Loading...</h1></body>
-</html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Life Dashboard</title>
+<meta name="description" content="Personal dashboard: Chess.com stats, today's schedule, and unread priority emails.">
+<style>
+  :root {
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --surface-2: #f0f3fa;
+    --text: #172033;
+    --muted: #5b667a;
+    --border: #dde3ef;
+    --accent: #3b5bdb;
+    --accent-soft: #e4e9ff;
+    --green: #1b7f4b;
+    --green-soft: #def5e8;
+    --amber: #8a5a00;
+    --amber-soft: #fff0cc;
+    --red: #b42318;
+    --red-soft: #fde4e1;
+    --shadow: 0 1px 2px rgba(20,30,60,.06), 0 4px 16px rgba(20,30,60,.06);
+    --radius: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e1220;
+      --surface: #171c2e;
+      --surface-2: #1e2438;
+      --text: #e8ecf8;
+      --muted: #9aa5c0;
+      --border: #2a3250;
+      --accent: #8da2ff;
+      --accent-soft: #232c55;
+      --green: #6fdc9f;
+      --green-soft: #173a29;
+      --amber: #ffd166;
+      --amber-soft: #3d3010;
+      --red: #ff9b92;
+      --red-soft: #46201d;
+      --shadow: none;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .skip-link {
+    position: absolute; left: 12px; top: -60px;
+    background: var(--accent); color: #fff; padding: 10px 14px;
+    border-radius: 8px; z-index: 10; text-decoration: none; font-weight: 600;
+  }
+  .skip-link:focus { top: 12px; }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  header.page-header {
+    display: flex; flex-wrap: wrap; gap: 12px 24px;
+    align-items: flex-end; justify-content: space-between;
+    padding: 12px 0 24px;
+  }
+  .page-header h1 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.3rem); letter-spacing: -.02em; }
+  .page-header p { margin: 4px 0 0; color: var(--muted); }
+  .summary { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .summary li {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 999px; padding: 6px 14px; font-size: .9rem; font-weight: 600;
+  }
+  .summary strong { color: var(--accent); }
+
+  .grid { display: grid; gap: 20px; grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 900px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .span-2 { grid-column: 1 / -1; }
+  }
+
+  section.card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 20px;
+  }
+  .card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+  .card-head h2 { margin: 0; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+  .icon {
+    width: 34px; height: 34px; display: inline-grid; place-items: center;
+    background: var(--accent-soft); border-radius: 10px; font-size: 1.1rem;
+  }
+  .count {
+    background: var(--accent-soft); color: var(--accent);
+    font-weight: 700; font-size: .85rem; padding: 3px 10px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .note { color: var(--muted); font-size: .88rem; margin: 0 0 16px; }
+
+  /* Chess */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .stat {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px;
+  }
+  .stat .value { font-size: 2.6rem; font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+  .stat .label { color: var(--muted); font-size: .88rem; margin-top: 8px; }
+
+  /* Events */
+  .events, .email-list { list-style: none; margin: 0; padding: 0; }
+  .event {
+    display: grid; grid-template-columns: auto 1fr; gap: 16px;
+    padding: 16px; background: var(--surface-2);
+    border: 1px solid var(--border); border-left: 5px solid var(--accent);
+    border-radius: 12px;
+  }
+  .event + .event { margin-top: 12px; }
+  .event-time { min-width: 96px; font-variant-numeric: tabular-nums; }
+  .event-time .start { font-size: 1.15rem; font-weight: 800; display: block; }
+  .event-time .end { color: var(--muted); font-size: .88rem; display: block; }
+  .event h3 { margin: 0 0 4px; font-size: 1.05rem; text-transform: capitalize; }
+  .event .meta { margin: 2px 0; color: var(--muted); font-size: .92rem; }
+  .pill {
+    display: inline-block; font-size: .72rem; font-weight: 700;
+    padding: 2px 9px; border-radius: 999px; letter-spacing: .02em;
+    background: var(--accent-soft); color: var(--accent); white-space: nowrap;
+  }
+  .pill.green { background: var(--green-soft); color: var(--green); }
+  .pill.amber { background: var(--amber-soft); color: var(--amber); }
+  .pill.red { background: var(--red-soft); color: var(--red); }
+  @media (max-width: 480px) {
+    .event { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  /* Emails */
+  .email-group + .email-group { margin-top: 18px; }
+  .email-group h3 {
+    margin: 0 0 8px; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .08em; color: var(--muted);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .email {
+    display: flex; gap: 12px; align-items: flex-start; justify-content: space-between;
+    padding: 11px 14px; border: 1px solid var(--border);
+    background: var(--surface-2); border-radius: 10px;
+  }
+  .email + .email { margin-top: 8px; }
+  .email .subject { font-weight: 600; overflow-wrap: anywhere; }
+  @media (min-width: 900px) {
+    .email-groups { columns: 2; column-gap: 24px; }
+    .email-group { break-inside: avoid; margin-bottom: 18px; }
+    .email-group + .email-group { margin-top: 0; }
+  }
+
+  .empty-state {
+    text-align: center; padding: 28px 16px; color: var(--muted);
+    border: 2px dashed var(--border); border-radius: 12px;
+  }
+  .empty-state .big { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+  .empty-state strong { display: block; color: var(--text); margin-bottom: 2px; }
+  [hidden] { display: none !important; }
+
+  footer { margin-top: 28px; text-align: center; color: var(--muted); font-size: .85rem; }
+  @media (prefers-reduced-motion: no-preference) {
+    .event, .email { transition: transform .15s ease; }
+    .event:hover, .email:hover { transform: translateY(-1px); }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="wrap">
+  <header class="page-header">
+    <div>
+      <h1>Life Dashboard</h1>
+      <p><time datetime="2026-10-03">Saturday, October 3, 2026</time></p>
+    </div>
+    <ul class="summary" aria-label="Today at a glance">
+      <li><strong id="sum-events">1</strong> event today</li>
+      <li><strong id="sum-emails">20</strong> unread priority emails</li>
+    </ul>
+  </header>
+
+  <main id="main" class="grid">
+
+    <!-- Chess.com -->
+    <section class="card" aria-labelledby="chess-title" data-section>
+      <div class="card-head">
+        <h2 id="chess-title"><span class="icon" aria-hidden="true">♟</span> Chess.com Stats</h2>
+      </div>
+      <ul class="stats" data-list>
+        <li class="stat">
+          <div class="value">1</div>
+          <div class="label">Stat reported (no label provided)</div>
+        </li>
+      </ul>
+      <div class="empty-state" data-empty hid
