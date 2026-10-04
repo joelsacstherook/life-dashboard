@@ -3,149 +3,152 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Life Dashboard</title>
+<title>Life Dashboard – Joel</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen bg-slate-100 text-slate-800 antialiased">
-<div class="mx-auto max-w-7xl space-y-5 p-4 sm:p-6">
+<div class="mx-auto max-w-6xl space-y-6 p-4 sm:p-6">
 
-  <!-- HEADER -->
-  <header class="flex flex-col gap-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-sky-600 p-5 text-white shadow sm:flex-row sm:items-center sm:justify-between">
-    <div>
-      <h1 class="text-3xl font-bold tracking-tight">Hi Joel</h1>
-      <p class="mt-1 text-sm text-indigo-100">Daily dashboard · Google Calendar, Gmail, and Chess snapshot.</p>
-    </div>
-    <div class="sm:text-right">
-      <p id="clock-date" class="text-sm font-medium text-indigo-100">Loading date…</p>
-      <p id="clock-time" class="text-3xl font-semibold tabular-nums">--:--</p>
-    </div>
-  </header>
+<!-- HEADER -->
+<header class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900">Hi Joel</h1>
+    <p class="mt-1 text-sm text-slate-500">Daily dashboard · Google Calendar, Gmail, and Chess snapshot.</p>
+  </div>
+  <div class="rounded-xl bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200 sm:text-right">
+    <div id="clockDate" class="text-sm font-medium text-slate-600">Loading date…</div>
+    <div id="clockTime" class="text-2xl font-semibold text-indigo-600">--:--</div>
+  </div>
+</header>
 
-  <!-- TOP ROW -->
-  <section class="grid gap-5 md:grid-cols-2">
-
-    <!-- Today's Schedule -->
-    <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div class="mb-1 flex items-center justify-between">
-        <h2 class="text-lg font-semibold">Today's Schedule</h2>
-        <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">4 events</span>
-      </div>
-      <p class="mb-4 text-xs text-slate-500">Source times were in UTC; shown here in EDT.</p>
-      <ol class="flex-1 space-y-3">
-        <li class="flex gap-3">
-          <div class="w-20 shrink-0 pt-3 text-right text-xs font-semibold text-slate-500">11:00 AM</div>
-          <div class="flex-1 rounded-xl border-l-4 border-indigo-500 bg-indigo-50 p-3">
-            <div class="flex items-start justify-between gap-2">
-              <h3 class="text-sm font-semibold">Pursuit Clinic &amp; showcase - paid</h3>
-              <span class="shrink-0 rounded-full bg-slate-800 px-2 py-0.5 text-xs font-semibold text-white">All</span>
-            </div>
-            <p class="mt-1 text-xs text-slate-600">11:00 AM – 2:30 PM EDT</p>
-            <p class="text-xs text-slate-600">📍 8325 Green meadows drive North Lewis, center OH</p>
+<!-- TOP ROW -->
+<section class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+  <!-- Today's Schedule -->
+  <div class="flex flex-col rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+    <h2 class="text-lg font-semibold text-slate-900">Today's Schedule</h2>
+    <p class="mb-3 text-xs text-slate-400">Source times are UTC, shown here in EDT (UTC−4).</p>
+    <div class="flex-1 divide-y divide-slate-100 rounded-xl border border-slate-200">
+      <div class="flex gap-3 p-3">
+        <div class="w-20 shrink-0 text-right text-xs font-semibold text-slate-500">11:00 AM<br><span class="font-normal text-slate-400">to 2:30 PM</span></div>
+        <div class="flex-1 rounded-lg border-l-4 border-slate-400 bg-slate-50 p-3">
+          <div class="flex items-start justify-between gap-2">
+            <h3 class="text-sm font-semibold">Pursuit Clinic &amp; showcase - paid</h3>
+            <span class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold text-slate-700">All</span>
           </div>
-        </li>
-        <li class="flex gap-3">
-          <div class="w-20 shrink-0 pt-3 text-right text-xs font-semibold text-slate-500">2:00 PM</div>
-          <div class="flex-1 rounded-xl border-l-4 border-sky-500 bg-sky-50 p-3">
-            <div class="flex items-start justify-between gap-2">
-              <h3 class="text-sm font-semibold">JP meet w/JP3 Algebra 2 Thinkwell</h3>
-              <span class="shrink-0 rounded-full bg-slate-800 px-2 py-0.5 text-xs font-semibold text-white">All</span>
-            </div>
-            <p class="mt-1 text-xs text-slate-600">2:00 PM – 3:00 PM EDT</p>
-            <p class="text-xs text-slate-500">No location or details provided.</p>
-          </div>
-        </li>
-        <li class="flex gap-3">
-          <div class="w-20 shrink-0 pt-3 text-right text-xs font-semibold text-slate-500">3:30 PM</div>
-          <div class="flex-1 rounded-xl border-l-4 border-emerald-500 bg-emerald-50 p-3">
-            <div class="flex items-start justify-between gap-2">
-              <h3 class="text-sm font-semibold">Rock climbing</h3>
-              <span class="shrink-0 rounded-full bg-slate-800 px-2 py-0.5 text-xs font-semibold text-white">All</span>
-            </div>
-            <p class="mt-1 text-xs text-slate-600">3:30 PM – 6:00 PM EDT</p>
-            <p class="text-xs text-slate-500">No location or details provided.</p>
-          </div>
-        </li>
-        <li class="flex gap-3">
-          <div class="w-20 shrink-0 pt-3 text-right text-xs font-semibold text-slate-500">5:30 PM</div>
-          <div class="flex-1 rounded-xl border-l-4 border-amber-500 bg-amber-50 p-3">
-            <div class="flex items-start justify-between gap-2">
-              <h3 class="text-sm font-semibold">JJL Velocity</h3>
-              <span class="shrink-0 rounded-full bg-slate-800 px-2 py-0.5 text-xs font-semibold text-white">All</span>
-            </div>
-            <p class="mt-1 text-xs text-slate-600">5:30 PM – 7:30 PM EDT</p>
-            <p class="text-xs text-slate-500">No location or details provided.</p>
-          </div>
-        </li>
-      </ol>
-      <div class="mt-4 rounded-xl bg-indigo-600 px-4 py-3 text-sm text-white">
-        <strong>Coming up:</strong> JP meet w/JP3 Algebra 2 Thinkwell at 2:00 PM, then Rock climbing at 3:30 PM EDT.
-      </div>
-    </article>
-
-    <!-- Action Items / Inbox -->
-    <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div class="mb-1 flex items-center justify-between">
-        <h2 class="text-lg font-semibold">Action Items / Inbox</h2>
-        <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">20 unread</span>
-      </div>
-      <p class="mb-3 text-xs text-slate-500">Priority is inferred from subject lines only. Sender and snippet were not provided.</p>
-      <ul class="max-h-[34rem] flex-1 space-y-2 overflow-y-auto pr-1">
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m1" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m1" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600">Low</span><span class="mt-1 block text-sm font-semibold peer-checked:line-through">🚀 Your GitHub launch code</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Snippet not available.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m2" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m2" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600">Low</span><span class="mt-1 block text-sm font-semibold">Thanks for placing a mobile order!</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Snippet not available.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m3" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m3" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Medium</span><span class="mt-1 block text-sm font-semibold">USMC Sports Leadership Academy Columbus Wrestling Camp - 10-03-2026</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Camp dated 10-03-2026 per subject.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m4" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m4" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Medium</span><span class="mt-1 block text-sm font-semibold">Invitation: FTP Family outing @ Lehner farms. Dinner included:). Fu… @ Fri Oct 9, 2026 4:30pm - 7pm (EDT) (Joel Penton)</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Calendar invitation, Fri Oct 9, 4:30–7 PM EDT.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m5" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m5" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Medium</span><span class="mt-1 block text-sm font-semibold">Canceled event: FTP outing at Lehner Farms @ Fri Oct 9, 2026 4:30pm - 7pm (EDT) (Joel Penton)</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Cancellation notice for Fri Oct 9 event.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m6" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m6" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Medium</span><span class="mt-1 block text-sm font-semibold">Updated invitation: FTP outing at Lehner Farms @ Fri Oct 9, 2026 4:30pm - 7pm (EDT) (Joel Penton)</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Updated invitation for Fri Oct 9 event.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m7" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m7" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Medium</span><span class="mt-1 block text-sm font-semibold">Invitation: FTP outing at Lehner Farms @ Fri Oct 9, 2026 4:30pm - 8:15pm (EDT) (Joel Penton)</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Invitation, Fri Oct 9, 4:30–8:15 PM EDT.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m8" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m8" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-rose-100 px-2 py-0.5 text-[11px] font-semibold text-rose-700">High</span><span class="mt-1 block text-sm font-semibold">New sign-in to your OpenAI account</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Security notice. Confirm the sign-in was yours.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m9" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m9" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Medium</span><span class="mt-1 block text-sm font-semibold">Oct 2, 2026 Digest: 1 new message from Hilliard Davidson High School today</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Digest reports 1 new school message.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m10" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m10" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-rose-100 px-2 py-0.5 text-[11px] font-semibold text-rose-700">High</span><span class="mt-1 block text-sm font-semibold">Q4 Kickoff - Thursday, Oct. 7th</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Time-sensitive: Thursday, Oct. 7th.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m11" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m11" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600">Low</span><span class="mt-1 block text-sm font-semibold">Notes: “Doorknocker Mind Meld” Oct 2, 2026</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Meeting notes from Oct 2.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m12" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m12" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600">Low</span><span class="mt-1 block text-sm font-semibold">🗓 Doorknocker Mind Meld on October 2, 2026 @ 12:00 PM | Read Meeting Report</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Meeting report for the Oct 2, 12:00 PM meeting.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m13" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m13" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Medium</span><span class="mt-1 block text-sm font-semibold">Invitation: Midwest Doorknockign Camp @ Weekly from 4pm to 5pm on Monday (EDT) (thejoelpenton@gmail.com)</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Weekly invitation, Mondays 4–5 PM EDT.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m14" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m14" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600">Low</span><span class="mt-1 block text-sm font-semibold">Joel, your monthly MyPanera recap is here!</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Snippet not available.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m15" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m15" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Medium</span><span class="mt-1 block text-sm font-semibold">🎉 Hey Joel, you’ve been paid (10/02/2026)</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Payment notice dated 10/02/2026.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m16" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m16" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Medium</span><span class="mt-1 block text-sm font-semibold">Bid Viewed by Brad Williams - 149012</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Bid 149012 was viewed.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m17" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m17" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Medium</span><span class="mt-1 block text-sm font-semibold">Bid Viewed by Ken Gallant - 148809</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Bid 148809 was viewed.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m18" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m18" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-rose-100 px-2 py-0.5 text-[11px] font-semibold text-rose-700">High</span><span class="mt-1 block text-sm font-semibold">New Appointment: Residential Painting Estimate (Elaine Hosteler) on Monday, October 5, 2026 10:00am EDT with Joel Penton</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Appointment Mon, Oct 5, 10:00 AM EDT.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m19" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m19" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-rose-100 px-2 py-0.5 text-[11px] font-semibold text-rose-700">High</span><span class="mt-1 block text-sm font-semibold">New Wallogy Task Assigned - Enter Estimate - 148810</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Details: Task assigned: enter estimate 148810.</span></label></li>
-        <li class="flex gap-3 rounded-xl border border-slate-200 p-3"><input id="m20" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="m20" class="min-w-0 flex-1 peer-checked:opacity-50"><span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600">Low</span><span class="mt-1 block text-sm font-semibold">Get a lead for every Google Drive download</span><span class="block text-xs text-slate-500">From: Sender not available</span><span class="block text-xs text-slate-500">Snippet not available.</span></label></li>
-      </ul>
-    </article>
-  </section>
-
-  <!-- MIDDLE ROW -->
-  <section class="grid gap-5 md:grid-cols-2">
-
-    <!-- Weather & Focus -->
-    <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <h2 class="mb-4 text-lg font-semibold">Weather &amp; Focus</h2>
-      <div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-5 text-center">
-        <div class="text-3xl" aria-hidden="true">🌤️</div>
-        <p class="mt-1 font-semibold text-slate-700">Weather unavailable</p>
-        <p class="text-xs text-slate-500">No weather source was supplied. Temperature, high/low, and forecast will appear here when data exists.</p>
-      </div>
-      <div class="mt-4 rounded-xl bg-slate-900 p-5 text-center text-white">
-        <p class="text-xs font-semibold uppercase tracking-widest text-slate-400">Focus Goal</p>
-        <p id="timer" class="my-2 text-5xl font-bold tabular-nums" aria-live="polite">25:00</p>
-        <div class="flex justify-center gap-3">
-          <button id="startBtn" type="button" class="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300">Start focus</button>
-          <button id="resetBtn" type="button" class="rounded-lg bg-slate-700 px-4 py-2 text-sm font-semibold hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400">Reset</button>
+          <p class="mt-1 text-xs text-slate-500">11:00 AM – 2:30 PM EDT</p>
+          <p class="text-xs text-slate-500">📍 8325 Green meadows drive North Lewis, center OH</p>
         </div>
-        <p id="timerMsg" class="mt-2 h-4 text-xs text-slate-400"></p>
       </div>
-    </article>
-
-    <!-- Chess Ratings -->
-    <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div class="mb-4 flex items-center justify-between">
-        <h2 class="text-lg font-semibold">Chess Ratings</h2>
-        <span class="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">@joel3sacstherook</span>
-      </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div class="rounded-xl border border-slate-200 bg-slate-50 p-3 text-center">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Rapid</p>
-          <p class="text-3xl font-bold text-indigo-600">1742</p>
-          <p class="text-xs text-slate-600">W-L-D: 10-4-2</p>
+      <div class="flex gap-3 p-3">
+        <div class="w-20 shrink-0 text-right text-xs font-semibold text-slate-500">2:00 PM<br><span class="font-normal text-slate-400">to 3:00 PM</span></div>
+        <div class="flex-1 rounded-lg border-l-4 border-slate-400 bg-slate-50 p-3">
+          <div class="flex items-start justify-between gap-2">
+            <h3 class="text-sm font-semibold">JP meet w/JP3 Algebra 2 Thinkwell</h3>
+            <span class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold text-slate-700">All</span>
+          </div>
+          <p class="mt-1 text-xs text-slate-500">2:00 PM – 3:00 PM EDT</p>
+          <p class="text-xs text-slate-400">No location or details provided.</p>
         </div>
-        <div class="rounded-xl border border-slate-200 bg-slate-50 p-
+      </div>
+      <div class="flex gap-3 p-3">
+        <div class="w-20 shrink-0 text-right text-xs font-semibold text-slate-500">3:30 PM<br><span class="font-normal text-slate-400">to 6:00 PM</span></div>
+        <div class="flex-1 rounded-lg border-l-4 border-slate-400 bg-slate-50 p-3">
+          <div class="flex items-start justify-between gap-2">
+            <h3 class="text-sm font-semibold">Rock climbing</h3>
+            <span class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold text-slate-700">All</span>
+          </div>
+          <p class="mt-1 text-xs text-slate-500">3:30 PM – 6:00 PM EDT</p>
+          <p class="text-xs text-slate-400">No location or details provided.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 p-3">
+        <div class="w-20 shrink-0 text-right text-xs font-semibold text-slate-500">5:30 PM<br><span class="font-normal text-slate-400">to 7:30 PM</span></div>
+        <div class="flex-1 rounded-lg border-l-4 border-slate-400 bg-slate-50 p-3">
+          <div class="flex items-start justify-between gap-2">
+            <h3 class="text-sm font-semibold">JJL Velocity</h3>
+            <span class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold text-slate-700">All</span>
+          </div>
+          <p class="mt-1 text-xs text-slate-500">5:30 PM – 7:30 PM EDT</p>
+          <p class="text-xs text-slate-400">No location or details provided.</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 rounded-xl bg-indigo-50 px-4 py-3 text-sm text-indigo-800 ring-1 ring-indigo-100">
+      <strong>Coming up:</strong> JP meet w/JP3 Algebra 2 Thinkwell at 2:00 PM EDT, then Rock climbing at 3:30 PM.
+    </div>
+  </div>
+
+  <!-- Action Items / Inbox -->
+  <div class="flex flex-col rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+    <h2 class="text-lg font-semibold text-slate-900">Action Items / Inbox</h2>
+    <p class="mb-3 text-xs text-slate-400">Unread Gmail threads. Sender and snippet were not supplied; priority is inferred from subject lines only.</p>
+    <ul id="inboxList" class="max-h-[34rem] flex-1 divide-y divide-slate-100 overflow-y-auto rounded-xl border border-slate-200">
+      <li class="flex gap-3 p-3"><input id="t1" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t1" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">🚀 Your GitHub launch code</span><span class="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">Low</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t2" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t2" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Thanks for placing a mobile order!</span><span class="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">Low</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t3" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t3" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">USMC Sports Leadership Academy Columbus Wrestling Camp - 10-03-2026</span><span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">Medium</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t4" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t4" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Invitation: FTP Family outing @ Lehner farms. Dinner included:). Fu... @ Fri Oct 9, 2026 4:30pm - 7pm (EDT) (Joel Penton)</span><span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">Medium</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t5" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t5" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Canceled event: FTP outing at Lehner Farms @ Fri Oct 9, 2026 4:30pm - 7pm (EDT) (Joel Penton)</span><span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">Medium</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t6" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t6" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Updated invitation: FTP outing at Lehner Farms @ Fri Oct 9, 2026 4:30pm - 7pm (EDT) (Joel Penton)</span><span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">Medium</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t7" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t7" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Invitation: FTP outing at Lehner Farms @ Fri Oct 9, 2026 4:30pm - 8:15pm (EDT) (Joel Penton)</span><span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">Medium</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t8" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t8" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">New sign-in to your OpenAI account</span><span class="shrink-0 rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">High</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t9" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t9" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Oct 2, 2026 Digest: 1 new message from Hilliard Davidson High School today</span><span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">Medium</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t10" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t10" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Q4 Kickoff - Thursday, Oct. 7th</span><span class="shrink-0 rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">High</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t11" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t11" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Notes: “Doorknocker Mind Meld” Oct 2, 2026</span><span class="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">Low</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t12" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t12" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">🗓 Doorknocker Mind Meld on October 2, 2026 @ 12:00 PM | Read Meeting Report</span><span class="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">Low</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t13" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t13" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Invitation: Midwest Doorknockign Camp @ Weekly from 4pm to 5pm on Monday (EDT) (thejoelpenton@gmail.com)</span><span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">Medium</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t14" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t14" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Joel, your monthly MyPanera recap is here!</span><span class="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">Low</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t15" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t15" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">🎉 Hey Joel, you’ve been paid (10/02/2026)</span><span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">Medium</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t16" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t16" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Bid Viewed by Brad Williams - 149012</span><span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">Medium</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t17" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t17" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Bid Viewed by Ken Gallant - 148809</span><span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">Medium</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t18" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t18" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">New Appointment: Residential Painting Estimate (Elaine Hosteler) on Monday, October 5, 2026 10:00am EDT with Joel Penton</span><span class="shrink-0 rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">High</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t19" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t19" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">New Wallogy Task Assigned - Enter Estimate - 148810</span><span class="shrink-0 rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">High</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+      <li class="flex gap-3 p-3"><input id="t20" type="checkbox" class="task peer mt-1 h-4 w-4 shrink-0 accent-indigo-600"><label for="t20" class="min-w-0 flex-1 peer-checked:line-through peer-checked:opacity-50"><span class="flex items-start justify-between gap-2"><span class="text-sm font-medium">Get a lead for every Google Drive download</span><span class="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">Low</span></span><span class="block text-xs text-slate-500">From: Sender not provided</span><span class="block text-xs text-slate-400">Snippet not provided</span></label></li>
+    </ul>
+  </div>
+</section>
+
+<!-- MIDDLE ROW -->
+<section class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+  <!-- Weather & Focus -->
+  <div class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+    <h2 class="mb-3 text-lg font-semibold text-slate-900">Weather &amp; Focus</h2>
+    <div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-5 text-center">
+      <div class="text-3xl" aria-hidden="true">🌤️</div>
+      <p class="mt-1 text-sm font-semibold text-slate-600">Weather unavailable</p>
+      <p class="text-xs text-slate-400">No weather source was connected, so temperature, high/low, and forecast are not shown.</p>
+    </div>
+    <div class="mt-4 rounded-xl bg-indigo-600 p-5 text-white">
+      <div class="text-xs font-semibold uppercase tracking-wider text-indigo-200">Focus Goal</div>
+      <div id="timerDisplay" class="my-2 text-5xl font-bold tabular-nums" aria-live="polite">25:00</div>
+      <p id="timerStatus" class="mb-3 text-xs text-indigo-200">Ready when you are.</p>
+      <div class="flex gap-2">
+        <button id="startBtn" type="button" class="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white">Start focus</button>
+        <button id="resetBtn" type="button" class="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white ring-1 ring-indigo-300 hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-white">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chess Ratings -->
+  <div class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+    <div class="mb-3 flex items-start justify-between gap-2">
+      <h2 class="text-lg font-semibold text-slate-900">Chess Ratings</h2>
+      <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs font-medium text-white">@joel3sacstherook</span>
+    </div>
+    <div class="grid grid-cols-2 gap-3">
+      <div class="rounded-xl border border-slate-200 p-3">
+        <div class="text-xs font-semibold uppercase tracking-wide text-slate-500">Rapid</div>
+        <div class="text-3xl font-bold text-indigo-600">1742</div>
+        <div class="text-xs text-slate-500">W-L-D: 10-4-2</div>
+      </div>
+      <div class="rounded-xl border border-slate-200 p-3">
+        <div class="text-xs font-semibold uppercase tracking-wide text-slate-500">Blitz</div>
+        <div class="text-3xl font-bold text-amber-600">1150</div>
+        <div class="text-xs text-slate-500">W-L-D: 5-11-0</div>
+      </div>
+      <div class="rounded-xl border border-slate-200 p-3">
+        <div class="text-xs font-semibold uppercase tracking-wide text-slate-500">Bullet</div>
+        <div class="text-3xl font-bold text-rose-600">1415</div>
+        <div class="text-xs text-slate-500">W-L-D: 8-17-1</div>
+      </div>
+      <div class="rounded-xl border border-slate-200 p-3">
+        <div class="text-xs font-semibold uppercase tracking-wide
