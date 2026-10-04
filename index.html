@@ -3,216 +3,82 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Joel's Life Dashboard</title>
+<title>Life Dashboard · Hi Joel</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<style type="text/tailwindcss">
+@layer components {
+  .card{@apply rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-xl shadow-black/20;}
+  .pill{@apply inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold ring-1;}
+  .ph{@apply bg-rose-500/15 text-rose-300 ring-rose-500/40;}
+  .pm{@apply bg-amber-500/15 text-amber-300 ring-amber-500/40;}
+  .pl{@apply bg-emerald-500/15 text-emerald-300 ring-emerald-500/40;}
+  .lb{@apply rounded bg-slate-800 px-1.5 py-0.5 text-[10px] font-medium text-slate-300;}
+  .att{@apply bg-sky-500/20 text-sky-300;}
+  .it{@apply rounded-xl border border-slate-800 bg-slate-950/50 p-3 transition;}
+  .row{@apply flex cursor-pointer gap-3;}
+  .cb{@apply mt-1 h-4 w-4 shrink-0 accent-sky-500;}
+  .bd{@apply min-w-0 flex-1;}
+  .hd{@apply flex flex-wrap items-center gap-2;}
+  .sj{@apply text-sm font-semibold text-white;}
+  .dt{@apply ml-auto text-[11px] text-slate-400;}
+  .fm{@apply mt-0.5 block text-xs text-slate-400;}
+  .tx{@apply mt-1 block text-sm leading-snug text-slate-300;}
+  .tg{@apply mt-2 flex flex-wrap gap-1.5;}
+  .gh{@apply mb-2 mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400;}
+  .tile{@apply rounded-xl border border-slate-800 bg-slate-950/50 p-3;}
+  .tile dt{@apply text-[11px] font-medium uppercase tracking-wide text-slate-400;}
+  .tile dd{@apply mt-1 text-lg font-semibold text-slate-100;}
+  .sum{@apply rounded-2xl border border-slate-800 bg-slate-900/80 p-4;}
+  .sum h3{@apply text-xs font-semibold uppercase tracking-wide text-slate-400;}
+  .sum p.n{@apply mt-2 text-3xl font-extrabold text-white;}
+  .sum p.s{@apply mt-1 text-xs text-slate-400;}
+  .ev{@apply relative rounded-xl border border-slate-800 border-l-4 bg-slate-950/50 p-4;}
+}
+</style>
+<style>
+  .done{opacity:.55}
+  .done .sj{text-decoration:line-through}
+  :focus-visible{outline:2px solid #38bdf8;outline-offset:2px}
+</style>
 </head>
-<body class="min-h-screen bg-slate-100 text-slate-800 antialiased">
+<body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-950 to-indigo-950 text-slate-100 antialiased">
 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 
-  <header class="mb-6 flex flex-col gap-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-sky-500 p-6 text-white shadow-lg md:flex-row md:items-start md:justify-between">
+  <header class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
     <div>
-      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Hi Joel</h1>
-      <p class="mt-1 text-indigo-50">Daily dashboard · Google Calendar, Gmail, Chess, and Weather snapshot.</p>
+      <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Hi Joel</h1>
+      <p class="mt-1 text-sm text-slate-400">Daily dashboard · Google Calendar, Gmail, Chess, and Weather snapshot.</p>
     </div>
-    <div class="flex flex-col gap-3 md:items-end">
-      <div class="md:text-right">
-        <p id="now-date" class="text-lg font-semibold">Loading date…</p>
-        <p id="now-time" class="font-mono text-2xl tabular-nums" aria-live="off">--:--:--</p>
-      </div>
-      <div class="flex items-center gap-3 rounded-xl bg-white/15 px-3 py-2 backdrop-blur" role="group" aria-label="Focus timer">
-        <span class="text-xs font-semibold uppercase tracking-wide">Focus</span>
-        <span id="timer" class="font-mono text-2xl font-bold tabular-nums" role="timer" aria-label="Focus timer remaining">25:00</span>
-        <button id="timer-toggle" type="button" class="rounded-lg bg-white px-3 py-1 text-sm font-semibold text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white">Start</button>
-        <button id="timer-reset" type="button" class="rounded-lg border border-white/60 px-3 py-1 text-sm font-semibold text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white">Reset</button>
-      </div>
+    <div class="rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 text-left sm:text-right">
+      <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Current date &amp; time</p>
+      <time id="now" class="mt-1 block text-sm font-semibold text-sky-300" datetime="">Loading…</time>
     </div>
   </header>
 
-  <main class="space-y-6">
-
-    <!-- Top row -->
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-
-      <section aria-labelledby="schedule-h" class="flex flex-col rounded-2xl bg-white p-5 shadow">
-        <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <h2 id="schedule-h" class="text-xl font-bold">Today's Schedule</h2>
-          <ul class="flex gap-1.5 text-xs font-semibold" aria-label="Badge legend">
-            <li class="rounded-full bg-indigo-100 px-2.5 py-0.5 text-indigo-700">Joel</li>
-            <li class="rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">Family</li>
-            <li class="rounded-full bg-amber-100 px-2.5 py-0.5 text-amber-700">All</li>
-          </ul>
-        </div>
-        <div class="mb-4 rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-900" role="note">
-          <strong>Coming up:</strong> No upcoming events were supplied in today's calendar data.
-        </div>
-        <ol id="agenda" class="flex-1 space-y-2" aria-label="Time-block agenda">
-          <li class="flex h-full min-h-[10rem] flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 p-6 text-center">
-            <p class="font-semibold text-slate-600">No events on today's agenda</p>
-            <p class="mt-1 max-w-sm text-sm text-slate-500">The Google Calendar feed returned no events, so there are no titles, times, locations, attendees, or conference links to show.</p>
-          </li>
-        </ol>
-      </section>
-
-      <section aria-labelledby="inbox-h" class="flex flex-col rounded-2xl bg-white p-5 shadow">
-        <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <h2 id="inbox-h" class="text-xl font-bold">Action Items / Inbox</h2>
-          <ul class="flex gap-1.5 text-xs font-semibold" aria-label="Priority legend">
-            <li class="rounded-full bg-rose-100 px-2.5 py-0.5 text-rose-700">High</li>
-            <li class="rounded-full bg-orange-100 px-2.5 py-0.5 text-orange-700">Medium</li>
-            <li class="rounded-full bg-slate-200 px-2.5 py-0.5 text-slate-700">Low</li>
-          </ul>
-        </div>
-        <ul id="inbox" class="flex-1 space-y-2" aria-label="Unread Gmail messages">
-          <li id="inbox-empty" class="flex h-full min-h-[10rem] flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 p-6 text-center">
-            <p class="font-semibold text-slate-600">No unread Gmail messages supplied</p>
-            <p class="mt-1 max-w-sm text-sm text-slate-500">When messages are available, each appears here as a checkable item with priority, subject, sender, snippet, labels, and attachment indicators.</p>
-          </li>
-        </ul>
-      </section>
+  <section aria-labelledby="focus-h" class="mt-5 flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-900/70 px-5 py-3 sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex items-center gap-4">
+      <h2 id="focus-h" class="text-sm font-semibold text-slate-200">Focus timer</h2>
+      <p id="timer" class="font-mono text-3xl font-bold tabular-nums text-white" role="timer" aria-live="off">25:00</p>
+      <span id="tstate" class="text-xs text-slate-400">Ready · 25-minute session</span>
     </div>
-
-    <!-- Middle row -->
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-
-      <section aria-labelledby="weather-h" class="rounded-2xl bg-white p-5 shadow">
-        <div class="mb-3 flex items-start justify-between gap-2">
-          <div>
-            <h2 id="weather-h" class="text-xl font-bold">Weather</h2>
-            <p class="text-sm text-slate-500">Hilliard, OH · <span id="weather-date">Today</span></p>
-          </div>
-          <span class="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-700">°F only</span>
-        </div>
-        <div class="mb-4 flex items-center gap-4 rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 p-4">
-          <div class="text-5xl font-bold tabular-nums text-sky-700" aria-label="Reported temperature 55 degrees Fahrenheit">55°F</div>
-          <div>
-            <p class="font-semibold">Description: <span class="font-normal text-slate-600">—</span></p>
-            <p class="text-sm text-slate-500">Single unlabeled temperature reading supplied (converted to Fahrenheit).</p>
-          </div>
-        </div>
-        <dl class="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          <div class="rounded-xl bg-slate-50 p-3"><dt class="text-xs font-semibold uppercase text-slate-500">Day</dt><dd class="text-xl font-bold">—</dd></div>
-          <div class="rounded-xl bg-slate-50 p-3"><dt class="text-xs font-semibold uppercase text-slate-500">High</dt><dd class="text-xl font-bold">—</dd></div>
-          <div class="rounded-xl bg-slate-50 p-3"><dt class="text-xs font-semibold uppercase text-slate-500">Low</dt><dd class="text-xl font-bold">—</dd></div>
-          <div class="rounded-xl bg-slate-50 p-3"><dt class="text-xs font-semibold uppercase text-slate-500">Morning</dt><dd class="text-xl font-bold">—</dd></div>
-          <div class="rounded-xl bg-slate-50 p-3"><dt class="text-xs font-semibold uppercase text-slate-500">Evening</dt><dd class="text-xl font-bold">—</dd></div>
-          <div class="rounded-xl bg-slate-50 p-3"><dt class="text-xs font-semibold uppercase text-slate-500">Humidity</dt><dd class="text-xl font-bold">—</dd></div>
-          <div class="rounded-xl bg-slate-50 p-3 col-span-2 sm:col-span-3"><dt class="text-xs font-semibold uppercase text-slate-500">Wind</dt><dd class="text-xl font-bold">—</dd></div>
-        </dl>
-        <p class="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">The forecast data was incomplete: only one temperature value came through, with no description, high/low, morning/evening, humidity, or wind. Missing fields are shown as —.</p>
-      </section>
-
-      <section aria-labelledby="chess-h" class="rounded-2xl bg-white p-5 shadow">
-        <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <h2 id="chess-h" class="text-xl font-bold">Chess Ratings</h2>
-          <span class="rounded-full bg-slate-800 px-3 py-1 text-sm font-semibold text-white">@joel3sacstherook</span>
-        </div>
-        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <article class="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Rapid</h3>
-            <p class="my-1 text-4xl font-extrabold text-emerald-600">—</p>
-            <p class="text-sm text-slate-600">W-L-D: — / — / —</p>
-          </article>
-          <article class="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Blitz</h3>
-            <p class="my-1 text-4xl font-extrabold text-amber-600">—</p>
-            <p class="text-sm text-slate-600">W-L-D: — / — / —</p>
-          </article>
-          <article class="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Bullet</h3>
-            <p class="my-1 text-4xl font-extrabold text-rose-600">—</p>
-            <p class="text-sm text-slate-600">W-L-D: — / — / —</p>
-          </article>
-          <article class="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Daily</h3>
-            <p class="my-1 text-4xl font-extrabold text-sky-600">—</p>
-            <p class="text-sm text-slate-600">W-L-D: — / — / —</p>
-          </article>
-          <article class="rounded-xl border border-slate-200 bg-slate-50 p-4 sm:col-span-2">
-            <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Tactics / Puzzles</h3>
-            <p class="my-1 text-4xl font-extrabold text-violet-600">—</p>
-            <p class="text-sm text-slate-600">W-L-D: — / — / —</p>
-          </article>
-        </div>
-        <p class="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">The Chess.com stats payload contained only a lone value ("1") with no mode labels, so no ratings or records could be reliably parsed.</p>
-      </section>
+    <div class="flex gap-2">
+      <button id="tstart" type="button" class="rounded-lg bg-sky-500 px-4 py-1.5 text-sm font-semibold text-slate-950 hover:bg-sky-400">Start</button>
+      <button id="treset" type="button" class="rounded-lg border border-slate-700 px-4 py-1.5 text-sm font-semibold text-slate-200 hover:bg-slate-800">Reset</button>
     </div>
+  </section>
 
-    <!-- Summary -->
-    <section aria-labelledby="summary-h">
-      <h2 id="summary-h" class="sr-only">Summary</h2>
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-        <div class="rounded-2xl bg-white p-4 shadow">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Total Events</p>
-          <p id="s-events" class="mt-1 text-3xl font-extrabold text-indigo-600">—</p>
-        </div>
-        <div class="rounded-2xl bg-white p-4 shadow">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">New Email Threads</p>
-          <p id="s-new" class="mt-1 text-3xl font-extrabold text-sky-600">—</p>
-        </div>
-        <div class="rounded-2xl bg-white p-4 shadow">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Open Inbox Threads</p>
-          <p id="s-open-threads" class="mt-1 text-3xl font-extrabold text-amber-600">—</p>
-        </div>
-        <div class="rounded-2xl bg-white p-4 shadow">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Action Items Open</p>
-          <p id="s-open" class="mt-1 text-3xl font-extrabold text-rose-600">—</p>
-        </div>
-        <div class="col-span-2 rounded-2xl bg-white p-4 shadow md:col-span-1">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Completion Percentage</p>
-          <p id="s-pct" class="mt-1 text-3xl font-extrabold text-emerald-600">—</p>
-        </div>
-      </div>
-    </section>
-  </main>
+  <main class="mt-6 space-y-6">
 
-  <footer class="mt-6 text-center text-xs text-slate-500">Values not present in the supplied data are shown as —.</footer>
-</div>
+    <!-- TOP ROW -->
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
 
-<script>
-(function(){
-  var $=function(i){return document.getElementById(i)};
-  function tick(){
-    var d=new Date();
-    $('now-date').textContent=d.toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-    $('now-time').textContent=d.toLocaleTimeString();
-    $('weather-date').textContent=d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'});
-  }
-  tick();setInterval(tick,1000);
+      <!-- SCHEDULE -->
+      <section class="card" aria-labelledby="sched-h">
+        <div class="flex items-center justify-between gap-2">
+          <h2 id="sched-h" class="text-lg font-bold text-white">Today's Schedule</h2>
+          <span class="text-xs text-slate-400">Sun, Oct 4, 2026 · times in Eastern (EDT)</span>
+        </div>
 
-  function summary(){
-    var boxes=document.querySelectorAll('#inbox input[type=checkbox]');
-    var total=boxes.length,done=0;
-    boxes.forEach(function(b){
-      if(b.checked)done++;
-      var li=b.closest('li');
-      if(li)li.classList.toggle('opacity-60',b.checked);
-      var t=li&&li.querySelector('[data-subject]');
-      if(t)t.classList.toggle('line-through',b.checked);
-    });
-    $('s-open').textContent=total?String(total-done):'—';
-    $('s-pct').textContent=total?Math.round(done/total*100)+'%':'—';
-  }
-  $('inbox').addEventListener('change',summary);
-  summary();
-
-  var secs=1500,run=null;
-  function show(){
-    var m=Math.floor(secs/60),s=secs%60;
-    $('timer').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
-  }
-  function stop(){clearInterval(run);run=null;$('timer-toggle').textContent='Start';}
-  $('timer-toggle').addEventListener('click',function(){
-    if(run){stop();return;}
-    if(secs===0)secs=1500;
-    show();
-    $('timer-toggle').textContent='Pause';
-    run=setInterval(function(){
-      secs--;show();
-      if(secs<=0){stop();$('timer').textContent='00:00';}
-    },1000);
-  });
-  $('timer-reset').addEventListener('click',function(){stop();secs=1500;show();});
-})();
-</script>
-</body>
-</html>
+        <div class="mt-3 rounded-xl border border-indigo-500/40 bg-indigo-500/10 p-3 text-sm text-indigo-100" role="note">
+          <strong class="font-bold text-indigo-200">Coming up:</strong>
+          JP meet w/JP3 Algebra 2 Th
