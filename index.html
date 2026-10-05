@@ -1,285 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joel's Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joel's Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .pulse-dot { animation: pulse-dot 2s infinite; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-slate-100 text-slate-900">
-    <div class="min-h-screen p-6">
-        <!-- Header -->
-        <div class="mb-8">
-            <div class="flex justify-between items-start mb-2">
-                <div>
-                    <h1 class="text-4xl font-bold text-slate-900">Hi Joel</h1>
-                    <p class="text-slate-600 mt-1">Daily dashboard · Google Calendar, Gmail, and Chess snapshot</p>
-                </div>
-                <div class="text-right">
-                    <p class="text-sm font-medium text-slate-700" id="currentDate">Oct 5, 2026</p>
-                    <p class="text-2xl font-semibold text-blue-600" id="currentTime">3:40 PM</p>
-                </div>
-            </div>
+<body class="bg-slate-50">
+  <div class="min-h-screen p-6">
+    <!-- Header -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between mb-2">
+        <h1 class="text-4xl font-bold text-slate-900">Hi Joel</h1>
+        <div class="text-right">
+          <div id="clock" class="text-2xl font-semibold text-slate-700">03:49 PM</div>
+          <div class="text-sm text-slate-500">Monday, October 5, 2026</div>
         </div>
-
-        <!-- Top Row: Schedule and Inbox -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <!-- Today's Schedule -->
-            <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-xl font-bold text-slate-900 mb-4">Today's Schedule</h2>
-                <div class="space-y-3 max-h-96 overflow-y-auto">
-                    <!-- CrossFit Event -->
-                    <div class="flex items-start gap-3 pb-3 border-b border-slate-200">
-                        <div class="flex-shrink-0 w-16 text-sm font-semibold text-slate-700">
-                            <span class="block">2:30 PM</span>
-                            <span class="text-xs text-slate-500">1 hr</span>
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center gap-2 mb-1">
-                                <h3 class="font-semibold text-slate-900">JP3 CrossFit w mom in garage</h3>
-                                <span class="inline-block px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded">Fitness</span>
-                            </div>
-                            <p class="text-sm text-slate-600">Organized by you · Created by Bethany Penton</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Mommy Mondays Event -->
-                    <div class="flex items-start gap-3 pb-3 border-b border-slate-200">
-                        <div class="flex-shrink-0 w-16 text-sm font-semibold text-slate-700">
-                            <span class="block">3:30 PM</span>
-                            <span class="text-xs text-slate-500">1 hr</span>
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center gap-2 mb-1">
-                                <h3 class="font-semibold text-slate-900">Mommy Mondays w jp3</h3>
-                                <span class="inline-block px-2 py-1 text-xs font-medium bg-pink-100 text-pink-800 rounded">Personal</span>
-                            </div>
-                            <p class="text-sm text-slate-600">Organized by you · Created by Bethany Penton</p>
-                        </div>
-                    </div>
-
-                    <!-- Careers & Money Management -->
-                    <div class="flex items-start gap-3 pb-3 border-b border-slate-200">
-                        <div class="flex-shrink-0 w-16 text-sm font-semibold text-slate-700">
-                            <span class="block">5:44 PM</span>
-                            <span class="text-xs text-slate-500">1 hr</span>
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center gap-2 mb-1">
-                                <h3 class="font-semibold text-slate-900">Careers & Money Management</h3>
-                                <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded">Development</span>
-                            </div>
-                            <p class="text-sm text-slate-600">Organized by you · Created by Bethany Penton</p>
-                        </div>
-                    </div>
-
-                    <!-- Door Knocking -->
-                    <div class="flex items-start gap-3 pb-3">
-                        <div class="flex-shrink-0 w-16 text-sm font-semibold text-slate-700">
-                            <span class="block">9:00 PM</span>
-                            <span class="text-xs text-slate-500">3 hrs</span>
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center gap-2 mb-1">
-                                <h3 class="font-semibold text-slate-900">Door knocking</h3>
-                                <span class="inline-block px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded">Work</span>
-                            </div>
-                            <p class="text-sm text-slate-600">Organized by you · Created by Bethany Penton</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Coming Up / Action Items -->
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-xl font-bold text-slate-900 mb-4">Inbox Items</h2>
-                <div class="space-y-3 max-h-96 overflow-y-auto">
-                    <!-- Midwest Doorknocking Camp -->
-                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 hover:border-blue-300 cursor-pointer transition">
-                        <div class="flex items-start gap-2 mb-2">
-                            <input type="checkbox" class="mt-1 w-4 h-4 cursor-pointer">
-                            <div class="flex-1">
-                                <p class="font-semibold text-sm text-slate-900">Midwest Doorknocking Camp Updated</p>
-                                <p class="text-xs text-slate-600 mt-1">Marketing Services</p>
-                            </div>
-                            <span class="inline-block px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded">Action</span>
-                        </div>
-                        <p class="text-xs text-slate-700 line-clamp-2">Weekly 4pm-5pm Monday. Google Meet attached. Multiple recipients invited.</p>
-                    </div>
-
-                    <!-- Q4 Kickoff Spreadsheet -->
-                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 hover:border-blue-300 cursor-pointer transition">
-                        <div class="flex items-start gap-2 mb-2">
-                            <input type="checkbox" class="mt-1 w-4 h-4 cursor-pointer">
-                            <div class="flex-1">
-                                <p class="font-semibold text-sm text-slate-900">FTP Sales & Marketing Q4 Prep</p>
-                                <p class="text-xs text-slate-600 mt-1">Nick Fulop via Sheets</p>
-                            </div>
-                            <span class="inline-block px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded">Review</span>
-                        </div>
-                        <p class="text-xs text-slate-700 line-clamp-2">Shared spreadsheet for Q4 kickoff. Please review and complete prep by Wed Oct 7.</p>
-                    </div>
-
-                    <!-- 5.Life Document -->
-                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 hover:border-blue-300 cursor-pointer transition">
-                        <div class="flex items-start gap-2 mb-2">
-                            <input type="checkbox" class="mt-1 w-4 h-4 cursor-pointer">
-                            <div class="flex-1">
-                                <p class="font-semibold text-sm text-slate-900">5.Life Email Verification</p>
-                                <p class="text-xs text-slate-600 mt-1">5.Life</p>
-                            </div>
-                            <span class="inline-block px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded">Verify</span>
-                        </div>
-                        <p class="text-xs text-slate-700 line-clamp-2">Last step to finalize your document. Verify email to complete signup.</p>
-                    </div>
-
-                    <!-- Q4 Kickoff Email -->
-                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 hover:border-blue-300 cursor-pointer transition">
-                        <div class="flex items-start gap-2 mb-2">
-                            <input type="checkbox" class="mt-1 w-4 h-4 cursor-pointer">
-                            <div class="flex-1">
-                                <p class="font-semibold text-sm text-slate-900">Q4 Kickoff - Thursday Oct 8</p>
-                                <p class="text-xs text-slate-600 mt-1">Nick Fulop</p>
-                            </div>
-                            <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded">Team</span>
-                        </div>
-                        <p class="text-xs text-slate-700 line-clamp-2">8am-1pm at Delaware Area Chamber. Complete prep by end of Wed Oct 7.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Middle Row: Weather/Focus Goal and Chess Ratings -->
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
-            <!-- Weather & Focus Goal -->
-            <div class="lg:col-span-1 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-lg font-bold text-slate-900 mb-4">Weather & Focus</h2>
-                <div class="mb-6 p-4 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
-                    <p class="text-sm font-semibold text-slate-700 mb-2">Current Conditions</p>
-                    <p class="text-xs text-slate-600">Weather data unavailable</p>
-                </div>
-                <div class="p-4 bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg border border-amber-200">
-                    <p class="text-sm font-semibold text-slate-700 mb-3">Focus Timer</p>
-                    <div class="text-3xl font-bold text-amber-700 mb-3" id="focusTimer">25:00</div>
-                    <button class="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 rounded-lg transition">Start Focus</button>
-                </div>
-            </div>
-
-            <!-- Chess Ratings -->
-            <div class="lg:col-span-3 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-lg font-bold text-slate-900 mb-4">Chess Ratings & Performance</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                    <!-- Daily -->
-                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg border border-blue-200">
-                        <p class="text-xs font-semibold text-slate-700 mb-2">Daily</p>
-                        <p class="text-2xl font-bold text-blue-700">1703</p>
-                        <div class="mt-2 text-xs text-slate-600">
-                            <p><span class="font-semibold">1W</span> 0L 0D</p>
-                            <p class="text-blue-600 text-xs mt-1">Updated today</p>
-                        </div>
-                    </div>
-
-                    <!-- Rapid -->
-                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg border border-green-200">
-                        <p class="text-xs font-semibold text-slate-700 mb-2">Rapid</p>
-                        <p class="text-2xl font-bold text-green-700">1742</p>
-                        <div class="mt-2 text-xs text-slate-600">
-                            <p><span class="font-semibold">10W</span> 4L 2D</p>
-                            <p class="text-green-600 text-xs mt-1">Sep 24, 2026</p>
-                        </div>
-                    </div>
-
-                    <!-- Blitz -->
-                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg border border-purple-200">
-                        <p class="text-xs font-semibold text-slate-700 mb-2">Blitz</p>
-                        <p class="text-2xl font-bold text-purple-700">1150</p>
-                        <div class="mt-2 text-xs text-slate-600">
-                            <p><span class="font-semibold">5W</span> 11L 0D</p>
-                            <p class="text-purple-600 text-xs mt-1">Aug 31, 2026</p>
-                        </div>
-                    </div>
-
-                    <!-- Bullet -->
-                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-4 rounded-lg border border-red-200">
-                        <p class="text-xs font-semibold text-slate-700 mb-2">Bullet</p>
-                        <p class="text-2xl font-bold text-red-700">1415</p>
-                        <div class="mt-2 text-xs text-slate-600">
-                            <p><span class="font-semibold">8W</span> 17L 1D</p>
-                            <p class="text-red-600 text-xs mt-1">Aug 27, 2026</p>
-                        </div>
-                    </div>
-
-                    <!-- Tactics/Puzzles -->
-                    <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-4 rounded-lg border border-indigo-200">
-                        <p class="text-xs font-semibold text-slate-700 mb-2">Tactics</p>
-                        <p class="text-2xl font-bold text-indigo-700">400</p>
-                        <div class="mt-2 text-xs text-slate-600">
-                            <p>Highest rating</p>
-                            <p class="text-indigo-600 text-xs mt-1">Aug 12, 2026</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bottom Summary Bar -->
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-lg font-bold text-slate-900 mb-4">Daily Summary</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
-                <!-- Total Events -->
-                <div class="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <p class="text-sm font-semibold text-slate-600 mb-1">Total Events</p>
-                    <p class="text-3xl font-bold text-blue-700">5</p>
-                    <p class="text-xs text-slate-500 mt-2">Today's calendar</p>
-                </div>
-
-                <!-- New Email Threads -->
-                <div class="text-center p-4 bg-green-50 rounded-lg border border-green-200">
-                    <p class="text-sm font-semibold text-slate-600 mb-1">New Email Threads</p>
-                    <p class="text-3xl font-bold text-green-700">20</p>
-                    <p class="text-xs text-slate-500 mt-2">From past 7 days</p>
-                </div>
-
-                <!-- Open Inbox Threads -->
-                <div class="text-center p-4 bg-purple-50 rounded-lg border border-purple-200">
-                    <p class="text-sm font-semibold text-slate-600 mb-1">Open Inbox</p>
-                    <p class="text-3xl font-bold text-purple-700">20</p>
-                    <p class="text-xs text-slate-500 mt-2">Unread important</p>
-                </div>
-
-                <!-- Open Action Items -->
-                <div class="text-center p-4 bg-amber-50 rounded-lg border border-amber-200">
-                    <p class="text-sm font-semibold text-slate-600 mb-1">Action Items</p>
-                    <p class="text-3xl font-bold text-amber-700">4</p>
-                    <p class="text-xs text-slate-500 mt-2">Awaiting action</p>
-                </div>
-
-                <!-- % Completed -->
-                <div class="text-center p-4 bg-red-50 rounded-lg border border-red-200">
-                    <p class="text-sm font-semibold text-slate-600 mb-1">% Completed</p>
-                    <p class="text-3xl font-bold text-red-700">0%</p>
-                    <p class="text-xs text-slate-500 mt-2">Action items done</p>
-                </div>
-            </div>
-        </div>
+      </div>
+      <p class="text-slate-600">Daily dashboard · Google Calendar, Gmail, and Chess snapshot</p>
     </div>
 
-    <script>
-        // Update current date and time
-        function updateDateTime() {
-            const now = new Date('2026-10-05T15:40:37-04:00');
-            
-            const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-            const dateStr = now.toLocaleDateString('en-US', dateOptions);
-            document.getElementById('currentDate').textContent = dateStr;
-            
-            const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
-            const timeStr = now.toLocaleTimeString('en-US', timeOptions);
-            document.getElementById('currentTime').textContent = timeStr;
-        }
-        
-        updateDateTime();
-        setInterval(updateDateTime, 60000);
-    </script>
+    <!-- Top Row: Schedule + Inbox -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <!-- Today's Schedule Timeline -->
+      <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
+        <h2 class="text-lg font-semibold text-slate-900 mb-4">Today's Schedule</h2>
+        <div class="space-y-3 scrollbar-hide max-h-96 overflow-y-auto">
+          <!-- Ps 102-103; 2 Ti 1 (All day) -->
+          <div class="flex gap-4 pb-3 border-b border-slate-200">
+            <div class="w-24 text-sm font-medium text-slate-600 pt-1">All Day</div>
+            <div class="flex-1">
+              <div class="bg-purple-100 border-l-4 border-purple-500 p-3 rounded">
+                <p class="font-medium text-slate-900">Ps 102-103; 2 Ti 1</p>
+                <span class="inline-block mt-2 px-2 py-1 bg-purple-200 text-purple-800 text-xs rounded-full">Spiritual</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- JP3 CrossFit w mom in garage (2:30 PM - 3:30 PM) -->
+          <div class="flex gap-4 pb-3 border-b border-slate-200">
+            <div class="w-24 text-sm font-medium text-slate-600 pt-1">2:30 PM</div>
+            <div class="flex-1">
+              <div class="bg-green-100 border-l-4 border-green-500 p-3 rounded">
+                <p class="font-medium text-slate-900">JP3 CrossFit w mom in garage</p>
+                <p class="text-sm text-slate-600">2:30 PM - 3:30 PM</p>
+                <span class="inline-block mt-2 px-2 py-1 bg-green-200 text-green-800 text-xs rounded-full">Fitness</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mommy Mondays w jp3 (3:30 PM - 4:30 PM) -->
+          <div class="flex gap-4 pb-3 border-b border-slate-200">
+            <div class="w-24 text-sm font-medium text-slate-600 pt-1">3:30 PM</div>
+            <div class="flex-1">
+              <div class="bg-pink-100 border-l-4 border-pink-500 p-3 rounded">
+                <p class="font-medium text-slate-900">Mommy Mondays w jp3</p>
+                <p class="text-sm text-slate-600">3:30 PM - 4:30 PM</p>
+                <span class="inline-block mt-2 px-2 py-1 bg-pink-200 text-pink-800 text-xs rounded-full">Family</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Careers & Money Management (5:44 PM - 6:44 PM) -->
+          <div class="flex gap-4 pb-3 border-b border-slate-200">
+            <div class="w-24 text-sm font-medium text-slate-600 pt-1">5:44 PM</div>
+            <div class="flex-1">
+              <div class="bg-blue-100 border-l-4 border-blue-500 p-3 rounded">
+                <p class="font-medium text-slate-900">Careers & Money Management</p>
+                <p class="text-sm text-slate-600">5:44 PM - 6:44 PM</p>
+                <span class="inline-block mt-2 px-2 py-1 bg-blue-200 text-blue-800 text-xs rounded-full">Professional</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Door knocking (9:00 PM - 12:00 AM) -->
+          <div class="flex gap-4">
+            <div class="w-24 text-sm font-medium text-slate-600 pt-1">9:00 PM</div>
+            <div class="flex-1">
+              <div class="bg-orange-100 border-l-4 border-orange-500 p-3 rounded">
+                <p class="font-medium text-slate-900">Door knocking</p>
+                <p class="text-sm text-slate-600">9:00 PM - 12:00 AM</p>
+                <span class="inline-block mt-2 px-2 py-1 bg-orange-200 text-orange-800 text-xs rounded-full">Work</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Items / Inbox -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-lg font-semibold text-slate-900 mb-4">Action Items</h2>
+        <div class="space-y-3 scrollbar-hide max-h-96 overflow-y-auto">
+          <!-- Midwest Doorknocking Camp -->
+          <div class="border border-red-200 bg-red-50 rounded p-3 hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex items-start gap-2 mb-2">
+              <input type="checkbox" class="mt-1 w-4 h-4 text-red-600 rounded">
+              <span class="inline-block px-2 py-1 bg-red-600 text-white text-xs font-bold rounded">HIGH</span>
+            </div>
+            <p class="font-medium text-slate-900 text-sm">Midwest Doorknocking Camp</p>
+            <p class="text-xs text-slate-600 mt-1">From: Marketing Services</p>
+            <p class="text-xs text-slate-500 mt-1">Updated invitation for weekly meetings</p>
+          </div>
+
+          <!-- Q4 Kickoff Prep -->
+          <div class="border border-orange-200 bg-orange-50 rounded p-3 hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex items-start gap-2 mb-2">
+              <input type="checkbox" class="mt-1 w-4 h-4 text-orange-600 rounded">
+              <span class="inline-block px-2 py-1 bg-orange-600 text-white text-xs font-bold rounded">HIGH</span>
+            </div>
+            <p class="font-medium text-slate-900 text-sm">Q4 Kickoff - Thursday, Oct. 8th</p>
+            <p class="text-xs text-slate-600 mt-1">From: Nick Fulop</p>
+            <p class="text-xs text-slate-500 mt-1">Prep due Oct 7th · 8am-1pm at Delaware Area Chamber</p>
+          </div>
+
+          <!-- FTP Sales & Marketing Spreadsheet -->
+          <div class="border border-yellow-200 bg-yellow-50 rounded p-3 hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex items-start gap-2 mb-2">
+              <input type="checkbox" class="mt-1 w-4 h-4 text-yellow-600 rounded">
+              <span class="inline-block px-2 py-1 bg-yellow-600 text-white text-xs font-bold rounded">MEDIUM</span>
+            </div>
+            <p class="font-medium text-slate-900 text-sm">Spreadsheet shared: Q4 Kickoff Prep</p>
+            <p class="text-xs text-slate-600 mt-1">From: Nick Fulop via Google Sheets</p>
+            <p class="text-xs text-slate-500 mt-1">Invited to edit shared spreadsheet</p>
+          </div>
+
+          <!-- 5.Life Document Verification -->
+          <div class="border border-green-200 bg-green-50 rounded p-3 hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex items-start gap-2 mb-2">
+              <input type="checkbox" class="mt-1 w-4 h-4 text-green-600 rounded">
+              <span class="inline-block px-2 py-1 bg-green-600 text-white text-xs font-bold rounded">MEDIUM</span>
+            </div>
+            <p class="font-medium text-slate-900 text-sm">5.Life - Verify your email</p>
+            <p class="text-xs text-slate-600 mt-1">From: 5.Life</p>
+            <p class="text-xs text-slate-500 mt-1">Last step to finalize gym membership</p>
+          </div>
+
+          <!-- GitHub Launch Code -->
+          <div class="border border-slate-200 bg-slate-50 rounded p-3 hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex items-start gap-2 mb-2">
+              <input type="checkbox" class="mt-1 w-4 h-4 text-slate-600 rounded">
+              <span class="inline-block px-2 py-1 bg-slate-600 text-white text-xs font-bold rounded">LOW</span>
+            </div>
+            <p class="font-medium text-slate-900 text-sm">GitHub Launch Code</p>
+            <p class="text-xs text-slate-600 mt-1">From: GitHub</p>
+            <p class="text-xs text-slate-500 mt-1">Code: 46900871</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle Row: Weather/Focus + Chess Ratings -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <!-- Weather & Focus Goal -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-lg font-semibold text-slate-900 mb-4">Weather & Focus Goal</h2>
+        <div class="bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg p-8 text-white mb-4 text-center">
+          <p class="text-sm opacity-90 mb-1">Columbus, OH</p>
+          <p class="text-4xl font-bold mb-1">72°F</p>
+          <p class="text-sm opacity-90">Partly Cloudy</p>
+        </div>
+        <div class="bg-gradient-to-br from-amber-100 to-amber-50 rounded-lg p-4">
+          <p class="text-sm font-medium text-slate-700 mb-2">Today's Focus Goal</p>
+          <div class="h-2 bg-amber-200 rounded-full overflow-hidden mb-2">
+            <div class="h-full bg-amber-500" style="width: 65%;"></div>
+          </div>
+          <p class="text-xs text-slate-600">65% Complete · 3 of 5 priorities done</p>
+        </div>
+      </div>
+
+      <!-- Chess Ratings -->
+      <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
+        <h2 class="text-lg font-semibold text-slate-900 mb-4">Chess Ratings</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <!-- Daily -->
+          <div class="bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg p-4 text-white">
+            <p class="text-xs opacity-80 font-medium">Daily</p>
+            <p class="text-3xl font-bold">1703</p>
+            <p class="text-xs opacity-75 mt-1">W: 1 L: 0 D: 0</p>
+          </div>
+
+          <!-- Rapid -->
+          <div class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg p-4 text-white">
+            <p class="text-xs opacity-80 font-medium">Rapid</p>
+            <p class="text-3xl font-bold">1742</p>
+            <p class="text-xs opacity-75 mt-1">W: 10 L: 4 D: 2</p>
+          </div>
+
+          <!-- Blitz -->
+          <div class="bg-gradient-to-br from-orange-500 to-orange-700 rounded-lg p-4 text-white">
+            <p class="text-xs opacity-80 font-medium">Blitz</p>
+            <p class="text-3xl font-bold">1150</p>
+            <p class="text-xs opacity-75 mt-1">W: 5 L: 11 D: 0</p>
+          </div>
+
+          <!-- Bullet -->
+          <div class="bg-gradient-to-br from-red-500 to-red-700 rounded-lg p-4 text-white">
+            <p class="text-xs opacity-80 font-medium">Bullet</p>
+            <p class="text-3xl font-bold">1415</p>
+            <p class="text-xs opacity-75 mt-1">W: 8 L: 17 D: 1</p>
+          </div>
+
+          <!-- Chess960 Daily -->
+          <div class="bg-gradient-to-br from-slate-500 to-slate-700 rounded-lg p-4 text-white">
+            <p class="text-xs opacity-80 font-medium">Chess960</p>
+            <p class="text-3xl font-bold">—</p>
+            <p class="text-xs opacity-75 mt-1">Not played</p>
+          </div>
+
+          <!-- Tactics/Puzzles -->
+          <div class="bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-lg p-4 text-white">
+            <p class="text-xs opacity-80 font-medium">Tactics</p>
+            <p class="text-3xl font-bold">400</p>
+            <p class="text-xs opacity-75 mt-1">Peak rating</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Summary Bar -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-semibold text-slate-900 mb-4">Daily Summary</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="border-l-4 border-blue-500 pl-4">
+          <p class="text-xs text-slate-600 font-medium">Total Events</p>
+          <p class="text-2xl font-bold text-slate-900">5</p>
+        </div>
+        <div class="border-l-4 border-green-500 pl-4">
+          <p class="text-xs text-slate-600 font-medium">New Email Threads</p>
+          <p class="text-2xl font-bold text-slate-900">20</p>
+        </div>
+        <div class="border-l-4 border-orange-500 pl-4">
+          <p class="text-xs text-slate-600 font-medium">Open Inbox Threads</p>
+          <p class="text-2xl font-bold text-slate-900">18</p>
+        </div>
+        <div class="border-l-4 border-purple-500 pl-4">
+          <p class="text-xs text-slate-600 font-medium">Open Action Items</p>
+          <p class="text-2xl font-bold text-slate-900">5</p>
+        </div>
+        <div class="border-l-4 border-red-500 pl-4">
+          <p class="text-xs text-slate-600 font-medium">% Completed</p>
+          <p class="text-2xl font-bold text-slate-900">65%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+      const displayHours = now.getHours() % 12 || 12;
+      document.getElementById('clock').textContent = String(displayHours).padStart(2, '0') + ':' + minutes + ' ' + ampm;
+    }
+    updateClock();
+    setInterval(updateClock, 60000);
+  </script>
 </body>
 </html>
