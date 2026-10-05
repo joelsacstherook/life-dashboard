@@ -3,65 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joel's Daily Dashboard</title>
+    <title>Joel's Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         function updateClock() {
-            const now = new Date('2026-10-05T20:31:56');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+            const now = new Date('2026-10-05T15:34:13Z');
+            const formatter = new Intl.DateTimeFormat('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true,
+                timeZone: 'America/New_York'
+            });
+            document.getElementById('clock').textContent = formatter.format(now);
+            setTimeout(updateClock, 1000);
         }
-        updateClock();
-        setInterval(updateClock, 1000);
-
-        function formatTime12H(date) {
-            const d = new Date(date);
-            const hours = d.getHours() % 12 || 12;
-            const minutes = String(d.getMinutes()).padStart(2, '0');
-            const ampm = d.getHours() >= 12 ? 'PM' : 'AM';
-            return `${hours}:${minutes} ${ampm}`;
+        function formatTime12(isoString) {
+            const date = new Date(isoString);
+            return date.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit',
+                hour12: true,
+                timeZone: 'America/New_York'
+            });
         }
-
-        function toggleCheckbox(el) {
-            el.classList.toggle('bg-green-100');
-            el.classList.toggle('border-green-500');
-            const check = el.querySelector('input');
-            check.checked = !check.checked;
-        }
+        window.addEventListener('DOMContentLoaded', updateClock);
     </script>
 </head>
-<body class="bg-slate-50 text-slate-900">
-    <!-- Header -->
-    <div class="bg-white border-b border-slate-200 px-6 py-5 shadow-sm">
-        <div class="flex justify-between items-start mb-2">
-            <div>
-                <h1 class="text-3xl font-bold text-slate-900">Hi Joel</h1>
-                <p class="text-sm text-slate-600">Daily dashboard · Google Calendar, Gmail, and Chess snapshot</p>
+<body class="bg-gray-50 text-gray-900">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200 shadow-sm">
+            <div class="max-w-7xl mx-auto px-6 py-6">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">Hi Joel</h1>
+                        <p class="text-sm text-gray-600 mt-1">Daily dashboard · Google Calendar, Gmail, and Chess snapshot</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-lg font-semibold text-gray-900" id="clock">3:34:13 PM</p>
+                        <p class="text-sm text-gray-600">October 5, 2026</p>
+                    </div>
+                </div>
             </div>
-            <div class="text-right">
-                <div class="text-lg font-semibold text-slate-900" id="clock">20:31:56</div>
-                <div class="text-sm text-slate-600">October 5, 2026</div>
-            </div>
-        </div>
-    </div>
+        </header>
 
-    <!-- Main Content -->
-    <div class="p-6">
-        <!-- Top Row: Schedule + Inbox -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <!-- Today's Schedule -->
-            <div class="lg:col-span-2 bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
-                <h2 class="text-lg font-bold text-slate-900 mb-4">Today's Schedule</h2>
-                <div class="space-y-3 max-h-96 overflow-y-auto">
-                    <!-- JP3 CrossFit -->
-                    <div class="flex gap-3 pb-3 border-b border-slate-100">
-                        <div class="flex-shrink-0 w-20 text-sm font-semibold text-blue-700 bg-blue-50 rounded px-2 py-1 text-center">
-                            2:30 PM
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-6 py-8">
+            <!-- Top Row: Schedule + Inbox -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <!-- Today's Schedule Timeline -->
+                <div class="lg:col-span-2 bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Today's Schedule</h2>
+                    <div class="space-y-3">
+                        <!-- Event 1: CrossFit -->
+                        <div class="flex items-start border-l-4 border-blue-500 pl-4 py-2">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm font-semibold text-gray-900">JP3 CrossFit w mom in garage</span>
+                                    <span class="inline-block bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded">Personal</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">10:30 AM – 11:30 AM</p>
+                            </div>
                         </div>
-                        <div class="flex-grow">
-                            <div class="font-semibold text-slate-900">JP3 CrossFit w mom in garage</div>
-                            <div class="text-xs text-slate-600 mt-1">Duration: 1 hour</div>
-                            <span class="inline-block mt-2 px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded">Fitness</span>
-                        </div>
+                        <!-- Event 2: Mommy Mondays -->
+                        <div class="flex items-start border-l-4 border-purple-500 pl-4 py-2">
+                            <div class="flex-1
