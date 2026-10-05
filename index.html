@@ -1,76 +1,67 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Joel's Daily Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @keyframes clock {
-            0% { opacity: 1; }
+    <script>
+        function updateClock() {
+            const now = new Date('2026-10-05T20:31:56');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
         }
-        .event-block {
-            border-left: 4px solid;
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        function formatTime12H(date) {
+            const d = new Date(date);
+            const hours = d.getHours() % 12 || 12;
+            const minutes = String(d.getMinutes()).padStart(2, '0');
+            const ampm = d.getHours() >= 12 ? 'PM' : 'AM';
+            return `${hours}:${minutes} ${ampm}`;
         }
-        .category-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            font-size: 12px;
-            font-weight: 600;
+
+        function toggleCheckbox(el) {
+            el.classList.toggle('bg-green-100');
+            el.classList.toggle('border-green-500');
+            const check = el.querySelector('input');
+            check.checked = !check.checked;
         }
-        .joel-badge { background-color: #E3F2FD; color: #1565C0; }
-        .family-badge { background-color: #F3E5F5; color: #7B1FA2; }
-        .all-badge { background-color: #E0F2F1; color: #00695C; }
-    </style>
+    </script>
 </head>
-<body class="bg-gray-50 text-gray-900">
-    <div class="min-h-screen p-8">
-        <!-- Header -->
-        <div class="flex justify-between items-start mb-12">
+<body class="bg-slate-50 text-slate-900">
+    <!-- Header -->
+    <div class="bg-white border-b border-slate-200 px-6 py-5 shadow-sm">
+        <div class="flex justify-between items-start mb-2">
             <div>
-                <h1 class="text-4xl font-bold mb-2">Hi Joel</h1>
-                <p class="text-gray-600">Daily dashboard · Google Calendar, Gmail, and Chess snapshot</p>
+                <h1 class="text-3xl font-bold text-slate-900">Hi Joel</h1>
+                <p class="text-sm text-slate-600">Daily dashboard · Google Calendar, Gmail, and Chess snapshot</p>
             </div>
             <div class="text-right">
-                <div class="text-2xl font-semibold" id="currentDate">October 5, 2026</div>
-                <div class="text-3xl font-bold text-blue-600" id="currentTime">3:25 PM</div>
+                <div class="text-lg font-semibold text-slate-900" id="clock">20:31:56</div>
+                <div class="text-sm text-slate-600">October 5, 2026</div>
             </div>
         </div>
+    </div>
 
-        <!-- Top Row: Schedule & Inbox -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Main Content -->
+    <div class="p-6">
+        <!-- Top Row: Schedule + Inbox -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             <!-- Today's Schedule -->
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-xl font-bold mb-4">Today's Schedule</h2>
-                <div class="space-y-3 mb-6">
-                    <!-- Event 1 -->
-                    <div class="event-block border-blue-500 bg-blue-50 p-4 rounded">
-                        <div class="flex items-start justify-between mb-2">
-                            <div>
-                                <div class="font-semibold text-gray-800">Team Standup</div>
-                                <div class="text-sm text-gray-600">9:00 AM - 9:30 AM EDT</div>
-                            </div>
-                            <span class="category-badge joel-badge">Joel</span>
+            <div class="lg:col-span-2 bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
+                <h2 class="text-lg font-bold text-slate-900 mb-4">Today's Schedule</h2>
+                <div class="space-y-3 max-h-96 overflow-y-auto">
+                    <!-- JP3 CrossFit -->
+                    <div class="flex gap-3 pb-3 border-b border-slate-100">
+                        <div class="flex-shrink-0 w-20 text-sm font-semibold text-blue-700 bg-blue-50 rounded px-2 py-1 text-center">
+                            2:30 PM
                         </div>
-                        <div class="text-xs text-gray-600">Conference Room A</div>
-                    </div>
-
-                    <!-- Event 2 -->
-                    <div class="event-block border-purple-500 bg-purple-50 p-4 rounded">
-                        <div class="flex items-start justify-between mb-2">
-                            <div>
-                                <div class="font-semibold text-gray-800">Project Review</div>
-                                <div class="text-sm text-gray-600">11:00 AM - 12:00 PM EDT</div>
-                            </div>
-                            <span class="category-badge all-badge">All</span>
+                        <div class="flex-grow">
+                            <div class="font-semibold text-slate-900">JP3 CrossFit w mom in garage</div>
+                            <div class="text-xs text-slate-600 mt-1">Duration: 1 hour</div>
+                            <span class="inline-block mt-2 px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded">Fitness</span>
                         </div>
-                        <div class="text-xs text-gray-600">Video Call</div>
-                    </div>
-
-                    <!-- Event 3 -->
-                    <div class="event-block border-green-500 bg-green-50 p-4 rounded">
-                        <div class="flex items-start justify-between mb-2">
-                            <div>
-                                <div class
