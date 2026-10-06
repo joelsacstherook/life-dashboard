@@ -1,329 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Joel's Life Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-slide-in {
-      animation: slideIn 0.3s ease-out;
-    }
-    .checkbox-custom:checked {
-      background-color: #10b981;
-      border-color: #10b981;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joel's Daily Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-gray-100 min-h-screen">
-  <div class="container mx-auto px-4 py-8 max-w-7xl">
-    
-    <!-- Header -->
-    <div class="mb-8 animate-slide-in">
-      <div class="flex justify-between items-start mb-4">
-        <div>
-          <h1 class="text-4xl font-bold text-white mb-1">Hi Joel</h1>
-          <p class="text-sm text-gray-400">Daily dashboard · Google Calendar, Gmail, and Chess snapshot</p>
+<body class="bg-gray-50 text-gray-900">
+    <div class="min-h-screen p-6">
+        <!-- HEADER -->
+        <div class="mb-8">
+            <div class="flex justify-between items-start mb-2">
+                <div>
+                    <h1 class="text-4xl font-bold">Hi Joel</h1>
+                    <p class="text-gray-600 text-sm mt-1">Daily dashboard · Google Calendar, Gmail, and Chess snapshot</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-gray-500">Tuesday, October 6, 2026</p>
+                    <p class="text-2xl font-semibold tabular-nums" id="clock">06:00:09</p>
+                </div>
+            </div>
         </div>
-        <div class="text-right">
-          <p class="text-xl font-semibold text-emerald-400" id="current-date">October 5, 2026</p>
-          <p class="text-2xl font-bold text-white" id="current-time">4:09 PM</p>
+
+        <!-- TOP ROW: SCHEDULE & INBOX -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <!-- TODAY'S SCHEDULE -->
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h2 class="text-lg font-semibold mb-4">Today's Schedule</h2>
+                <div class="space-y-3 max-h-96 overflow-y-auto">
+                    <!-- Event: Ps 104-106; 2 Ti 2 (All day) -->
+                    <div class="border-l-4 border-blue-500 pl-4 py-2">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-sm">Ps 104-106; 2 Ti 2</p>
+                                <p class="text-xs text-gray-500">All day event</p>
+                            </div>
+                            <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Personal</span>
+                        </div>
+                    </div>
+
+                    <!-- Event: Careers & Money Management -->
+                    <div class="border-l-4 border-purple-500 pl-4 py-2">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-sm">Careers & Money Management</p>
+                                <p class="text-xs text-gray-500">1:44 PM – 2:44 PM</p>
+                            </div>
+                            <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Work</span>
+                        </div>
+                    </div>
+
+                    <!-- Event: WRESTLING -->
+                    <div class="border-l-4 border-orange-500 pl-4 py-2">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-sm">WRESTLING</p>
+                                <p class="text-xs text-gray-500">2:45 PM – 4:15 PM</p>
+                            </div>
+                            <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">Sports</span>
+                        </div>
+                    </div>
+
+                    <!-- Event: Door Knocking -->
+                    <div class="border-l-4 border-red-500 pl-4 py-2">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-sm">Door Knocking</p>
+                                <p class="text-xs text-gray-500">4:15 PM – 8:00 PM</p>
+                            </div>
+                            <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Activity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coming Up Section -->
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <p class="text-xs font-semibold text-gray-600 uppercase mb-2">Coming Up</p>
+                    <p class="text-sm text-gray-600">FTP Family outing @ Lehner Farms · Fri, Oct 9 · 4:30 PM – 7:00 PM</p>
+                </div>
+            </div>
+
+            <!-- ACTION ITEMS / INBOX -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h2 class="text-lg font-semibold mb-4">Action Items</h2>
+                <div class="space-y-3 max-h-96 overflow-y-auto">
+                    <!-- High Priority: Make a Daily Chess Move -->
+                    <div class="border border-red-200 bg-red-50 rounded p-3">
+                        <div class="flex items-start justify-between mb-2">
+                            <input type="checkbox" class="mt-1 w-4 h-4 text-red-600">
+                            <span class="inline-block bg-red-600 text-white text-xs px-2 py-1 rounded font-semibold">HIGH</span>
+                        </div>
+                        <p class="font-medium text-sm">Make a move in Daily Chess game</p>
+                        <p class="text-xs text-gray-600 mt-1">Chess.com · Time running out</p>
+                    </div>
+
+                    <!-- High Priority: Review Q4 Sales & Marketing -->
+                    <div class="border border-red-200 bg-red-50 rounded p-3">
+                        <div class="flex items-start justify-between mb-2">
+                            <input type="checkbox" class="mt-1 w-4 h-4 text-red-600">
+                            <span class="inline-block bg-red-600 text-white text-xs px-2 py-1 rounded font-semibold">HIGH</span>
+                        </div>
+                        <p class="font-medium text-sm">Review Q4 Kickoff Prep Spreadsheet</p>
+                        <p class="text-xs text-gray-600 mt-1">Nick Fulop shared · Google Sheets</p>
+                    </div>
+
+                    <!-- Medium Priority: Verify 5.Life Email -->
+                    <div class="border border-yellow-200 bg-yellow-50 rounded p-3">
+                        <div class="flex items-start justify-between mb-2">
+                            <input type="checkbox" class="mt-1 w-4 h-4 text-yellow-600">
+                            <span class="inline-block bg-yellow-600 text-white text-xs px-2 py-1 rounded font-semibold">MED</span>
+                        </div>
+                        <p class="font-medium text-sm">Verify 5.Life account email</p>
+                        <p class="text-xs text-gray-600 mt-1">5.Life · Complete gym registration</p>
+                    </div>
+
+                    <!-- Medium Priority: Add Claude API Credits -->
+                    <div class="border border-yellow-200 bg-yellow-50 rounded p-3">
+                        <div class="flex items-start justify-between mb-2">
+                            <input type="checkbox" class="mt-1 w-4 h-4 text-yellow-600">
+                            <span class="inline-block bg-yellow-600 text-white text-xs px-2 py-1 rounded font-semibold">MED</span>
+                        </div>
+                        <p class="font-medium text-sm">Add Claude API credits ($1.57 left)</p>
+                        <p class="text-xs text-gray-600 mt-1">Anthropic · Billing account</p>
+                    </div>
+
+                    <!-- Low Priority: Review Claude Managed Agents -->
+                    <div class="border border-green-200 bg-green-50 rounded p-3">
+                        <div class="flex items-start justify-between mb-2">
+                            <input type="checkbox" class="mt-1 w-4 h-4 text-green-600">
+                            <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded font-semibold">LOW</span>
+                        </div>
+                        <p class="font-medium text-sm">Review Claude Managed Agents setup</p>
+                        <p class="text-xs text-gray-600 mt-1">Anthropic · Optional exploration</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <!-- MIDDLE ROW: WEATHER/FOCUS & CHESS RATINGS -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <!-- WEATHER & FOCUS GOAL -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h2 class="text-lg font-semibold mb-4">Weather & Focus</h2>
+                <div class="space-y-4">
+                    <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-lg p-4 text-center">
+                        <p class="text-sm text-gray-600 mb-2">Weather</p>
+                        <p class="text-3xl font-light">🌤️</p>
+                        <p class="text-sm text-gray-700 mt-2">Columbus, OH · Partly Cloudy · 68°F</p>
+                    </div>
+                    <div class="border-t pt-4">
+                        <p class="text-sm font-semibold mb-2">Focus Goal</p>
+                        <div class="bg-indigo-50 border border-indigo-200 rounded p-3">
+                            <p class="text-sm text-indigo-900">Complete Q4 Kickoff Prep review before 3 PM</p>
+                        </div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <p class="text-xs font-semibold text-gray-600 uppercase mb-2">Focus Timer</p>
+                        <div class="flex gap-2">
+                            <button class="flex-1 bg-indigo-600 text-white py-2 rounded text-sm font-medium hover:bg-indigo-700">25 min</button>
+                            <button class="flex-1 bg-gray-200 text-gray-800 py-2 rounded text-sm font-medium hover:bg-gray-300">45 min</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHESS RATINGS -->
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h2 class="text-lg font-semibold mb-4">Chess Ratings</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- Daily -->
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg p-4 border border-amber-200">
+                        <p class="text-xs font-semibold text-amber-900 uppercase mb-1">Daily</p>
+                        <p class="text-3xl font-bold text-amber-700">1703</p>
+                        <p class="text-xs text-amber-600 mt-2">W: 1 · L: 0 · D: 0</p>
+                        <p class="text-xs text-amber-500 mt-1">Last: Oct 5</p>
+                    </div>
+
+                    <!-- Rapid -->
+                    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-4 border border-blue-200">
+                        <p class="text-xs font-semibold text-blue-900 uppercase mb-1">Rapid</p>
+                        <p class="text-3xl font-bold text-blue-700">1742</p>
+                        <p class="text-xs text-blue-600 mt-2">W: 10 · L: 4 · D: 2</p>
+                        <p class="text-xs text-blue-500 mt-1">Best: 1742</p>
+                    </div>
+
+                    <!-- Blitz -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
+                        <p class="text-xs font-semibold text-purple-900 uppercase mb-1">Blitz</p>
+                        <p class="text-3xl font-bold text-purple-700">1150</p>
+                        <p class="text-xs text-purple-600 mt-2">W: 5 · L: 11 · D: 0</p>
+                        <p class="text-xs text-purple-500 mt-1">Best: 1396</p>
+                    </div>
+
+                    <!-- Bullet -->
+                    <div class="bg-gradient-to-br from-red-50 to-rose-50 rounded-lg p-4 border border-red-200">
+                        <p class="text-xs font-semibold text-red-900 uppercase mb-1">Bullet</p>
+                        <p class="text-3xl font-bold text-red-700">1415</p>
+                        <p class="text-xs text-red-600 mt-2">W: 8 · L: 17 · D: 1</p>
+                        <p class="text-xs text-red-500 mt-1">Best: 1893</p>
+                    </div>
+
+                    <!-- Tactics -->
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+                        <p class="text-xs font-semibold text-green-900 uppercase mb-1">Tactics</p>
+                        <p class="text-3xl font-bold text-green-700">400</p>
+                        <p class="text-xs text-green-600 mt-2">Puzzles & Training</p>
+                        <p class="text-xs text-green-500 mt-1">Keep practicing!</p>
+                    </div>
+
+                    <!-- 14-Day Streak -->
+                    <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-lg p-4 border border-indigo-200">
+                        <p class="text-xs font-semibold text-indigo-900 uppercase mb-1">Streak</p>
+                        <p class="text-3xl font-bold text-indigo-700">14</p>
+                        <p class="text-xs text-indigo-600 mt-2">Days in Top 60%</p>
+                        <p class="text-xs text-indigo-500 mt-1">Excellent work!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM SUMMARY BAR -->
+        <div class="bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-lg shadow-md p-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                <div>
+                    <p class="text-3xl font-bold">4</p>
+                    <p class="text-xs uppercase tracking-wide text-slate-300 mt-1">Total Events</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold">46</p>
+                    <p class="text-xs uppercase tracking-wide text-slate-300 mt-1">New Threads</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold">~30</p>
+                    <p class="text-xs uppercase tracking-wide text-slate-300 mt-1">Inbox Threads</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold">5</p>
+                    <p class="text-xs uppercase tracking-wide text-slate-300 mt-1">Action Items</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold">20%</p>
+                    <p class="text-xs uppercase tracking-wide text-slate-300 mt-1">Completed</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Main Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-      
-      <!-- Left Column: Calendar & Inbox -->
-      <div class="lg:col-span-2 space-y-6">
-        
-        <!-- Today's Schedule Timeline -->
-        <div class="bg-slate-800 rounded-lg border border-slate-700 p-6 animate-slide-in">
-          <h2 class="text-xl font-bold text-white mb-4">Today's Schedule</h2>
-          <div class="space-y-3">
-            <!-- Timeline item 1 -->
-            <div class="flex gap-4">
-              <div class="flex flex-col items-center">
-                <div class="w-3 h-3 bg-blue-500 rounded-full mt-2"></div>
-                <div class="w-0.5 h-16 bg-slate-700 my-1"></div>
-              </div>
-              <div class="pb-4">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-sm font-semibold text-gray-300">10:30 AM - 11:30 AM</span>
-                  <span class="text-xs px-2 py-1 bg-orange-900 text-orange-200 rounded">Family</span>
-                </div>
-                <p class="text-sm text-gray-300">JP3 CrossFit w mom in garage</p>
-              </div>
-            </div>
-            
-            <!-- Timeline item 2 -->
-            <div class="flex gap-4">
-              <div class="flex flex-col items-center">
-                <div class="w-3 h-3 bg-purple-500 rounded-full mt-2"></div>
-                <div class="w-0.5 h-16 bg-slate-700 my-1"></div>
-              </div>
-              <div class="pb-4">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-sm font-semibold text-gray-300">11:30 AM - 12:30 PM</span>
-                  <span class="text-xs px-2 py-1 bg-purple-900 text-purple-200 rounded">Personal</span>
-                </div>
-                <p class="text-sm text-gray-300">Mommy Mondays w jp3</p>
-              </div>
-            </div>
-            
-            <!-- Timeline item 3 -->
-            <div class="flex gap-4">
-              <div class="flex flex-col items-center">
-                <div class="w-3 h-3 bg-amber-500 rounded-full mt-2"></div>
-                <div class="w-0.5 h-16 bg-slate-700 my-1"></div>
-              </div>
-              <div class="pb-4">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-sm font-semibold text-gray-300">1:44 PM - 2:44 PM</span>
-                  <span class="text-xs px-2 py-1 bg-amber-900 text-amber-200 rounded">Learning</span>
-                </div>
-                <p class="text-sm text-gray-300">Careers & Money Management</p>
-              </div>
-            </div>
-            
-            <!-- Timeline item 4 -->
-            <div class="flex gap-4">
-              <div class="flex flex-col items-center">
-                <div class="w-3 h-3 bg-red-500 rounded-full mt-2"></div>
-              </div>
-              <div>
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-sm font-semibold text-gray-300">5:00 PM - 8:00 PM</span>
-                  <span class="text-xs px-2 py-1 bg-red-900 text-red-200 rounded">Work</span>
-                </div>
-                <p class="text-sm text-gray-300">Door knocking</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Coming Up Section -->
-        <div class="bg-slate-800 rounded-lg border border-slate-700 p-6 animate-slide-in">
-          <h3 class="text-lg font-bold text-white mb-3">Coming Up</h3>
-          <div class="space-y-2 text-sm">
-            <p class="text-gray-400">✓ 5 events today</p>
-            <p class="text-gray-400">→ FTP Family outing Fri Oct 9, 4:30 PM (Lehner Farms)</p>
-            <p class="text-gray-400">→ Homecoming Dance tomorrow 7:30 PM (Spider-Man theme)</p>
-          </div>
-        </div>
-
-        <!-- Action Items / Inbox -->
-        <div class="bg-slate-800 rounded-lg border border-slate-700 p-6 animate-slide-in">
-          <h2 class="text-xl font-bold text-white mb-4">Action Items / Inbox</h2>
-          <div class="space-y-3 max-h-96 overflow-y-auto">
-            
-            <!-- High Priority: Chess Move -->
-            <div class="bg-slate-700 border-l-4 border-red-500 p-4 rounded flex gap-3 hover:bg-slate-600 transition cursor-pointer">
-              <input type="checkbox" class="checkbox-custom w-5 h-5 rounded mt-1">
-              <div class="flex-1">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-xs font-bold px-2 py-1 bg-red-900 text-red-200 rounded">HIGH</span>
-                  <span class="text-xs text-gray-400">♟ Chess.com</span>
-                </div>
-                <p class="font-semibold text-white text-sm">Make a move in Daily Game</p>
-                <p class="text-xs text-gray-400 mt-1">Time running out on Oct 5 at 8:13 PM • Against yusefbarack</p>
-              </div>
-            </div>
-
-            <!-- High Priority: GitHub Token -->
-            <div class="bg-slate-700 border-l-4 border-red-500 p-4 rounded flex gap-3 hover:bg-slate-600 transition cursor-pointer">
-              <input type="checkbox" class="checkbox-custom w-5 h-5 rounded mt-1">
-              <div class="flex-1">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-xs font-bold px-2 py-1 bg-red-900 text-red-200 rounded">HIGH</span>
-                  <span class="text-xs text-gray-400">GitHub</span>
-                </div>
-                <p class="font-semibold text-white text-sm">Verify GitHub personal access tokens</p>
-                <p class="text-xs text-gray-400 mt-1">New tokens added: Life Dashboard3.0 & lifedashboard</p>
-              </div>
-            </div>
-
-            <!-- Medium Priority: Spreadsheet -->
-            <div class="bg-slate-700 border-l-4 border-amber-500 p-4 rounded flex gap-3 hover:bg-slate-600 transition cursor-pointer">
-              <input type="checkbox" class="checkbox-custom w-5 h-5 rounded mt-1">
-              <div class="flex-1">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-xs font-bold px-2 py-1 bg-amber-900 text-amber-200 rounded">MEDIUM</span>
-                  <span class="text-xs text-gray-400">Nick Fulop via Google Sheets</span>
-                </div>
-                <p class="font-semibold text-white text-sm">Review FTP Sales and Marketing - Q4 Kickoff Prep</p>
-                <p class="text-xs text-gray-400 mt-1">Shared spreadsheet awaiting review</p>
-              </div>
-            </div>
-
-            <!-- Medium Priority: Make Automation -->
-            <div class="bg-slate-700 border-l-4 border-amber-500 p-4 rounded flex gap-3 hover:bg-slate-600 transition cursor-pointer">
-              <input type="checkbox" class="checkbox-custom w-5 h-5 rounded mt-1">
-              <div class="flex-1">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-xs font-bold px-2 py-1 bg-amber-900 text-amber-200 rounded">MEDIUM</span>
-                  <span class="text-xs text-gray-400">Make</span>
-                </div>
-                <p class="font-semibold text-white text-sm">Run automation scenario - Life Dashboard</p>
-                <p class="text-xs text-gray-400 mt-1">Try running once to get things moving</p>
-              </div>
-            </div>
-
-            <!-- Low Priority: 5.Life Signup -->
-            <div class="bg-slate-700 border-l-4 border-gray-500 p-4 rounded flex gap-3 hover:bg-slate-600 transition cursor-pointer">
-              <input type="checkbox" class="checkbox-custom w-5 h-5 rounded mt-1">
-              <div class="flex-1">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-xs font-bold px-2 py-1 bg-gray-700 text-gray-300 rounded">LOW</span>
-                  <span class="text-xs text-gray-400">5.Life</span>
-                </div>
-                <p class="font-semibold text-white text-sm">Confirm gym membership email verification</p>
-                <p class="text-xs text-gray-400 mt-1">Last step to finalize recent document</p>
-              </div>
-            </div>
-
-            <!-- Low Priority: Claude Credits -->
-            <div class="bg-slate-700 border-l-4 border-gray-500 p-4 rounded flex gap-3 hover:bg-slate-600 transition cursor-pointer">
-              <input type="checkbox" class="checkbox-custom w-5 h-5 rounded mt-1">
-              <div class="flex-1">
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-xs font-bold px-2 py-1 bg-gray-700 text-gray-300 rounded">LOW</span>
-                  <span class="text-xs text-gray-400">Anthropic</span>
-                </div>
-                <p class="font-semibold text-white text-sm">Add Claude API credits (balance: $1.57)</p>
-                <p class="text-xs text-gray-400 mt-1">Turn on auto-reload to prevent disruption</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Right Column: Weather & Chess -->
-      <div class="space-y-6">
-        
-        <!-- Weather & Focus Goal -->
-        <div class="bg-slate-800 rounded-lg border border-slate-700 p-6 animate-slide-in">
-          <h3 class="text-lg font-bold text-white mb-4">Weather & Focus Goal</h3>
-          <div class="bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg p-6 text-center mb-4 border border-slate-600">
-            <p class="text-sm text-gray-400 mb-2">Columbus, OH</p>
-            <p class="text-4xl mb-2">72°F</p>
-            <p class="text-gray-300">Partly Cloudy</p>
-          </div>
-          <div class="bg-gradient-to-br from-emerald-900 to-slate-800 rounded-lg p-4 border border-emerald-700">
-            <p class="text-xs text-emerald-300 font-semibold mb-2">TODAY'S FOCUS GOAL</p>
-            <p class="text-white font-semibold">Complete Q4 prep & door knocking</p>
-            <div class="mt-3 bg-slate-700 rounded h-2">
-              <div class="bg-emerald-500 h-2 rounded" style="width: 65%;"></div>
-            </div>
-            <p class="text-xs text-gray-400 mt-2">65% completed</p>
-          </div>
-        </div>
-
-        <!-- Chess Ratings -->
-        <div class="bg-slate-800 rounded-lg border border-slate-700 p-6 animate-slide-in">
-          <h3 class="text-lg font-bold text-white mb-4">Chess Ratings</h3>
-          <div class="space-y-3">
-            
-            <!-- Daily -->
-            <div class="bg-slate-700 rounded p-3 border-l-4 border-purple-500">
-              <p class="text-xs text-gray-400 font-semibold">Daily</p>
-              <p class="text-2xl font-bold text-white">1703</p>
-              <p class="text-xs text-gray-400 mt-1">Record: 1W 0L 0D</p>
-              <p class="text-xs text-purple-300">Updated Oct 5</p>
-            </div>
-
-            <!-- Rapid -->
-            <div class="bg-slate-700 rounded p-3 border-l-4 border-blue-500">
-              <p class="text-xs text-gray-400 font-semibold">Rapid</p>
-              <p class="text-2xl font-bold text-white">1742</p>
-              <p class="text-xs text-gray-400 mt-1">Record: 10W 4L 2D</p>
-              <p class="text-xs text-blue-300">Updated Sep 24</p>
-            </div>
-
-            <!-- Blitz -->
-            <div class="bg-slate-700 rounded p-3 border-l-4 border-amber-500">
-              <p class="text-xs text-gray-400 font-semibold">Blitz</p>
-              <p class="text-2xl font-bold text-white">1150</p>
-              <p class="text-xs text-gray-400 mt-1">Record: 5W 11L 0D</p>
-              <p class="text-xs text-amber-300">Best: 1396</p>
-            </div>
-
-            <!-- Bullet -->
-            <div class="bg-slate-700 rounded p-3 border-l-4 border-red-500">
-              <p class="text-xs text-gray-400 font-semibold">Bullet</p>
-              <p class="text-2xl font-bold text-white">1415</p>
-              <p class="text-xs text-gray-400 mt-1">Record: 8W 17L 1D</p>
-              <p class="text-xs text-red-300">Best: 1893</p>
-            </div>
-
-            <!-- Tactics -->
-            <div class="bg-slate-700 rounded p-3 border-l-4 border-emerald-500">
-              <p class="text-xs text-gray-400 font-semibold">Tactics/Puzzles</p>
-              <p class="text-2xl font-bold text-white">400</p>
-              <p class="text-xs text-emerald-300">Keep practicing</p>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- Bottom Summary Bar -->
-    <div class="bg-slate-800 rounded-lg border border-slate-700 p-6 animate-slide-in">
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-        <div class="text-center">
-          <p class="text-2xl font-bold text-emerald-400">5</p>
-          <p class="text-xs text-gray-400 mt-1">Total Events</p>
-        </div>
-        <div class="text-center border-l border-slate-700">
-          <p class="text-2xl font-bold text-blue-400">1</p>
-          <p class="text-xs text-gray-400 mt-1">New Email Threads</p>
-        </div>
-        <div class="text-center border-l border-slate-700">
-          <p class="text-2xl font-bold text-purple-400">6</p>
-          <p class="text-xs text-gray-400 mt-1">Open Inbox Threads</p>
-        </div>
-        <div class="text-center border-l border-slate-700">
-          <p class="text-2xl font-bold text-amber-400">6</p>
-          <p class="text-xs text-gray-400 mt-1">Open Action Items</p>
-        </div>
-        <div class="text-center border-l border-slate-700">
-          <p class="text-2xl font-bold text-red-400">65%</p>
-          <p class="text-xs text-gray-400 mt-1">Completed Today</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    function updateClock() {
-      const now = new Date('2026-10-05T16:09:34');
-      
-      const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-      document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', dateOptions);
-      
-      const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
-      document.getElementById('current-time').textContent = now.toLocaleTimeString('en-US', timeOptions);
-    }
-    
-    updateClock();
-    
-    // Add checkbox interactivity
-    document.querySelectorAll('.checkbox-custom').forEach(checkbox => {
-      checkbox.addEventListener('change', function() {
-        this.parentElement.parentElement.style.opacity = this.checked ? '0.6' : '1';
-      });
-    });
-  </script>
+    <script>
+        // Update clock every second
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
 </body>
 </html>
