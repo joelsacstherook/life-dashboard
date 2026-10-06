@@ -1,262 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joel's Daily Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daily Dashboard – Tue, Oct 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF2F6;--card:#fff;--ink:#16212E;--mute:#5B6B7C;--line:#DCE3EA;--accent:#2457D6;--accent-soft:#E3ECFF;--ok:#217A55;--ok-soft:#DDF3E8;--warn:#9A5B00;--warn-soft:#FFF0D1;--bad:#B3322B;--bad-soft:#FBE3E1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F161F;--card:#17212D;--ink:#E8EEF5;--mute:#93A3B5;--line:#263344;--accent:#7AA2FF;--accent-soft:#1C2E55;--ok:#5BD3A0;--ok-soft:#14342A;--warn:#F2B75A;--warn-soft:#3A2C10;--bad:#FF8A82;--bad-soft:#3D1D1B}}
+:root[data-theme="dark"]{--bg:#0F161F;--card:#17212D;--ink:#E8EEF5;--mute:#93A3B5;--line:#263344;--accent:#7AA2FF;--accent-soft:#1C2E55;--ok:#5BD3A0;--ok-soft:#14342A;--warn:#F2B75A;--warn-soft:#3A2C10;--bad:#FF8A82;--bad-soft:#3D1D1B}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:20px 16px 40px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:18px}
+h1{font-size:28px;font-weight:800;margin:0;letter-spacing:-.02em}
+.sub{color:var(--mute);margin:2px 0 0}
+.clock{font-weight:800;font-size:28px;font-variant-numeric:tabular-nums}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.c-time{grid-column:span 7}.c-todo{grid-column:span 5;grid-row:span 2}.c-wx{grid-column:span 7}.c-chess{grid-column:span 12}.c-sum{grid-column:span 12}
+@media(max-width:860px){.c-time,.c-todo,.c-wx,.c-chess,.c-sum{grid-column:span 12;grid-row:auto}}
+h2{font-size:16px;font-weight:800;margin:0 0 12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pill{font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.tl{position:relative;border-top:1px solid var(--line)}
+.hr{display:grid;grid-template-columns:56px 1fr;height:40px;border-bottom:1px solid var(--line);color:var(--mute);font-size:12px}
+.hr span{padding-top:4px}.hr.now{background:var(--accent-soft)}
+.nowline{position:absolute;left:56px;right:0;height:2px;background:var(--bad);pointer-events:none}
+.nowline::before{content:"";position:absolute;left:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--bad)}
+.ev{position:absolute;border-radius:7px;padding:2px 7px;background:var(--accent);color:#fff;font-size:12px;font-weight:600;overflow:hidden;line-height:1.25;border:1px solid var(--card)}
+.ev.fam{background:#6B5B95}.ev.live{outline:3px solid var(--bad);z-index:2}.ev small{display:block;font-weight:400;opacity:.9}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}.chip{background:transparent;color:var(--ink);border:1px solid var(--line);padding:5px 12px;font-size:13px}.chip[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.strip{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:12px}.strip div{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px}.strip .nowbox{border-color:var(--bad);background:var(--bad-soft)}
+.alld{font-size:13px;color:var(--mute);margin:0 0 10px}.warnbox{margin:0 0 12px;padding:10px 12px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-size:14px}
+.empty{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-size:14px;display:none}
+.soon{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.soon li{display:flex;justify-content:space-between;gap:10px;font-size:14px;border-left:3px solid var(--accent);padding:2px 0 2px 10px}
+.soon small{color:var(--mute)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:12px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+.todo{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.todo label{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;padding:10px;border:1px solid var(--line);border-radius:10px;cursor:pointer}
+.todo input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--accent)}
+.todo b{display:block;font-weight:600}.todo small{color:var(--mute);display:block}
+.todo input:checked~div b{text-decoration:line-through;color:var(--mute)}
+.tag{display:inline-block;font-size:11px;font-weight:600;border-radius:99px;padding:1px 8px;margin-right:6px}
+.t-hi{background:var(--bad-soft);color:var(--bad)}.t-md{background:var(--warn-soft);color:var(--warn)}.t-lo{background:var(--ok-soft);color:var(--ok)}
+.wx{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+.temp{font-size:44px;font-weight:800;line-height:1}
+.days{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.days div{flex:1 1 90px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px}
+.note{margin:12px 0 0;padding:10px 12px;border-radius:10px;background:var(--accent-soft);color:var(--ink);font-size:14px}
+.focus{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+input[type=text]{flex:1 1 200px;min-width:0;padding:9px 11px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+button{font:inherit;font-weight:600;padding:9px 14px;border-radius:9px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+button.ghost{background:transparent;color:var(--accent)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.metrics{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.m{border:1px solid var(--line);border-radius:10px;padding:12px}
+.m strong{display:block;font-size:28px;font-weight:800;line-height:1.1}.m span{color:var(--mute);font-size:13px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--mute);font-size:13px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-900">
-    <div class="min-h-screen p-6">
-        <!-- HEADER -->
-        <div class="mb-8">
-            <div class="flex justify-between items-start mb-2">
-                <div>
-                    <h1 class="text-4xl font-bold">Hi Joel</h1>
-                    <p class="text-gray-600 text-sm mt-1">Daily dashboard · Google Calendar, Gmail, and Chess snapshot</p>
-                </div>
-                <div class="text-right">
-                    <p class="text-sm text-gray-500">Tuesday, October 6, 2026</p>
-                    <p class="text-2xl font-semibold tabular-nums" id="clock">06:00:09</p>
-                </div>
-            </div>
-        </div>
+<body>
+<div class="wrap">
+<header>
+  <div><h1>Tuesday, October 6</h1><p class="sub">Daily dashboard · Google Calendar and Gmail snapshot</p></div>
+  <div class="clock" id="clock" aria-live="off">--:--</div>
+</header>
 
-        <!-- TOP ROW: SCHEDULE & INBOX -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <!-- TODAY'S SCHEDULE -->
-            <div class="lg:col-span-2 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 class="text-lg font-semibold mb-4">Today's Schedule</h2>
-                <div class="space-y-3 max-h-96 overflow-y-auto">
-                    <!-- Event: Ps 104-106; 2 Ti 2 (All day) -->
-                    <div class="border-l-4 border-blue-500 pl-4 py-2">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="font-medium text-sm">Ps 104-106; 2 Ti 2</p>
-                                <p class="text-xs text-gray-500">All day event</p>
-                            </div>
-                            <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Personal</span>
-                        </div>
-                    </div>
-
-                    <!-- Event: Careers & Money Management -->
-                    <div class="border-l-4 border-purple-500 pl-4 py-2">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="font-medium text-sm">Careers & Money Management</p>
-                                <p class="text-xs text-gray-500">1:44 PM – 2:44 PM</p>
-                            </div>
-                            <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Work</span>
-                        </div>
-                    </div>
-
-                    <!-- Event: WRESTLING -->
-                    <div class="border-l-4 border-orange-500 pl-4 py-2">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="font-medium text-sm">WRESTLING</p>
-                                <p class="text-xs text-gray-500">2:45 PM – 4:15 PM</p>
-                            </div>
-                            <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">Sports</span>
-                        </div>
-                    </div>
-
-                    <!-- Event: Door Knocking -->
-                    <div class="border-l-4 border-red-500 pl-4 py-2">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="font-medium text-sm">Door Knocking</p>
-                                <p class="text-xs text-gray-500">4:15 PM – 8:00 PM</p>
-                            </div>
-                            <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Activity</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coming Up Section -->
-                <div class="mt-6 pt-4 border-t border-gray-200">
-                    <p class="text-xs font-semibold text-gray-600 uppercase mb-2">Coming Up</p>
-                    <p class="text-sm text-gray-600">FTP Family outing @ Lehner Farms · Fri, Oct 9 · 4:30 PM – 7:00 PM</p>
-                </div>
-            </div>
-
-            <!-- ACTION ITEMS / INBOX -->
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 class="text-lg font-semibold mb-4">Action Items</h2>
-                <div class="space-y-3 max-h-96 overflow-y-auto">
-                    <!-- High Priority: Make a Daily Chess Move -->
-                    <div class="border border-red-200 bg-red-50 rounded p-3">
-                        <div class="flex items-start justify-between mb-2">
-                            <input type="checkbox" class="mt-1 w-4 h-4 text-red-600">
-                            <span class="inline-block bg-red-600 text-white text-xs px-2 py-1 rounded font-semibold">HIGH</span>
-                        </div>
-                        <p class="font-medium text-sm">Make a move in Daily Chess game</p>
-                        <p class="text-xs text-gray-600 mt-1">Chess.com · Time running out</p>
-                    </div>
-
-                    <!-- High Priority: Review Q4 Sales & Marketing -->
-                    <div class="border border-red-200 bg-red-50 rounded p-3">
-                        <div class="flex items-start justify-between mb-2">
-                            <input type="checkbox" class="mt-1 w-4 h-4 text-red-600">
-                            <span class="inline-block bg-red-600 text-white text-xs px-2 py-1 rounded font-semibold">HIGH</span>
-                        </div>
-                        <p class="font-medium text-sm">Review Q4 Kickoff Prep Spreadsheet</p>
-                        <p class="text-xs text-gray-600 mt-1">Nick Fulop shared · Google Sheets</p>
-                    </div>
-
-                    <!-- Medium Priority: Verify 5.Life Email -->
-                    <div class="border border-yellow-200 bg-yellow-50 rounded p-3">
-                        <div class="flex items-start justify-between mb-2">
-                            <input type="checkbox" class="mt-1 w-4 h-4 text-yellow-600">
-                            <span class="inline-block bg-yellow-600 text-white text-xs px-2 py-1 rounded font-semibold">MED</span>
-                        </div>
-                        <p class="font-medium text-sm">Verify 5.Life account email</p>
-                        <p class="text-xs text-gray-600 mt-1">5.Life · Complete gym registration</p>
-                    </div>
-
-                    <!-- Medium Priority: Add Claude API Credits -->
-                    <div class="border border-yellow-200 bg-yellow-50 rounded p-3">
-                        <div class="flex items-start justify-between mb-2">
-                            <input type="checkbox" class="mt-1 w-4 h-4 text-yellow-600">
-                            <span class="inline-block bg-yellow-600 text-white text-xs px-2 py-1 rounded font-semibold">MED</span>
-                        </div>
-                        <p class="font-medium text-sm">Add Claude API credits ($1.57 left)</p>
-                        <p class="text-xs text-gray-600 mt-1">Anthropic · Billing account</p>
-                    </div>
-
-                    <!-- Low Priority: Review Claude Managed Agents -->
-                    <div class="border border-green-200 bg-green-50 rounded p-3">
-                        <div class="flex items-start justify-between mb-2">
-                            <input type="checkbox" class="mt-1 w-4 h-4 text-green-600">
-                            <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded font-semibold">LOW</span>
-                        </div>
-                        <p class="font-medium text-sm">Review Claude Managed Agents setup</p>
-                        <p class="text-xs text-gray-600 mt-1">Anthropic · Optional exploration</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- MIDDLE ROW: WEATHER/FOCUS & CHESS RATINGS -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <!-- WEATHER & FOCUS GOAL -->
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 class="text-lg font-semibold mb-4">Weather & Focus</h2>
-                <div class="space-y-4">
-                    <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-lg p-4 text-center">
-                        <p class="text-sm text-gray-600 mb-2">Weather</p>
-                        <p class="text-3xl font-light">🌤️</p>
-                        <p class="text-sm text-gray-700 mt-2">Columbus, OH · Partly Cloudy · 68°F</p>
-                    </div>
-                    <div class="border-t pt-4">
-                        <p class="text-sm font-semibold mb-2">Focus Goal</p>
-                        <div class="bg-indigo-50 border border-indigo-200 rounded p-3">
-                            <p class="text-sm text-indigo-900">Complete Q4 Kickoff Prep review before 3 PM</p>
-                        </div>
-                    </div>
-                    <div class="border-t pt-4">
-                        <p class="text-xs font-semibold text-gray-600 uppercase mb-2">Focus Timer</p>
-                        <div class="flex gap-2">
-                            <button class="flex-1 bg-indigo-600 text-white py-2 rounded text-sm font-medium hover:bg-indigo-700">25 min</button>
-                            <button class="flex-1 bg-gray-200 text-gray-800 py-2 rounded text-sm font-medium hover:bg-gray-300">45 min</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CHESS RATINGS -->
-            <div class="lg:col-span-2 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 class="text-lg font-semibold mb-4">Chess Ratings</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <!-- Daily -->
-                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg p-4 border border-amber-200">
-                        <p class="text-xs font-semibold text-amber-900 uppercase mb-1">Daily</p>
-                        <p class="text-3xl font-bold text-amber-700">1703</p>
-                        <p class="text-xs text-amber-600 mt-2">W: 1 · L: 0 · D: 0</p>
-                        <p class="text-xs text-amber-500 mt-1">Last: Oct 5</p>
-                    </div>
-
-                    <!-- Rapid -->
-                    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-4 border border-blue-200">
-                        <p class="text-xs font-semibold text-blue-900 uppercase mb-1">Rapid</p>
-                        <p class="text-3xl font-bold text-blue-700">1742</p>
-                        <p class="text-xs text-blue-600 mt-2">W: 10 · L: 4 · D: 2</p>
-                        <p class="text-xs text-blue-500 mt-1">Best: 1742</p>
-                    </div>
-
-                    <!-- Blitz -->
-                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
-                        <p class="text-xs font-semibold text-purple-900 uppercase mb-1">Blitz</p>
-                        <p class="text-3xl font-bold text-purple-700">1150</p>
-                        <p class="text-xs text-purple-600 mt-2">W: 5 · L: 11 · D: 0</p>
-                        <p class="text-xs text-purple-500 mt-1">Best: 1396</p>
-                    </div>
-
-                    <!-- Bullet -->
-                    <div class="bg-gradient-to-br from-red-50 to-rose-50 rounded-lg p-4 border border-red-200">
-                        <p class="text-xs font-semibold text-red-900 uppercase mb-1">Bullet</p>
-                        <p class="text-3xl font-bold text-red-700">1415</p>
-                        <p class="text-xs text-red-600 mt-2">W: 8 · L: 17 · D: 1</p>
-                        <p class="text-xs text-red-500 mt-1">Best: 1893</p>
-                    </div>
-
-                    <!-- Tactics -->
-                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
-                        <p class="text-xs font-semibold text-green-900 uppercase mb-1">Tactics</p>
-                        <p class="text-3xl font-bold text-green-700">400</p>
-                        <p class="text-xs text-green-600 mt-2">Puzzles & Training</p>
-                        <p class="text-xs text-green-500 mt-1">Keep practicing!</p>
-                    </div>
-
-                    <!-- 14-Day Streak -->
-                    <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-lg p-4 border border-indigo-200">
-                        <p class="text-xs font-semibold text-indigo-900 uppercase mb-1">Streak</p>
-                        <p class="text-3xl font-bold text-indigo-700">14</p>
-                        <p class="text-xs text-indigo-600 mt-2">Days in Top 60%</p>
-                        <p class="text-xs text-indigo-500 mt-1">Excellent work!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- BOTTOM SUMMARY BAR -->
-        <div class="bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-lg shadow-md p-6">
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
-                <div>
-                    <p class="text-3xl font-bold">4</p>
-                    <p class="text-xs uppercase tracking-wide text-slate-300 mt-1">Total Events</p>
-                </div>
-                <div>
-                    <p class="text-3xl font-bold">46</p>
-                    <p class="text-xs uppercase tracking-wide text-slate-300 mt-1">New Threads</p>
-                </div>
-                <div>
-                    <p class="text-3xl font-bold">~30</p>
-                    <p class="text-xs uppercase tracking-wide text-slate-300 mt-1">Inbox Threads</p>
-                </div>
-                <div>
-                    <p class="text-3xl font-bold">5</p>
-                    <p class="text-xs uppercase tracking-wide text-slate-300 mt-1">Action Items</p>
-                </div>
-                <div>
-                    <p class="text-3xl font-bold">20%</p>
-                    <p class="text-xs uppercase tracking-wide text-slate-300 mt-1">Completed</p>
-                </div>
-            </div>
-        </div>
+<div class="grid">
+  <section class="card c-time" aria-labelledby="h-time">
+    <h2 id="h-time">Today's schedule <span class="pill" id="evCount">0 events</span></h2>
+    <div class="chips" role="group" aria-label="Calendar filter">
+      <button class="chip" data-f="joel" aria-pressed="true">Joel</button>
+      <button class="chip" data-f="fam" aria-pressed="false">Family</button>
+      <button class="chip" data-f="all" aria-pressed="false">All</button>
     </div>
+    <div class="strip"><div class="nowbox" id="nowBox">Now: –</div><div id="nextBox">Next: –</div></div>
+    <p class="alld" id="alld"></p>
+    <div class="tl" id="tl"></div>
+    <div class="empty" id="empty">No events for this filter.</div>
+    <p class="alld" style="margin-top:12px">Coming up: Q4 Kickoff, Thu Oct 8 (date to confirm) · FTP Family outing at Lehner Farms, Fri Oct 9, 4:30–7:00 PM · Midwest Doorknocking Camp, Mon Oct 12</p>
+  </section>
 
-    <script>
-        // Update clock every second
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-        }
-        updateClock();
-        setInterval(updateClock, 1000);
-    </script>
+  <section class="card c-todo" aria-labelledby="h-todo">
+    <h2 id="h-todo">Action items <span class="pill" id="todoPill">0 open</span></h2>
+    <div class="bar" role="progressbar" aria-label="Completed" id="bar"><i></i></div>
+    <ul class="todo" id="todo"></ul>
+  </section>
+
+  <section class="card c-wx" aria-labelledby="h-wx">
+    <h2 id="h-wx">Weather and focus</h2>
+    <div class="wx">
+      <div><div class="temp">68°F</div><div class="sub">Sunny · Columbus, OH</div></div>
+      <div><b>Today</b> 68° / 41° · dry<br><b>Tomorrow</b> 78° / 41° · dry</div>
+    </div>
+    <div class="days">
+      <div><b>Thu</b><br>77° / 45°<br>5% rain</div><div><b>Fri</b><br>71° / 43°<br>Dry</div>
+      <div><b>Sat</b><br>74° / 48°<br>10% rain</div><div><b>Sun</b><br>66° / 58°<br>75% rain</div>
+    </div>
+    <p class="note">Dry and warm through Saturday. Sunday looks wet, with a 75% chance of rain.</p>
+    <div class="focus"><input type="text" id="goal" placeholder="Today's focus goal" aria-label="Focus goal" maxlength="90"></div>
+  </section>
+
+  <section class="card c-chess" aria-labelledby="h-ch">
+    <h2 id="h-ch">Chess ratings <span class="pill">joel3sacstherook</span></h2>
+    <div class="metrics" id="chess"></div>
+    <p class="note" id="chnote"></p>
+  </section>
+
+  <section class="card c-sum" aria-labelledby="h-sum">
+    <h2 id="h-sum">Summary</h2>
+    <div class="metrics">
+      <div class="m"><strong id="mEv">0</strong><span>Events on this view</span></div>
+      <div class="m"><strong>49</strong><span>Inbox threads since Oct 3</span></div>
+      <div class="m"><strong id="mTexts">0</strong><span>New texts waiting</span></div>
+      <div class="m"><strong id="mOpen">0</strong><span>Action items open</span></div>
+      <div class="m"><strong id="mDone">0%</strong><span>Completed</span></div>
+    </div>
+    <div class="foot"><span id="stamp">Pulled Tue Oct 6, 2026 about 2:45 PM ET · counts update as you check items</span><button id="refresh">Refresh summary</button></div>
+  </section>
+</div>
+</div>
+<script>
+var DAY="2026-10-06";
+var EVENTS=[
+ {t:"BP coach",s:"11:00",e:"13:00",c:"fam"},
+ {t:"LifeWise (Vera & Levi)",s:"12:40",e:"13:30",c:"fam"},
+ {t:"Careers & Money Management",s:"13:44",e:"14:44",c:"joel"},
+ {t:"Luther football practice",s:"14:50",e:"16:45",c:"fam"},
+ {t:"Practice & film",s:"15:30",e:"20:00",c:"fam"},
+ {t:"Vera tutoring",s:"15:30",e:"16:30",c:"fam"},
+ {t:"Door Knocking",s:"16:15",e:"20:00",c:"joel"},
+ {t:"BP coach: Vera gymnastics",s:"17:00",e:"20:00",c:"fam"},
+ {t:"Vera field hockey game",s:"17:30",e:"18:30",c:"fam",n:"Arrive 4:45"}
+];
+var ALLDAY={joel:"All day: Reading, Ps 104-106; 2 Ti 2",fam:"All day: JP Off"};
+var ITEMS=[
+ {id:"elaine2",p:"hi",t:"Reschedule Elaine's estimate",s:"She cancelled Monday's 10 AM appointment by voicemail. The office is waiting to hear when to rebook her."},
+ {id:"q4sheet",p:"hi",t:"Review the Q4 Kickoff Prep spreadsheet",s:"Nick shared it with you for editing on Monday."},
+ {id:"q4",p:"hi",t:"Confirm Q4 Kickoff date and place",s:"Nick's email subject says Thu Oct 7, but the body says Oct 8, 8 AM to 1 PM at the Delaware Area Chamber of Commerce."},
+ {id:"chess",p:"hi",t:"Make a move in your Daily Chess game",s:"Chess.com warned twice yesterday that you were about to lose on time."},
+ {id:"outing",p:"md",t:"RSVP to the FTP Family outing, Fri Oct 9",s:"Lehner Farms, 4:30 to 7 PM, dinner included. Eric sent three versions on Saturday and cancelled two. The last invite is the live one."},
+ {id:"pumpkin",p:"md",t:"Plan Mon Oct 12 evening: camp, then pumpkin carving",s:"Bethany asked you to start around 5 PM, right after the camp meeting. You said sure."},
+ {id:"camp",p:"md",t:"Reply to Midwest Doorknocking Camp invite",s:"Weekly on Mondays, 4 to 5 PM ET."},
+ {id:"ken",p:"md",t:"Close out Ken's bid (148809)",s:"He said he'll paint the fence himself."},
+ {id:"brad",p:"md",t:"Plan Brad's job start (149012)",s:"Contract signed and the deposit invoice went out last Thursday."},
+ {id:"lawn",p:"md",t:"Answer the lawn mowing customer",s:"Her email says she never heard back from your brother."},
+ {id:"pf",p:"md",t:"Enter estimates for jobs 148810, 148811 and 148812",s:"Assigned Sep 28. Skip if already entered."},
+ {id:"mat",p:"lo",t:"Note: no open mat today, next one is Thu 2:45 to 3:30 PM",s:"The coach's back is out. This came through the school's FinalForms email."},
+ {id:"act",p:"lo",t:"See your September ACT scores",s:"The scores email arrived this morning."},
+ {id:"mm",p:"lo",t:"Read the Mind Meld follow-up: \"Light Yourself Up\" ideas",s:"Nate sent it to the Doorknocker group at 1:29 PM."},
+ {id:"survey",p:"lo",t:"Fill out the USMC wrestling camp survey",s:"SurveyMonkey sent it Saturday."}
+];
+var TEXTS=[]; // action items from the Incoming Texts note go here: {id,p:"hi|md|lo",t,s}
+ITEMS=ITEMS.concat(TEXTS);
+var KEY="ftp-dash-3",st={done:{},goal:""};
+try{var r=localStorage.getItem(KEY);if(r)st=JSON.parse(r)}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+var $=function(i){return document.getElementById(i)};
+var L={hi:"High",md:"Medium",lo:"Low"};
+
+function mins(h){var a=h.split(":");return +a[0]*60+ +a[1]}
+function fmt(m){var h=Math.floor(m/60),x=m%60;return (h>12?h-12:h===0?12:h)+":"+("0"+x).slice(-2)+(h<12?" AM":" PM")}
+var filt="joel";
+function vis(){return EVENTS.filter(function(e){return filt==="all"||e.c===filt})}
+function drawTimeline(){
+  var now=new Date(),today=now.getFullYear()+"-"+("0"+(now.getMonth()+1)).slice(-2)+"-"+("0"+now.getDate()).slice(-2)===DAY,
+  nm=now.getHours()*60+now.getMinutes(),H=40,T0=360,list=vis().slice().sort(function(a,b){return mins(a.s)-mins(b.s)||mins(b.e)-mins(a.e)}),html="",i;
+  for(var h=6;h<=22;h++)html+='<div class="hr'+(today&&now.getHours()===h?" now":"")+'"><span>'+(h>12?h-12:h)+(h<12?" AM":" PM")+'</span></div>';
+  var lanes=[],cl=[],ce=0;
+  list.forEach(function(e){var st=mins(e.s);
+    if(cl.length&&st>=ce){cl.forEach(function(x){x.n=lanes.length});cl=[];lanes=[];ce=0}
+    var l=0;while(lanes[l]!==undefined&&lanes[l]>st)l++;lanes[l]=mins(e.e);e.l=l;cl.push(e);ce=Math.max(ce,mins(e.e));
+    cl.forEach(function(x){x.n=Math.max(lanes.length,1)})});
+  list.forEach(function(e){var top=(mins(e.s)-T0)/60*H,hh=Math.max((mins(e.e)-mins(e.s))/60*H,22),w=(100-0)/e.n,
+    live=today&&nm>=mins(e.s)&&nm<mins(e.e);
+    html+='<div class="ev '+(e.c==="fam"?"fam":"")+(live?" live":"")+'" style="top:'+top+'px;height:'+hh+'px;left:calc(62px + (100% - 68px) * '+(e.l/e.n)+');width:calc((100% - 68px) * '+(1/e.n)+' - 2px)" title="'+e.t+' '+fmt(mins(e.s))+'-'+fmt(mins(e.e))+'">'+e.t+'<small>'+fmt(mins(e.s))+(e.n?"":"")+'</small></div>';});
+  if(today&&nm>=T0&&nm<=22*60+60)html+='<div class="nowline" style="top:'+((nm-T0)/60*H)+'px"></div>';
+  $("tl").innerHTML=html;
+  $("empty").style.display=list.length?"none":"block";
+  $("evCount").textContent=list.length+" events";$("mEv").textContent=list.length;$("mTexts").textContent=TEXTS.length;
+  var w=$("warn");if(w)w.style.display=(today&&nm>=1200)?"none":"block";
+  $("alld").textContent=filt==="all"?ALLDAY.joel+" · "+ALLDAY.fam:ALLDAY[filt];
+  var cur=today?list.filter(function(e){return nm>=mins(e.s)&&nm<mins(e.e)}):[],nxt=today?list.filter(function(e){return mins(e.s)>nm})[0]:null;
+  $("nowBox").textContent=today?"Now: "+(cur.length?cur.map(function(e){return e.t}).join(" + "):"nothing scheduled"):"Snapshot for Tue, Oct 6";
+  $("nextBox").textContent="Next: "+(nxt?nxt.t+" at "+fmt(mins(nxt.s)):today?"nothing more today":"–");
+  $("clock").textContent=now.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});
+}
+Array.prototype.forEach.call(document.querySelectorAll(".chip"),function(b){b.onclick=function(){filt=b.dataset.f;
+  Array.prototype.forEach.call(document.querySelectorAll(".chip"),function(x){x.setAttribute("aria-pressed",x===b)});drawTimeline()}});
+function drawTodo(){
+  $("todo").innerHTML=ITEMS.map(function(i){
+    return '<li><label><input type="checkbox" data-id="'+i.id+'"'+(st.done[i.id]?" checked":"")+'><div><b>'+i.t+'</b><small><span class="tag t-'+i.p+'">'+L[i.p]+'</span>'+i.s+'</small></div></label></li>';}).join("");
+  Array.prototype.forEach.call(document.querySelectorAll(".todo input"),function(c){
+    c.onchange=function(){st.done[c.dataset.id]=c.checked;save();metrics();};});
+}
+function metrics(){
+  var d=ITEMS.filter(function(i){return st.done[i.id]}).length,n=ITEMS.length,o=n-d,pc=Math.round(d/n*100);
+  $("todoPill").textContent=o+" open";$("mOpen").textContent=o;$("mDone").textContent=pc+"%";
+  $("bar").firstChild.style.width=pc+"%";$("bar").setAttribute("aria-valuenow",pc);
+}
+$("refresh").onclick=function(){
+  drawTimeline();metrics();
+  $("stamp").textContent="Recalculated "+new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})+" · to pull new email or calendar data, ask Claude again";
+};
+$("goal").value=st.goal||"";
+$("goal").oninput=function(){st.goal=this.value;save()};
+var CHESS=[{n:"Rapid",r:1742,best:1742,rec:"10-4-2",prev:1742},{n:"Blitz",r:1150,best:1396,rec:"5-11-0",prev:1150},{n:"Bullet",r:1415,best:1893,rec:"8-17-1",prev:1415},{n:"Daily",r:1703,best:1703,rec:"1-0-0",prev:1703},{n:"Tactics",r:400,best:400,rec:"",prev:400}];
+function drawChess(){
+  $("chess").innerHTML=CHESS.map(function(c){
+    var dl=c.r-c.prev,d=dl===0?"No change":(dl>0?"+":"")+dl;
+    return '<div class="m"><span>'+c.n+'</span><strong>'+c.r+'</strong><span>'+(c.rec?c.rec+" W-L-D · ":"")+"Best "+c.best+" · "+d+' vs Oct 2</span></div>';}).join("");
+  $("chnote").textContent="Ratings are unchanged between the Oct 2 and Oct 3 rows. The sheet has no entries after Oct 3, so nothing newer is shown. Chess.com reports a 14-day streak and warned twice yesterday that a daily game was about to time out.";
+}
+drawChess();
+drawTimeline();drawTodo();metrics();
+setInterval(drawTimeline,30000);
+</script>
 </body>
 </html>
