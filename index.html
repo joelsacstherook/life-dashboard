@@ -117,11 +117,11 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline
     <div class="metrics">
       <div class="m"><strong id="mEv">0</strong><span>Events on this view</span></div>
       <div class="m"><strong>49</strong><span>Inbox threads since Oct 3</span></div>
-      <div class="m"><strong id="mTexts">0</strong><span>New texts waiting</span></div>
+      <div class="m"><strong id="mTexts">0</strong><span>Action items from texts</span></div>
       <div class="m"><strong id="mOpen">0</strong><span>Action items open</span></div>
       <div class="m"><strong id="mDone">0%</strong><span>Completed</span></div>
     </div>
-    <div class="foot"><span id="stamp">Pulled Tue Oct 6, 2026 about 2:45 PM ET · counts update as you check items</span><button id="refresh">Refresh summary</button></div>
+    <div class="foot"><span id="stamp">Calendar and email pulled Tue Oct 6 about 2:45 PM ET, texts about 3:10 PM · counts update as you check items</span><button id="refresh">Refresh summary</button></div>
   </section>
 </div>
 </div>
@@ -144,7 +144,7 @@ var ITEMS=[
  {id:"q4sheet",p:"hi",t:"Review the Q4 Kickoff Prep spreadsheet",s:"Nick shared it with you for editing on Monday."},
  {id:"q4",p:"hi",t:"Confirm Q4 Kickoff date and place",s:"Nick's email subject says Thu Oct 7, but the body says Oct 8, 8 AM to 1 PM at the Delaware Area Chamber of Commerce."},
  {id:"chess",p:"hi",t:"Make a move in your Daily Chess game",s:"Chess.com warned twice yesterday that you were about to lose on time."},
- {id:"outing",p:"md",t:"RSVP to the FTP Family outing, Fri Oct 9",s:"Lehner Farms, 4:30 to 7 PM, dinner included. Eric sent three versions on Saturday and cancelled two. The last invite is the live one."},
+ {id:"outing",p:"md",t:"RSVP to the FTP Family outing, Fri Oct 9",s:"Lehner Farms, 4:30 to 7 PM, dinner included. Eric sent three versions on Saturday and cancelled two. The last invite is the live one. Kimberly's text adds a 6 PM hayride, a bonfire with s'mores, and parking at The Homestead of Radnor."},
  {id:"pumpkin",p:"md",t:"Plan Mon Oct 12 evening: camp, then pumpkin carving",s:"Bethany asked you to start around 5 PM, right after the camp meeting. You said sure."},
  {id:"camp",p:"md",t:"Reply to Midwest Doorknocking Camp invite",s:"Weekly on Mondays, 4 to 5 PM ET."},
  {id:"ken",p:"md",t:"Close out Ken's bid (148809)",s:"He said he'll paint the fence himself."},
@@ -156,7 +156,12 @@ var ITEMS=[
  {id:"mm",p:"lo",t:"Read the Mind Meld follow-up: \"Light Yourself Up\" ideas",s:"Nate sent it to the Doorknocker group at 1:29 PM."},
  {id:"survey",p:"lo",t:"Fill out the USMC wrestling camp survey",s:"SurveyMonkey sent it Saturday."}
 ];
-var TEXTS=[]; // action items from the Incoming Texts note go here: {id,p:"hi|md|lo",t,s}
+var TEXTS=[
+ {id:"tx-kim-days",p:"hi",t:"Tell Kimberly which days and times you'll knock this week",s:"Text from Kimberly at 1:14 PM."},
+ {id:"tx-thu",p:"hi",t:"Thursday Oct 8: buddy knock with Teresa",s:"Kimberly texted at 2:47 PM asking you to send Teresa the time and meeting spot, in your area. Teresa replied at 3:05 PM that she'll see you there, so this may already be settled. She shadows you for the first 1 to 1.5 hours with Step 0: loud knock, 5+ ft from the door, smile, body at an angle. Around hour 2, let her pitch every other house."},
+ {id:"tx-judah",p:"md",t:"Judah asked if you're getting Luther",s:"Texts between 12:40 and 12:56 PM. Skip if it's already handled."},
+ {id:"tx-justin",p:"lo",t:"Reply to Justin's check-in",s:"He texted at 2:04 PM."}
+];
 ITEMS=ITEMS.concat(TEXTS);
 var KEY="ftp-dash-3",st={done:{},goal:""};
 try{var r=localStorage.getItem(KEY);if(r)st=JSON.parse(r)}catch(e){}
