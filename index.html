@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Daily Dashboard – Tue, Oct 6</title>
+<title>Daily Dashboard – Wed, Oct 7</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#EEF2F6;--card:#fff;--ink:#16212E;--mute:#5B6B7C;--line:#DCE3EA;--accent:#2457D6;--accent-soft:#E3ECFF;--ok:#217A55;--ok-soft:#DDF3E8;--warn:#9A5B00;--warn-soft:#FFF0D1;--bad:#B3322B;--bad-soft:#FBE3E1;
@@ -20,8 +20,8 @@ h1{font-size:28px;font-weight:800;margin:0;letter-spacing:-.02em}
 .clock{font-weight:800;font-size:28px;font-variant-numeric:tabular-nums}
 .grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
-.c-time{grid-column:span 7}.c-todo{grid-column:span 5;grid-row:span 2}.c-wx{grid-column:span 7}.c-chess{grid-column:span 12}.c-sum{grid-column:span 12}
-@media(max-width:860px){.c-time,.c-todo,.c-wx,.c-chess,.c-sum{grid-column:span 12;grid-row:auto}}
+.c-time{grid-column:span 7}.c-todo{grid-column:span 5;grid-row:span 2}.c-wx{grid-column:span 7}.c-week{grid-column:span 7}.c-heads{grid-column:span 5}.c-chess{grid-column:span 12}.c-sum{grid-column:span 12}
+@media(max-width:860px){.c-time,.c-todo,.c-wx,.c-week,.c-heads,.c-chess,.c-sum{grid-column:span 12;grid-row:auto}}
 h2{font-size:16px;font-weight:800;margin:0 0 12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .pill{font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
 .tl{position:relative;border-top:1px solid var(--line)}
@@ -36,11 +36,13 @@ h2{font-size:16px;font-weight:800;margin:0 0 12px;display:flex;justify-content:s
 .alld{font-size:13px;color:var(--mute);margin:0 0 10px}.warnbox{margin:0 0 12px;padding:10px 12px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-size:14px}
 .empty{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-size:14px;display:none}
 .soon{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px}
-.soon li{display:flex;justify-content:space-between;gap:10px;font-size:14px;border-left:3px solid var(--accent);padding:2px 0 2px 10px}
+.soon li{display:grid;grid-template-columns:78px 1fr;gap:10px;font-size:14px;border-left:3px solid var(--accent);padding:2px 0 2px 10px}.soon b{font-weight:800}
+.heads{margin:0;padding:0;list-style:none;display:grid;gap:8px}.heads li{padding:9px 12px;border-radius:10px;background:var(--warn-soft);color:var(--ink);font-size:14px}.heads li.info{background:var(--accent-soft)}
 .soon small{color:var(--mute)}
 .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:12px}
 .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
-.todo{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.todo{list-style:none;margin:0;padding:0 6px 0 0;display:grid;gap:8px;overflow-y:auto;position:relative;overscroll-behavior:contain;scrollbar-width:thin;max-height:560px}
+.todohint{font-size:12px;color:var(--mute);margin:8px 0 0;text-align:center}
 .todo label{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;padding:10px;border:1px solid var(--line);border-radius:10px;cursor:pointer}
 .todo input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--accent)}
 .todo b{display:block;font-weight:600}.todo small{color:var(--mute);display:block}
@@ -83,17 +85,17 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline
     <p class="alld" id="alld"></p>
     <div class="tl" id="tl"></div>
     <div class="empty" id="empty">No events for this filter.</div>
-    <p class="alld" style="margin-top:12px">Coming up: Thu Oct 8 Door Knocking 4:15 PM, buddy knock 5–7:30 PM · Q4 Kickoff (date to confirm) · FTP Fall Party, Fri Oct 9, 4:30–7:00 PM · Mon Oct 12: estimates at 10 AM and noon, Midwest Doorknocking Camp at 4 PM</p>
   </section>
 
   <section class="card c-todo" aria-labelledby="h-todo">
     <h2 id="h-todo">Action items <span class="pill" id="todoPill">0 open</span></h2>
     <div class="bar" role="progressbar" aria-label="Completed" id="bar"><i></i></div>
     <ul class="todo" id="todo"></ul>
+    <p class="todohint" id="todoHint"></p>
   </section>
 
   <section class="card c-wx" aria-labelledby="h-wx">
-    <h2 id="h-wx">Weather and focus</h2>
+    <h2 id="h-wx">Weather</h2>
     <div class="wx">
       <div><div class="temp">77°F</div><div class="sub">High today · Clear and dry · Columbus, OH</div></div>
       <div><b>Today</b> 77° / 40° · dry<br><b>Tomorrow</b> 76° / 45° · dry</div>
@@ -103,7 +105,28 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline
       <div><b>Sun</b><br>66° / 58°<br>75% rain</div><div><b>Mon</b><br>74° / 60°<br>15% rain</div>
     </div>
     <p class="note">Dry and warm through Saturday. Sunday looks wet, with a 75% chance of rain.</p>
-    <div class="focus"><input type="text" id="goal" placeholder="Today's focus goal" aria-label="Focus goal" maxlength="90"></div>
+  </section>
+
+  <section class="card c-week" aria-labelledby="h-wk">
+    <h2 id="h-wk">Next five days</h2>
+    <ul class="soon">
+      <li><b>Thu Oct 8</b><span>Miller's 7 AM · Open mat 2:45 PM · Door Knocking 4:15–8 PM, buddy knock with Teresa 5–7:30 PM · Q4 Kickoff date to confirm</span></li>
+      <li><b>Fri Oct 9</b><span>Careers &amp; Money 1:44 PM · Wrestling 2:45–4:15 PM · FTP Fall Party 4:30–7 PM, hayride at 6</span></li>
+      <li><b>Sat Oct 10</b><span>Door Knocking 10 AM–2 PM</span></li>
+      <li><b>Sun Oct 11</b><span>Family outing at The Orchard 11:45 AM–4:45 PM · Algebra 2 with Thinkwell 2 PM · JJL Velocity 5:30–7:30 PM</span></li>
+      <li><b>Mon Oct 12</b><span>Estimates: Ben 10 AM, Larry noon · CrossFit 10:30 · Mommy Mondays 11:30 · Doorknocking Camp 4 PM · Capitals 6 PM</span></li>
+    </ul>
+  </section>
+
+  <section class="card c-heads" aria-labelledby="h-hd">
+    <h2 id="h-hd">Heads-up</h2>
+    <ul class="heads">
+      <li>Tonight is stacked: Luther's last game at 5:30, Vera's practice at 6:00, Justin at 8:00. JP is at Salt Fork Lodge from 4 PM, so check who is driving.</li>
+      <li>Sun Oct 11: 75% chance of rain during the 11:45 AM outing at The Orchard. Thinkwell at 2 PM falls in the middle of it.</li>
+      <li>Mon Oct 12: both estimates overlap CrossFit and Mommy Mondays. Consider moving one.</li>
+      <li>Q4 Kickoff: Nick's subject says Thu Oct 7, the body says Oct 8. It is not on your calendar.</li>
+      <li class="info">Thu Oct 8 is full. Miller's at 7 AM, open mat at 2:45, then knocking from 4:15 to 8.</li>
+    </ul>
   </section>
 
   <section class="card c-chess" aria-labelledby="h-ch">
@@ -204,6 +227,9 @@ function drawTodo(){
   Array.prototype.forEach.call(document.querySelectorAll(".todo input"),function(c){
     c.onchange=function(){st.done[c.dataset.id]=c.checked;save();metrics();};});
 }
+function fitTodo(){var t=$("todo"),l=t.children,n=l.length;t.style.maxHeight="";
+  if(n>6){t.style.maxHeight=(l[6].offsetTop-l[0].offsetTop-4)+"px";$("todoHint").textContent="Showing 6 of "+n+" · scroll for the rest"}else{$("todoHint").textContent=""}}
+window.addEventListener("resize",fitTodo);
 function metrics(){
   var d=ITEMS.filter(function(i){return st.done[i.id]}).length,n=ITEMS.length,o=n-d,pc=Math.round(d/n*100);
   $("todoPill").textContent=o+" open";$("mOpen").textContent=o;$("mDone").textContent=pc+"%";
@@ -213,8 +239,6 @@ $("refresh").onclick=function(){
   drawTimeline();metrics();
   $("stamp").textContent="Recalculated "+new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})+" · to pull new email or calendar data, ask Claude again";
 };
-$("goal").value=st.goal||"";
-$("goal").oninput=function(){st.goal=this.value;save()};
 var CHESS=[{n:"Rapid",r:1742,best:1742,rec:"10-4-2",prev:1742},{n:"Blitz",r:1150,best:1396,rec:"5-11-0",prev:1150},{n:"Bullet",r:1415,best:1893,rec:"8-17-1",prev:1415},{n:"Daily",r:1703,best:1703,rec:"1-0-0",prev:1703},{n:"Tactics",r:400,best:400,rec:"",prev:400}];
 function drawChess(){
   $("chess").innerHTML=CHESS.map(function(c){
@@ -223,7 +247,7 @@ function drawChess(){
   $("chnote").textContent="Ratings are unchanged since the Oct 2 row. The newest sheet entry is Oct 4. Chess.com reported a 14-day streak on Oct 5 and warned twice that day that a daily game was about to time out.";
 }
 drawChess();
-drawTimeline();drawTodo();metrics();
+drawTimeline();drawTodo();fitTodo();metrics();
 setInterval(drawTimeline,30000);
 </script>
 </body>
