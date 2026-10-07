@@ -97,12 +97,12 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline
   <section class="card c-wx" aria-labelledby="h-wx">
     <h2 id="h-wx">Weather</h2>
     <div class="wx">
-      <div><div class="temp">77°F</div><div class="sub">High today · Clear and dry · Columbus, OH</div></div>
-      <div><b>Today</b> 77° / 40° · dry<br><b>Tomorrow</b> 76° / 45° · dry</div>
+      <div><div class="temp">50°F</div><div class="sub">Sunny now, high 79° · Columbus, OH</div></div>
+      <div><b>Today</b> 79° / 46° · dry<br><b>Tomorrow</b> 77° / 46° · dry</div>
     </div>
     <div class="days">
-      <div><b>Fri</b><br>72° / 43°<br>Dry</div><div><b>Sat</b><br>73° / 48°<br>10% rain</div>
-      <div><b>Sun</b><br>66° / 58°<br>75% rain</div><div><b>Mon</b><br>74° / 60°<br>15% rain</div>
+      <div><b>Fri</b><br>74° / 44°<br>Dry</div><div><b>Sat</b><br>73° / 52°<br>10% rain</div>
+      <div><b>Sun</b><br>66° / 58°<br>75% rain</div><div><b>Mon</b><br>77° / 60°<br>15% rain</div>
     </div>
     <p class="note">Dry and warm through Saturday. Sunday looks wet, with a 75% chance of rain.</p>
   </section>
@@ -139,12 +139,12 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline
     <h2 id="h-sum">Summary</h2>
     <div class="metrics">
       <div class="m"><strong id="mEv">0</strong><span>Events on this view</span></div>
-      <div class="m"><strong>28</strong><span>Inbox threads, last 2 days</span></div>
+      <div class="m"><strong>14</strong><span>Inbox threads, last day</span></div>
       <div class="m"><strong id="mTexts">0</strong><span>Action items from texts</span></div>
       <div class="m"><strong id="mOpen">0</strong><span>Action items open</span></div>
       <div class="m"><strong id="mDone">0%</strong><span>Completed</span></div>
     </div>
-    <div class="foot"><span id="stamp">Calendar, email and texts pulled Tue Oct 6 about 11:30 PM ET · counts update as you check items</span><button id="refresh">Refresh summary</button></div>
+    <div class="foot"><span id="stamp">Calendar, email, chess and texts pulled Wed Oct 7 about 8:45 AM ET · counts update as you check items</span><button id="refresh">Refresh summary</button></div>
   </section>
 </div>
 </div>
@@ -169,7 +169,6 @@ var ITEMS=[
  {id:"q4",p:"hi",t:"Confirm Q4 Kickoff date and place",s:"Nick's email subject says Thu Oct 7 (today), but the body says Oct 8, 8 AM to 1 PM at the Delaware Area Chamber of Commerce. It is not on your calendar yet."},
  {id:"est12",p:"md",t:"Prep Mon Oct 12 estimates: Ben at 10 AM, Larry at noon",s:"Both booked through Acuity on Tuesday evening. They overlap CrossFit with mom (10:30) and Mommy Mondays (11:30) on your calendar."},
  {id:"outing",p:"md",t:"RSVP to the FTP Fall Party, Fri Oct 9",s:"Lehner's Pumpkin Farm, 4:30 to 7 PM, dinner included. Hayride at 6 PM, bonfire with s'mores. Kimberly texted the invite Tuesday. Parking is at The Homestead of Radnor."},
- {id:"chess",p:"md",t:"Make a move in your Daily Chess game",s:"Chess.com warned twice on Monday that you were about to lose on time. No newer warning since."},
  {id:"pumpkin",p:"md",t:"Plan Mon Oct 12 evening: camp, then pumpkin carving",s:"Bethany asked you to start around 5 PM, right after the camp meeting. You said sure."},
  {id:"camp",p:"md",t:"Reply to Midwest Doorknocking Camp invite",s:"Weekly on Mondays, 4 to 5 PM ET."},
  {id:"ken",p:"md",t:"Close out Ken's bid (148809)",s:"He said he'll paint the fence himself."},
@@ -182,6 +181,7 @@ var ITEMS=[
  {id:"survey",p:"lo",t:"Fill out the USMC wrestling camp survey",s:"SurveyMonkey sent it Saturday."}
 ];
 var TEXTS=[
+ {id:"tx-trey",p:"hi",t:"Send Trey the address for the PC",s:"He asked at 8:38 AM. He is at Chick-fil-A with a chicken minis order for you and wants your order."},
  {id:"tx-kim-days",p:"hi",t:"Tell Kimberly which days and times you'll knock this week",s:"Text from Kimberly Tuesday at 1:14 PM. Your calendar already has knocking Thu 4:15 to 8 PM and Sat 10 AM to 2 PM."},
  {id:"tx-thu",p:"hi",t:"Thursday Oct 8: buddy knock with Teresa, 5 to 7:30 PM",s:"The meet-up spot is now on the calendar invite and Kimberly moved the event to your FTP email. Teresa has not accepted the invite yet. She shadows you for the first 1 to 1.5 hours with Step 0: loud knock, 5+ ft from the door, smile, body at an angle. Around hour 2, let her pitch every other house."}
 ];
@@ -239,12 +239,12 @@ $("refresh").onclick=function(){
   drawTimeline();metrics();
   $("stamp").textContent="Recalculated "+new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})+" · to pull new email or calendar data, ask Claude again";
 };
-var CHESS=[{n:"Rapid",r:1742,best:1742,rec:"10-4-2",prev:1742},{n:"Blitz",r:1150,best:1396,rec:"5-11-0",prev:1150},{n:"Bullet",r:1415,best:1893,rec:"8-17-1",prev:1415},{n:"Daily",r:1703,best:1703,rec:"1-0-0",prev:1703},{n:"Tactics",r:400,best:400,rec:"",prev:400}];
+var CHESS=[{n:"Rapid",r:1742,best:1742,rec:"10-4-2",prev:1742},{n:"Blitz",r:1150,best:1396,rec:"5-11-0",prev:1150},{n:"Bullet",r:1415,best:1893,rec:"8-17-1",prev:1415},{n:"Daily",r:1722,best:1722,rec:"2-0-0",prev:1703},{n:"Tactics",r:400,best:400,rec:"",prev:400}];
 function drawChess(){
   $("chess").innerHTML=CHESS.map(function(c){
     var dl=c.r-c.prev,d=dl===0?"No change":(dl>0?"+":"")+dl;
-    return '<div class="m"><span>'+c.n+'</span><strong>'+c.r+'</strong><span>'+(c.rec?c.rec+" W-L-D · ":"")+"Best "+c.best+" · "+d+' vs Oct 2</span></div>';}).join("");
-  $("chnote").textContent="Ratings are unchanged since the Oct 2 row. The newest sheet entry is Oct 4. Chess.com reported a 14-day streak on Oct 5 and warned twice that day that a daily game was about to time out.";
+    return '<div class="m"><span>'+c.n+'</span><strong>'+c.r+'</strong><span>'+(c.rec?c.rec+" W-L-D · ":"")+"Best "+c.best+" · "+d+' vs Oct 6</span></div>';}).join("");
+  $("chnote").textContent="Daily rose 19 points to 1722, a new personal best, after a win over samuelluis1 that ended overnight. Rapid, Blitz and Bullet are unchanged. The sheet now logs automatic snapshots, the latest at 5:00 AM today.";
 }
 drawChess();
 drawTimeline();drawTodo();fitTodo();metrics();
